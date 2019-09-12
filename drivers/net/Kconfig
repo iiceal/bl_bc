@@ -1,0 +1,23 @@
+#
+# network device configuration
+#
+
+menuconfig DRV_NET
+	bool "enable net driver"
+	default n
+	depends on DRV_SPI
+	---help---
+	  net driver
+
+if DRV_NET
+config MACADDR
+    string      "mac address"
+    default     "f4:8e:38:a4:e7:7d"
+    help
+        board mac address
+config IPADDR
+    string      "ip address"
+    default     "192.168.1.122"
+    help
+        board default static ip address
+endif #DRV_NET

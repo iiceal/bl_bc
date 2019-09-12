@@ -1,0 +1,41 @@
+menuconfig  DRV_QSPI
+	bool "QSPI driver"
+    default n
+    ---help---
+        qspi controller driver
+
+if DRV_QSPI
+
+config QSPI_DMA_TRANSFER
+	bool "enable qspi dma read/write"
+    default n
+	depends on DRV_DMA
+    ---help---
+	help
+		enable qspi dma transfer 
+
+config QSPI_S25FL512S
+	bool "enable s25fl512s driver"
+    default n
+    ---help---
+		enable s25fl512s driver
+
+config QSPI_W25Q256FV
+    bool "enable w25q256fv driver"
+    default n
+    ---help---
+		enable w25q256fv driver
+    
+config QSPI_GD25Q512MC
+    bool "enable gd25q512mc driver"
+    default n
+    ---help---
+		enable gd25q512mc driver
+
+config QSPI_GD25Q256D
+    bool "enable gd25q256d driver"
+    default y
+    ---help---
+		enable gd25q256d driver
+
+endif

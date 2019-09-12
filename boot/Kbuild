@@ -1,0 +1,7 @@
+obj-y += serial.o	\
+		 timer.o
+
+
+ifndef CONFIG_COPY_BL_TO_BL_START
+obj-y += main.o
+endif

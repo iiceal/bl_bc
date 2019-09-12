@@ -1,0 +1,2 @@
+obj-y += dma_if.o	\
+		 dma_imp.o

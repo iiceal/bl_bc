@@ -1,0 +1,41 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file Documentation/kbuild/kconfig-language.txt in the
+# Linux kernel source tree.
+#
+
+mainmenu "HG-BOOTLOADER $HG_BL_VERSION Configuration"
+
+config HG_BL_VERSION
+	string
+	option env="HG_BL_VERSION"
+
+#menu Board select
+source "boards/Kconfig"
+
+# Allow defaults in arch-specific code to override any given here
+# Project
+source "chip/Kconfig"
+
+source "copy_bl/Kconfig"
+
+#menu "Target CPU Variant"
+source "cpu/Kconfig"
+
+#menu "boot parameter"
+source "boot/Kconfig"
+
+#menu "General setup"
+source "common/Kconfig"
+
+#menu "Drivers"
+source "drivers/Kconfig"
+
+#menu "File systems"
+source fs/Kconfig
+
+source net/Kconfig
+
+#menu "Command select"
+source cmd/Kconfig
+

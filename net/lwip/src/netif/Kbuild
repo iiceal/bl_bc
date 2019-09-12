@@ -1,0 +1,3 @@
+obj-y += etharp.o   \
+                     loopif.o    \
+                     slipif.o

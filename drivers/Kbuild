@@ -1,0 +1,60 @@
+ifdef CONFIG_DRV_QSPI
+	obj-y += qspi/
+endif
+
+ifdef CONFIG_DRV_DMA
+	obj-y += dma/
+endif
+
+ifdef CONFIG_DRV_I2C
+	obj-y += i2c/
+endif
+
+ifdef CONFIG_DRV_UART
+	obj-y += uart/
+endif
+
+ifdef CONFIG_DRV_SPI
+	obj-y += spi/
+endif
+
+ifdef CONFIG_DRV_SIM
+	obj-y += sim/
+endif
+
+ifdef CONFIG_DRV_RESET
+	obj-y += reset/
+endif
+
+ifdef CONFIG_DRV_WDT
+	obj-y += wdt/
+endif
+
+ifdef CONFIG_DRV_IOMUX
+	obj-y += iomux/
+endif
+
+ifdef CONFIG_DRV_CLK
+	obj-y += clk/
+endif
+
+ifdef CONFIG_DRV_CPU_RIGHT
+	obj-y += cpu_right/
+endif
+
+ifdef CONFIG_DRV_GPIO
+	obj-y += gpio/
+endif
+
+ifdef CONFIG_DRV_DDR
+	obj-y += ddr/
+endif
+
+ifdef CONFIG_DRV_SD
+	obj-y += sd/
+endif
+
+ifdef CONFIG_DRV_NET
+	obj-y += net/
+endif
+

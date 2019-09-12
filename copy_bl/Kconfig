@@ -1,0 +1,7 @@
+config COPY_BL_TO_BL_START
+    bool "copy Bootloader to SRAM_BL_START"
+    default n
+    help
+       copy Bootloader to SRAM_BL_START, Attention, if you select this
+       config, we not compile Bootloader but the code copy Bootloader
+       to its run address

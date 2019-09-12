@@ -1,0 +1,11 @@
+#
+# Network apps configuration
+#
+menu "Network Settings"
+
+config IPCONFIG
+	string "Ipconfig"
+	default "192.168.1.6"
+    depends on NET
+
+endmenu

@@ -1,0 +1,3 @@
+ifdef CONFIG_HG_PROJECT_BP2016
+    obj-y += bp2016/
+endif

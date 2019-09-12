@@ -1,0 +1,149 @@
+menu "Command select"
+
+config CMD_JFFS2
+	bool "jffs2 command"
+    default n
+	select FS_JFFS2
+    select CMD_FLASH
+	help
+	  Enables commands to support the JFFS2 (Journalling Flash File System
+	  version 2) filesystem. This enables fsload, ls and fsinfo which
+	  provide the ability to load files, list directories and obtain
+	  filesystem information.
+
+
+config CMD_FLASH
+	bool "Qspi Command"
+	default n
+    select DRV_QSPI
+	help
+	  NOR flash Command support, eg: qspi init/read/ahbread ...
+
+config CMD_SPI
+	bool "spi Command"
+	default n
+    select DRV_SPI
+	help
+	  spi Command support, eg: spi init/read/write...
+
+config CMD_I2C
+	bool "i2c Command"
+	default n
+    select DRV_I2C
+	help
+	  i2c Command support, eg: i2c init/read/write...
+
+config CMD_MBR
+	bool "MBR Command"
+	default n
+    select DRV_QSPI 
+    select DRV_UART
+	help
+	   MBR Command support, eg:MBR  dump/modify...
+
+config CMD_UPDATE
+	bool "update Command"
+	default n
+    select DRV_QSPI 
+    select DRV_UART
+	help
+	   update Command support, eg:update  flash file...
+
+config CMD_SIM
+	bool "sim Command"
+	default n
+    select DRV_SIM
+	help
+	  sim Command support, eg: sim init/atr/check...
+
+config CMD_RESET
+	bool "reset Command"
+	default n
+    select DRV_RESET
+	help
+	  reset Command support, eg: reset qspi/i2c0/spi0 ...
+
+config CMD_WDT
+    bool "watchdog Command"
+    default y
+    select DRV_WDT
+    help
+		Watchdog driver
+
+config CMD_IOMUX
+	bool "iomux Command"
+	default n
+    select DRV_IOMUX
+	help
+	  iomux Command support, eg: iomux qspi/i2c0/spi0 ...
+
+config CMD_CLK
+	bool "clock get/set Command"
+	default n
+    select DRV_CLK
+	help
+	  clock get/set Command support, eg: clk get qspi/i2c0/spi0...
+
+config CMD_ASRAM
+	bool "asram test Command"
+	default n
+    select DRV_ASRAM
+	help
+	  asram test Command, eg: asram init/auto/rw ...
+
+config CMD_CPU_RIGHT
+	bool "cpu right test Command"
+	default n
+    select DRV_CPU_RIGHT
+	help
+	  cpu right test Command, eg: right ...
+
+config CMD_GPIO
+	bool "gpio test Command"
+	default n
+    select DRV_GPIO
+	help
+	  gpio test Command, eg: gpio...
+
+config CMD_UART
+	bool "uart test Command"
+	default n
+    select DRV_UART
+	help
+	  uart test Command, eg: uart...
+
+config CMD_DMA
+	bool "dma test Command"
+	default n
+    select DRV_DMA
+	help
+	  dma test Command, eg: dma...
+
+config CMD_DDR
+	bool "ddr test Command"
+	default n
+    select DRV_DDR
+	help
+	  ddr test Command, eg: ddr...
+
+config CMD_SD
+	bool "sd test Command"
+	default n
+    select DRV_SD
+	help
+	  sd test Command, eg: sd...
+
+config CMD_NET
+	bool "net test Command"
+	default n
+    select NET
+	help
+	  net test Command, eg: ping, tftp...
+
+config CMD_GO
+	bool "go and run Command"
+	default y
+	help
+	  go to addr running...
+
+endmenu

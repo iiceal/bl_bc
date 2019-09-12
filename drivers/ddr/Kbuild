@@ -1,0 +1,5 @@
+obj-y += ddr_burst_op.o \
+         ddr3.o  \
+         lpddr.o  \
+         lpddr2.o  \
+         ddr.o

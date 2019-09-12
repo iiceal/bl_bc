@@ -1,0 +1,5 @@
+config DRV_SD
+    bool "enable sd driver"
+    default n
+    help
+		SD driver

@@ -1,0 +1,1 @@
+obj-y += bp2016_chip.o pll.o chip_boot_parse.o mbr.o bl2fw.o

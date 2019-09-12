@@ -1,0 +1,2 @@
+obj-y += designware_spi.o   \
+         drv_spi.o

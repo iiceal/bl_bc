@@ -1,0 +1,6 @@
+config DRV_CLK
+    bool "enable clock function"
+    default n
+    depends on HG_PROJECT_BP2016
+    help
+		module clock get/set function

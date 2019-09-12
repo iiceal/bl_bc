@@ -1,0 +1,11 @@
+obj-y += iomux_hw_gpio.o \
+         iomux_hw_if.o \
+         iomux_hw_mmc.o \
+         iomux_hw_prm.o \
+         iomux_hw_pwm.o \
+         iomux_hw_regs.o \
+         iomux_hw_scm.o \
+         iomux_hw_sim.o \
+         iomux_hw_spi.o \
+         iomux_hw_sram.o \
+         iomux_hw_uart.o

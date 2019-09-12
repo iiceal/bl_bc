@@ -1,0 +1,5 @@
+config DRV_UART
+    bool "enable serial driver"
+    default y
+    help
+		UART driver

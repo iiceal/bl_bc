@@ -1,0 +1,11 @@
+#
+# File system configuration
+#
+
+menu "File systems"
+
+#source "fs/fat/Kconfig"
+
+source "fs/jffs2/Kconfig"
+
+endmenu

@@ -1,0 +1,2 @@
+obj-y += mmc.o  \
+         sd_case.o

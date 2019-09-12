@@ -1,0 +1,7 @@
+obj-y += start.o	\
+		 arch_timer.o \
+		 irq.o \
+		 v7_cp15.o  \
+         cp15.o
+
+ccflags-$(CONFIG_HG_PROJECT_BP2016) += -I./chip/bp2016/include/

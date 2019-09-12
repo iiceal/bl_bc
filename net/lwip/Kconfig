@@ -1,0 +1,158 @@
+#
+# Network lwip configuration
+#
+
+menu "Lwip config"
+
+config MEM_ALIGNMENT
+	int	"memory alignment"
+	range 4 8
+	default 4
+	help
+	  memory align 4 bytes
+
+config MEM_SIZE
+	int	"memory size"
+	range 4096 40960
+	default 10240
+	help
+	  memory size
+
+config MEMP_NUM_PBUF
+    int "Number of memp pbufs"
+	range 2 1024
+	default 8
+	help
+	  memp struct bufs
+
+config PBUF_POOL_SIZE
+    int "pbuf pool numbers"
+	range 2 40
+	default 8
+	help
+      the number of buffers in the pbuf pool.
+
+config PBUF_POOL_BUFSIZE
+    int "pbuf pool buffer size"
+	range 2 1024
+	default 600
+	help
+      the size of each pbuf in the pbuf pool.
+
+config MEMP_NUM_UDP_PCB
+    int "UDP control blocks"
+	range 2 40
+	default 8
+	help
+      UDP control blocks
+
+config MEMP_NUM_TCP_PCB
+    int "Active TCP connections"
+	range 2 40
+	default 8
+	help
+      active TCP connections
+
+config MEMP_NUM_TCP_PCB_LISTEN
+    int "Listening TCP connections"
+	range 2 40
+	default 2
+	help
+      Listening TCP connections
+
+config MEMP_NUM_TCP_SEG
+    int "TCP segments queued"
+	range 2 40
+	default 12
+	help
+      Simultaneous TCP segments queued
+
+config MEMP_NUM_SYS_TIMEOUT
+    int "Simultaneous active timeouts"
+	range 2 40
+	default 4
+	help
+      Simultaneous active timeouts
+
+config LWIP_TCP
+	bool "TCP"
+	default y
+	help
+	  TCP option
+
+if LWIP_TCP
+config TCP_TTL
+	int "TCP TTL"
+	default 255
+    range 1 255
+	help
+	  TCP time to live
+
+config TCP_QUEUE_OOSEQ
+	bool "TCP QUEUE segments"
+	default n
+	help
+      Controls if TCP should queue segments that arrive out of
+      order. Define to 0 if your device is low on memory.
+
+config TCP_MSS
+	int "TCP Maximum segment size."
+	default 1460
+	range 2 2048
+	help
+      TCP Maximum segment size.
+
+endif   # if LWIP_TCP
+
+config LWIP_ICMP
+	bool "ICMP"
+	default y
+	help
+	  ICMP option
+
+config LWIP_DHCP
+	bool "DHCP"
+	default y
+    select LWIP_UDP
+	help
+	  DHCP option
+
+config LWIP_UDP
+	bool "UDP"
+	default y
+	help
+	  UDP option
+
+config UDP_TTL
+	int "UDP TTL"
+	default 255
+    range 1 255
+    depends on LWIP_UDP
+	help
+	  UDP time to live
+
+config LWIP_STATS
+	bool "Maintain traffic statistics"
+	default n
+	help
+      Check this box to turn ON statistics options for lwIP
+
+config LWIP_NETCONN
+	bool "Enable Netconn API"
+	default n
+	help
+	  Enable Netconn API
+
+config LWIP_SOCKET
+	bool "Enable Socket API"
+	default n
+	help
+	  Enable Socket API
+
+config LWIP_TFTP
+	bool "TFTP"
+	default y
+	help
+	  Enable lwip tftp
+
+endmenu

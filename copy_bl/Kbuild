@@ -1,0 +1,3 @@
+ifdef CONFIG_COPY_BL_TO_BL_START
+obj-y += input_bl.o copy_loader.o
+endif

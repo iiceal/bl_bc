@@ -1,0 +1,5 @@
+config DRV_WDT
+    bool "enable watchdog driver"
+    default n
+    help
+		Watchdog driver

@@ -1,0 +1,4 @@
+obj-y += ping/  \
+         standalone/    \
+         netconf.o  \
+         udp_echoclient/

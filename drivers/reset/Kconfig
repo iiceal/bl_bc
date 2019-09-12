@@ -1,0 +1,6 @@
+config DRV_RESET
+    bool "enable reset function"
+    default n
+    depends on HG_PROJECT_BP2016
+    help
+		module reset function

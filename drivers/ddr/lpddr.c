@@ -1,0 +1,385 @@
+#include <drivers/drv_ddr.h>
+
+
+#ifdef LPDDR_DEBUG
+#define lpddr_debug(fmt, args...)  printf("LPDDR: " fmt "\n", ##args);
+#else
+#define lpddr_debug(fmt, args...)
+#endif
+
+
+static void lpddr_phy_init(void)
+{
+    REG_WRITE_ctrl(0xC01A0008,0x07842e05);//at:338405.690 ns
+    REG_WRITE_ctrl(0xC01A01c0,0x000d8e89);//at:338869.274 ns
+    REG_WRITE_ctrl(0xC01A0200,0x000d8e89);//at:338921.954 ns
+    REG_WRITE_ctrl(0xC01A01c0,0x00090e89);//at:344885.330 ns
+    REG_WRITE_ctrl(0xC01A0200,0x00090e89);//at:345454.274 ns
+    REG_WRITE_ctrl(0xC01A0024,0x30c01813);//at:346212.866 ns
+    REG_WRITE_ctrl(0xC01A0028,0x00004802);//at:346792.346 ns
+    REG_WRITE_ctrl(0xC01A0030,0x00000408);//at:346845.026 ns
+    REG_WRITE_ctrl(0xC01A0018,0x10000010);//at:347308.610 ns
+    REG_WRITE_ctrl(0xC01A001c,0x00800080);//at:347772.194 ns
+    REG_WRITE_ctrl(0xC01A0020,0x00080421);//at:348246.314 ns
+    REG_WRITE_ctrl(0xC01A0040,0x00000022);//at:348298.994 ns
+    REG_WRITE_ctrl(0xC01A0044,0x00000000);//at:348351.674 ns
+    REG_WRITE_ctrl(0xC01A0048,0x00000000);//at:348404.354 ns
+    REG_WRITE_ctrl(0xC01A004c,0x00000000);//at:348457.034 ns
+    REG_WRITE_ctrl(0xC01A0034,0x1648334a);//at:348931.154 ns
+    REG_WRITE_ctrl(0xC01A0038,0x161c3000);//at:349405.274 ns
+    REG_WRITE_ctrl(0xC01A003c,0x10010802);//at:349868.858 ns
+    REG_WRITE_ctrl(0xC01A002c,0xfa00001f);//at:350627.450 ns
+    REG_WRITE_ctrl(0xC01A001c,0x0600ac40);//at:351364.970 ns
+    REG_WRITE_ctrl(0xC01A0020,0x0190006e);//at:352113.026 ns
+    REG_WRITE_ctrl(0xC01A0040,0x00000032);//at:352692.506 ns
+}
+
+static void lpddr_controller_init(void)
+{
+    REG_WRITE_ctrl(0xC0190000,0x03040000);//at:179628.170 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040002);//at:179701.922 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040002);//at:179775.674 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040002);//at:179849.426 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040402);//at:179923.178 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040402);//at:179996.930 ns
+    REG_WRITE_ctrl(0xC0190000,0x03040402);//at:180070.682 ns
+    REG_WRITE_ctrl(0xC0190000,0x03020402);//at:180144.434 ns
+    REG_WRITE_ctrl(0xC0190000,0x01020402);//at:180218.186 ns
+    REG_WRITE_ctrl(0xC0190010,0x00000030);//at:180629.090 ns
+    REG_WRITE_ctrl(0xC0190010,0x00000030);//at:181039.994 ns
+    REG_WRITE_ctrl(0xC0190010,0x00007030);//at:181450.898 ns
+    REG_WRITE_ctrl(0xC0190010,0x00007030);//at:181861.802 ns
+    REG_WRITE_ctrl(0xC0190014,0x00007030);//at:181988.234 ns
+    REG_WRITE_ctrl(0xC0190020,0x00000000);//at:182114.666 ns
+    REG_WRITE_ctrl(0xC0190020,0x00000000);//at:182241.098 ns
+    REG_WRITE_ctrl(0xC0190024,0xa94e5a1d);//at:182725.754 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000000);//at:182852.186 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000002);//at:182978.618 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000002);//at:183105.050 ns
+    REG_WRITE_ctrl(0xC0190030,0x0000000a);//at:183231.482 ns
+    REG_WRITE_ctrl(0xC0190030,0x0000000a);//at:183357.914 ns
+    REG_WRITE_ctrl(0xC0190034,0x00402003);//at:183853.106 ns
+    REG_WRITE_ctrl(0xC0190034,0x00401a03);//at:183926.858 ns
+    REG_WRITE_ctrl(0xC0190034,0x002b1a03);//at:184000.610 ns
+    REG_WRITE_ctrl(0xC0190038,0x00000002);//at:184074.362 ns
+    REG_WRITE_ctrl(0xC0190038,0x00000002);//at:184148.114 ns
+    REG_WRITE_ctrl(0xC0190038,0x00090002);//at:184221.866 ns
+    REG_WRITE_ctrl(0xC0190050,0x00210000);//at:184348.298 ns
+    REG_WRITE_ctrl(0xC0190050,0x00210020);//at:184474.730 ns
+    REG_WRITE_ctrl(0xC0190050,0x00217020);//at:184601.162 ns
+    REG_WRITE_ctrl(0xC0190050,0x00e17020);//at:184727.594 ns
+    REG_WRITE_ctrl(0xC0190054,0x00000012);//at:184854.026 ns
+    REG_WRITE_ctrl(0xC0190054,0x00030012);//at:184969.922 ns
+    REG_WRITE_ctrl(0xC0190060,0x00000000);//at:185096.354 ns
+    REG_WRITE_ctrl(0xC0190060,0x00000000);//at:185222.786 ns
+    REG_WRITE_ctrl(0xC0190064,0x0062000e);//at:185749.586 ns
+    REG_WRITE_ctrl(0xC0190064,0x0010000e);//at:185876.018 ns
+    REG_WRITE_ctrl(0xC01900c0,0x00000000);//at:186002.450 ns
+    REG_WRITE_ctrl(0xC01900c0,0x00000000);//at:186128.882 ns
+    REG_WRITE_ctrl(0xC01900c0,0x00000000);//at:186255.314 ns
+    REG_WRITE_ctrl(0xC01900d0,0x00020003);//at:186329.066 ns
+    REG_WRITE_ctrl(0xC01900d0,0x00030003);//at:186402.818 ns
+    REG_WRITE_ctrl(0xC01900d0,0x40030003);//at:186476.570 ns
+    REG_WRITE_ctrl(0xC01900d4,0x00000009);//at:186550.322 ns
+    REG_WRITE_ctrl(0xC01900d4,0x00000009);//at:186624.074 ns
+    REG_WRITE_ctrl(0xC01900d4,0x00010009);//at:186697.826 ns
+    REG_WRITE_ctrl(0xC01900d8,0x00000d06);//at:186771.578 ns
+    REG_WRITE_ctrl(0xC01900d8,0x00000806);//at:186845.330 ns
+    REG_WRITE_ctrl(0xC01900dc,0x00000000);//at:186919.082 ns
+    REG_WRITE_ctrl(0xC01900dc,0x00320000);//at:186992.834 ns
+    REG_WRITE_ctrl(0xC01900e0,0x00000000);//at:187066.586 ns
+    REG_WRITE_ctrl(0xC01900e0,0x00000000);//at:187140.338 ns
+    REG_WRITE_ctrl(0xC01900e4,0x00100003);//at:187635.530 ns
+    REG_WRITE_ctrl(0xC01900e4,0x00010003);//at:187709.282 ns
+    REG_WRITE_ctrl(0xC01900f0,0x00000000);//at:187783.034 ns
+    REG_WRITE_ctrl(0xC01900f0,0x00000000);//at:187856.786 ns
+    REG_WRITE_ctrl(0xC01900f4,0x0000066f);//at:187930.538 ns
+    REG_WRITE_ctrl(0xC01900f4,0x0000061f);//at:188004.290 ns
+    REG_WRITE_ctrl(0xC01900f4,0x00000c1f);//at:188078.042 ns
+    REG_WRITE_ctrl(0xC0190100,0x0f101b04);//at:188573.234 ns
+    REG_WRITE_ctrl(0xC0190100,0x0f100504);//at:188646.986 ns
+    REG_WRITE_ctrl(0xC0190100,0x0f000504);//at:188720.738 ns
+    REG_WRITE_ctrl(0xC0190100,0x03000504);//at:188794.490 ns
+    REG_WRITE_ctrl(0xC0190104,0x00080406);//at:189289.682 ns
+    REG_WRITE_ctrl(0xC0190104,0x00080106);//at:189363.434 ns
+    REG_WRITE_ctrl(0xC0190104,0x00010106);//at:189437.186 ns
+    REG_WRITE_ctrl(0xC0190108,0x03050603);//at:189932.378 ns
+    REG_WRITE_ctrl(0xC0190108,0x03050303);//at:190006.130 ns
+    REG_WRITE_ctrl(0xC0190108,0x03020303);//at:190079.882 ns
+    REG_WRITE_ctrl(0xC0190108,0x01020303);//at:190153.634 ns
+    REG_WRITE_ctrl(0xC019010c,0x00504006);//at:190648.826 ns
+    REG_WRITE_ctrl(0xC019010c,0x00501006);//at:190722.578 ns
+    REG_WRITE_ctrl(0xC019010c,0x00001006);//at:190796.330 ns
+    REG_WRITE_ctrl(0xC0190110,0x05040402);//at:191291.522 ns
+    REG_WRITE_ctrl(0xC0190110,0x05040102);//at:191365.274 ns
+    REG_WRITE_ctrl(0xC0190110,0x05010102);//at:191439.026 ns
+    REG_WRITE_ctrl(0xC0190110,0x02010102);//at:191512.778 ns
+    REG_WRITE_ctrl(0xC0190114,0x05050401);//at:192007.970 ns
+    REG_WRITE_ctrl(0xC0190114,0x05050e01);//at:192081.722 ns
+    REG_WRITE_ctrl(0xC0190114,0x05070e01);//at:192155.474 ns
+    REG_WRITE_ctrl(0xC0190114,0x0c070e01);//at:192229.226 ns
+    REG_WRITE_ctrl(0xC0190118,0x02020004);//at:192734.954 ns
+    REG_WRITE_ctrl(0xC0190118,0x02060004);//at:192808.706 ns
+    REG_WRITE_ctrl(0xC0190118,0x06060004);//at:192882.458 ns
+    REG_WRITE_ctrl(0xC019011c,0x0000020d);//at:192956.210 ns
+    REG_WRITE_ctrl(0xC019011c,0x00000c0d);//at:193029.962 ns
+    REG_WRITE_ctrl(0xC0190120,0x0000440a);//at:193103.714 ns
+    REG_WRITE_ctrl(0xC0190120,0x0000500a);//at:193177.466 ns
+    REG_WRITE_ctrl(0xC0190180,0x02000000);//at:193251.218 ns
+    REG_WRITE_ctrl(0xC0190180,0x00000000);//at:193324.970 ns
+    REG_WRITE_ctrl(0xC0190180,0x00000000);//at:193398.722 ns
+    REG_WRITE_ctrl(0xC0190180,0x00000000);//at:193472.474 ns
+    REG_WRITE_ctrl(0xC0190180,0x00000000);//at:193546.226 ns
+    REG_WRITE_ctrl(0xC0190184,0x02000070);//at:193619.978 ns
+    REG_WRITE_ctrl(0xC0190184,0x00000070);//at:193693.730 ns
+    REG_WRITE_ctrl(0xC0190188,0x00000000);//at:194104.634 ns
+    REG_WRITE_ctrl(0xC0190190,0x07020000);//at:194589.290 ns
+    REG_WRITE_ctrl(0xC0190190,0x07020100);//at:194663.042 ns
+    REG_WRITE_ctrl(0xC0190190,0x07020100);//at:194736.794 ns
+    REG_WRITE_ctrl(0xC0190190,0x07000100);//at:194810.546 ns
+    REG_WRITE_ctrl(0xC0190190,0x07000100);//at:194884.298 ns
+    REG_WRITE_ctrl(0xC0190190,0x02000100);//at:194958.050 ns
+    REG_WRITE_ctrl(0xC0190194,0x00000402);//at:197855.450 ns
+    REG_WRITE_ctrl(0xC0190194,0x00000102);//at:198055.634 ns
+    REG_WRITE_ctrl(0xC0190194,0x00030102);//at:198129.386 ns
+    REG_WRITE_ctrl(0xC0190198,0x07000000);//at:198203.138 ns
+    REG_WRITE_ctrl(0xC0190198,0x07000010);//at:198276.890 ns
+    REG_WRITE_ctrl(0xC0190198,0x07000010);//at:198350.642 ns
+    REG_WRITE_ctrl(0xC0190198,0x0700d010);//at:198424.394 ns
+    REG_WRITE_ctrl(0xC0190198,0x0700d010);//at:198498.146 ns
+    REG_WRITE_ctrl(0xC0190198,0x0700d010);//at:198571.898 ns
+    REG_WRITE_ctrl(0xC0190198,0x0700d010);//at:198645.650 ns
+    REG_WRITE_ctrl(0xC01901a0,0x00400003);//at:199130.306 ns
+    REG_WRITE_ctrl(0xC01901a0,0x00400003);//at:199204.058 ns
+    REG_WRITE_ctrl(0xC01901a0,0x00400003);//at:199277.810 ns
+    REG_WRITE_ctrl(0xC01901a4,0x0000000c);//at:199351.562 ns
+    REG_WRITE_ctrl(0xC01901a4,0x0005000c);//at:199425.314 ns
+    REG_WRITE_ctrl(0xC01901a8,0x8010014c);//at:199909.970 ns
+    REG_WRITE_ctrl(0xC01901a8,0x8db7014c);//at:200415.698 ns
+    REG_WRITE_ctrl(0xC01901a8,0x0db7014c);//at:200489.450 ns
+    REG_WRITE_ctrl(0xC01901ac,0x00100a67);//at:200995.178 ns
+    REG_WRITE_ctrl(0xC01901ac,0x002f0a67);//at:201068.930 ns
+    REG_WRITE_ctrl(0xC01901b0,0x00000001);//at:201142.682 ns
+    REG_WRITE_ctrl(0xC01901b4,0x00000202);//at:201216.434 ns
+    REG_WRITE_ctrl(0xC01901b4,0x00000002);//at:201290.186 ns
+    REG_WRITE_ctrl(0xC01901b8,0x01010101);//at:201795.914 ns
+    REG_WRITE_ctrl(0xC01901b8,0x01010101);//at:201869.666 ns
+    REG_WRITE_ctrl(0xC01901b8,0x01010101);//at:201943.418 ns
+    REG_WRITE_ctrl(0xC01901b8,0x01010101);//at:202017.170 ns
+    REG_WRITE_ctrl(0xC01901d0,0x00280000);//at:202090.922 ns
+    REG_WRITE_ctrl(0xC01901d0,0x00280000);//at:202164.674 ns
+    REG_WRITE_ctrl(0xC01901d0,0x00280000);//at:202238.426 ns
+    REG_WRITE_ctrl(0xC01901d0,0x03ea0000);//at:202733.618 ns
+    REG_WRITE_ctrl(0xC01901d4,0x00000fff);//at:202807.370 ns
+    REG_WRITE_ctrl(0xC01901d4,0x0fff0fff);//at:202881.122 ns
+    REG_WRITE_ctrl(0xC01901d8,0x0027009f);//at:203365.778 ns
+    REG_WRITE_ctrl(0xC01901d8,0x0042009f);//at:203439.530 ns
+#if 0
+    REG_WRITE_ctrl(0xC0190200,0x0000001f);//at:203513.282 ns
+    REG_WRITE_ctrl(0xC0190204,0x00000000);//at:203587.034 ns
+    REG_WRITE_ctrl(0xC0190204,0x00000100);//at:203660.786 ns
+    REG_WRITE_ctrl(0xC0190204,0x001f0100);//at:203734.538 ns
+    REG_WRITE_ctrl(0xC0190208,0x00000003);//at:203808.290 ns
+    REG_WRITE_ctrl(0xC0190208,0x00000003);//at:203882.042 ns
+    REG_WRITE_ctrl(0xC0190208,0x00020003);//at:203955.794 ns
+    REG_WRITE_ctrl(0xC0190208,0x02020003);//at:204029.546 ns
+    REG_WRITE_ctrl(0xC019020c,0x00000005);//at:204103.298 ns
+    REG_WRITE_ctrl(0xC019020c,0x00000205);//at:204177.050 ns
+    REG_WRITE_ctrl(0xC019020c,0x00050205);//at:204250.802 ns
+    REG_WRITE_ctrl(0xC019020c,0x01050205);//at:204324.554 ns
+    REG_WRITE_ctrl(0xC0190210,0x0000000f);//at:204398.306 ns
+    REG_WRITE_ctrl(0xC0190210,0x00000f0f);//at:204472.058 ns
+    REG_WRITE_ctrl(0xC0190214,0x00000002);//at:204545.810 ns
+    REG_WRITE_ctrl(0xC0190214,0x00000502);//at:204619.562 ns
+    REG_WRITE_ctrl(0xC0190214,0x00060502);//at:204693.314 ns
+    REG_WRITE_ctrl(0xC0190214,0x06060502);//at:204767.066 ns
+    REG_WRITE_ctrl(0xC0190218,0x00000006);//at:204840.818 ns
+    REG_WRITE_ctrl(0xC0190218,0x00000606);//at:204914.570 ns
+    REG_WRITE_ctrl(0xC0190218,0x000f0606);//at:204988.322 ns
+    REG_WRITE_ctrl(0xC0190218,0x0f0f0606);//at:205062.074 ns
+#endif
+    REG_WRITE_ctrl(0xC0190200,0x0000001f);//at:203513.282 ns
+    REG_WRITE_ctrl(0xC0190204,0x00000000);//at:203587.034 ns
+    REG_WRITE_ctrl(0xC0190204,0x00000700);//at:203660.786 ns
+    REG_WRITE_ctrl(0xC0190204,0x001f0700);//at:203734.538 ns
+    REG_WRITE_ctrl(0xC0190208,0x00000003);//at:203808.290 ns
+    REG_WRITE_ctrl(0xC0190208,0x00000003);//at:203882.042 ns
+    REG_WRITE_ctrl(0xC0190208,0x00000003);//at:203955.794 ns
+    REG_WRITE_ctrl(0xC0190208,0x07000003);//at:204029.546 ns
+    REG_WRITE_ctrl(0xC019020c,0x00000000);//at:204103.298 ns
+    REG_WRITE_ctrl(0xC019020c,0x00000000);//at:204177.050 ns
+    REG_WRITE_ctrl(0xC019020c,0x00010000);//at:204250.802 ns
+    REG_WRITE_ctrl(0xC019020c,0x0f010000);//at:204324.554 ns
+    REG_WRITE_ctrl(0xC0190210,0x0000000f);//at:204398.306 ns
+    REG_WRITE_ctrl(0xC0190210,0x00000f0f);//at:204472.058 ns
+    REG_WRITE_ctrl(0xC0190214,0x00000005);//at:204545.810 ns
+    REG_WRITE_ctrl(0xC0190214,0x00000105);//at:204619.562 ns
+    REG_WRITE_ctrl(0xC0190214,0x00050105);//at:204693.314 ns
+    REG_WRITE_ctrl(0xC0190214,0x05050105);//at:204767.066 ns
+    REG_WRITE_ctrl(0xC0190218,0x00000005);//at:204840.818 ns
+    REG_WRITE_ctrl(0xC0190218,0x00000505);//at:204914.570 ns
+    REG_WRITE_ctrl(0xC0190218,0x000f0505);//at:204988.322 ns
+    REG_WRITE_ctrl(0xC0190218,0x0f0f0505);//at:205062.074 ns
+
+    REG_WRITE_ctrl(0xC0190240,0x04000410);//at:205546.730 ns
+    REG_WRITE_ctrl(0xC0190240,0x04000210);//at:205620.482 ns
+    REG_WRITE_ctrl(0xC0190240,0x04000210);//at:205694.234 ns
+    REG_WRITE_ctrl(0xC0190240,0x0a000210);//at:205767.986 ns
+    REG_WRITE_ctrl(0xC0190244,0x00002210);//at:205841.738 ns
+    REG_WRITE_ctrl(0xC0190244,0x00002220);//at:205915.490 ns
+    REG_WRITE_ctrl(0xC0190244,0x00002220);//at:205989.242 ns
+    REG_WRITE_ctrl(0xC0190244,0x00000220);//at:206062.994 ns
+    REG_WRITE_ctrl(0xC0190250,0x00000305);//at:206136.746 ns
+    REG_WRITE_ctrl(0xC0190250,0x00000307);//at:206210.498 ns
+    REG_WRITE_ctrl(0xC0190250,0x00000303);//at:206284.250 ns
+    REG_WRITE_ctrl(0xC0190250,0x00000303);//at:206358.002 ns
+    REG_WRITE_ctrl(0xC0190250,0x00d70303);//at:206431.754 ns
+    REG_WRITE_ctrl(0xC0190250,0x7cd70303);//at:206505.506 ns
+    REG_WRITE_ctrl(0xC0190254,0x00000000);//at:206579.258 ns
+    REG_WRITE_ctrl(0xC019025c,0x0f0080f8);//at:207074.450 ns
+    REG_WRITE_ctrl(0xC019025c,0x680080f8);//at:207148.202 ns
+    REG_WRITE_ctrl(0xC0190264,0x0f003719);//at:207632.858 ns
+    REG_WRITE_ctrl(0xC0190264,0xea003719);//at:207706.610 ns
+    REG_WRITE_ctrl(0xC019026c,0x0f0089ed);//at:208191.266 ns
+    REG_WRITE_ctrl(0xC019026c,0x650089ed);//at:208265.018 ns
+    REG_WRITE_ctrl(0xC0190300,0x00000000);//at:208338.770 ns
+    REG_WRITE_ctrl(0xC0190300,0x00000000);//at:208412.522 ns
+    REG_WRITE_ctrl(0xC0190300,0x00000004);//at:208486.274 ns
+    REG_WRITE_ctrl(0xC0190300,0x00000014);//at:208560.026 ns
+    REG_WRITE_ctrl(0xC0190304,0x00000000);//at:208686.458 ns
+    REG_WRITE_ctrl(0xC0190304,0x00000000);//at:208812.890 ns
+    REG_WRITE_ctrl(0xC019030c,0x00000000);//at:209223.794 ns
+    REG_WRITE_ctrl(0xC019030c,0x00000000);//at:209634.698 ns
+    REG_WRITE_ctrl(0xC019030c,0x00000000);//at:210045.602 ns
+    REG_WRITE_ctrl(0xC019030c,0x00000000);//at:210456.506 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000001);//at:295366.130 ns
+    REG_WRITE_ctrl(0xC0190400,0x00000001);//at:295871.858 ns
+    REG_WRITE_ctrl(0xC0190404,0x00005045);//at:296388.122 ns
+    REG_WRITE_ctrl(0xC0190408,0x0000309b);//at:296461.874 ns
+    REG_WRITE_ctrl(0xC0190494,0x02100100);//at:296946.530 ns
+    REG_WRITE_ctrl(0xC0190490,0x00000001);//at:297072.962 ns
+    REG_WRITE_ctrl(0xC0190304,0x00000000);//at:333548.594 ns
+}
+
+int lpddr_init(void)
+{
+    volatile u32 ddr_rd_st, pgcr, pgsr, swstat ,ddr_pir ;
+    /*Setp 1*/
+    REG_WRITE_ctrl(0xC0190304, 0x00000001); /*disable pop queue*/
+    REG_WRITE_ctrl(0xC0190030, 0x00000001); /*enable self_refresh*/
+
+    /*Setp 2*/
+    ddr_rd_st = REG_READ_ctrl(0xC0190004); /*read and reset value?*/
+    lpddr_debug("2.lpddr: ddr rd status: 0x%x\n", ddr_rd_st);
+    while (ddr_rd_st != 0) {
+        ddr_rd_st = REG_READ_ctrl(0xC0190004);
+    }
+    lpddr_debug("2. ddr rd status: 0x%x\n", ddr_rd_st);
+
+    /*Setp 3*/
+    lpddr_controller_init();
+    lpddr_debug("3. ddr controller init done\n");
+
+    /*Setp 4*/
+    REG_READ_ctrl(0xC0190030);
+    //REG_WRITE_ctrl(0xC0190030, 0x00000000);
+    REG_WRITE_ctrl(0xC0190030, 0x0000000a);
+    REG_READ_ctrl(0xC0190030);
+    //REG_WRITE_ctrl(0xC0190030, 0x00000000);
+    REG_WRITE_ctrl(0xC0190030, 0x00000008);
+
+    /*Setp 5*/
+    REG_WRITE_ctrl(0xC0190320, 0x00000000);
+    REG_WRITE_ctrl(0xC01901b0, 0x00000000);
+
+    /*phy init */
+    /*Setp 6*/
+    pgcr = REG_READ_ctrl(0xC01A0008);
+    lpddr_debug("6. phy pgcr = 0x%x\n", pgcr);
+    pgcr = pgcr;
+    /*Setp 7*/
+    lpddr_phy_init();
+    lpddr_debug("7. ddr phy init done\n");
+
+    /*Setp 8*/
+    pgsr = REG_READ_ctrl(0xC01A000c);
+    lpddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+    while ((pgsr&0x1) != 0x1) {
+        pgsr = REG_READ_ctrl(0xC01A000c);
+        lpddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+    }
+    /*Step 9*/
+    REG_WRITE_ctrl(0xC01A0004, 0x00000061);
+    pgsr = REG_READ_ctrl(0xC01A000c);
+    REG_WRITE_ctrl(0xC01A0008,0x07842e05);//at:359372.330 ns)
+
+    /*Step 10*/
+    pgsr = REG_READ_ctrl(0xC01A000c);
+    lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    while ((pgsr&0x1) != 0x1) {
+        pgsr = REG_READ_ctrl(0xC01A000c);
+        lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    }
+    /*Step 11*/
+    REG_WRITE_ctrl(0xC01A0040,0x00000022);//at:355305.434 ns)
+    REG_WRITE_ctrl(0xC01901b0,0x00000001);//at:355379.186 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000001);//at:355452.938 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:356769.938 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:357465.314 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:358139.618 ns
+    REG_WRITE_ctrl(0xC0190060,0x00000001);//at:358266.050 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000000);//at:358339.802 ns
+    REG_WRITE_ctrl(0xC01901b0,0x00000000);//at:358413.554 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000001);//at:358487.306 ns
+
+    /*Step 13*/
+    swstat = REG_READ_ctrl(0xC0190324);
+    while (swstat != 0x1)
+        swstat = REG_READ_ctrl(0xC0190324);
+    lpddr_debug("ddr swstat: 0x%x\n", swstat);
+
+    /*Step 14*/
+    REG_WRITE_ctrl(0xC01A0008,0x07842e05);//at:359372.330 ns)
+    ddr_pir = REG_READ_ctrl(0xC01a0004);
+    lpddr_debug("ddr pir : 0x%x\n", ddr_pir);
+    while (ddr_pir != 0) {
+        ddr_pir = REG_READ_ctrl(0xC01a0004);
+    }
+    
+    REG_WRITE_ctrl(0xC01A0004,0x00000003);//at:370846.034 ns)
+
+    ddr_pir = REG_READ_ctrl(0xC01a0004);
+    lpddr_debug("ddr pir : 0x%x\n", ddr_pir);
+    while (ddr_pir != 0) {
+    ddr_pir = REG_READ_ctrl(0xC01a0004);
+    }
+     
+
+    pgsr = REG_READ_ctrl(0xC01A000c);
+    lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    while ((pgsr&0x1) != 0x1) {
+        pgsr = REG_READ_ctrl(0xC01A000c);
+        lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    }
+
+    /*Step 15*/
+    REG_WRITE_ctrl(0xC0190060,0x00000000);//at:392128.754 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:392244.650 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:392371.082 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:392497.514 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000000);//at:392571.266 ns
+    REG_WRITE_ctrl(0xC01901b0,0x00000001);//at:392645.018 ns
+    REG_WRITE_ctrl(0xC0190320,0x00000001);//at:392718.770 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:393403.610 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:393530.042 ns
+    //REG_WRITE_ctrl(0xC01a01d4,0x3db0b001);//lpddr ,200m , lichunlei 181206
+    //REG_WRITE_ctrl(0xC01a0214,0x3c00b001);
+#ifdef CONFIG_BP2016_OEM
+    REG_WRITE_ctrl(0xC01a01d4,0x3db09001);//lpddr ,200m , lichunlei 190603
+    REG_WRITE_ctrl(0xC01a0214,0x3db09001);
+#else
+    REG_WRITE_ctrl(0xC01a01d4,0x3db0a001);//lpddr ,200m , lichunlei 190603
+    REG_WRITE_ctrl(0xC01a0214,0x3db0a001);
+#endif
+    return 0;
+}

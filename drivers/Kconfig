@@ -1,0 +1,19 @@
+menu "Drivers"
+
+source drivers/qspi/Kconfig
+source drivers/sim/Kconfig
+source drivers/i2c/Kconfig
+source drivers/spi/Kconfig
+source drivers/dma/Kconfig
+source drivers/uart/Kconfig
+source drivers/reset/Kconfig
+source drivers/wdt/Kconfig
+source drivers/iomux/Kconfig
+source drivers/clk/Kconfig
+source drivers/cpu_right/Kconfig
+source drivers/gpio/Kconfig
+source drivers/ddr/Kconfig
+source drivers/sd/Kconfig
+source drivers/net/Kconfig
+
+endmenu

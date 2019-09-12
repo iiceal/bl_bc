@@ -1,0 +1,35 @@
+menuconfig  DRV_DDR
+	bool "enable DDR driver"
+    default n
+    select DRV_CLK
+    select DRV_RESET
+    ---help---
+        ddr controller driver
+
+if DRV_DDR
+
+choice
+	prompt "DDR type select"
+	default LPDDR 
+	help
+	  Select DDR type to init  
+
+config LPDDR 
+	bool "LPDDR chip"
+    depends on !BP2016_FPGA_DEF
+
+config LPDDR2
+	bool "LPDDR2 chip"
+    depends on !BP2016_FPGA_DEF
+
+config DDR3
+	bool "DDR3 chip"
+    depends on !BP2016_FPGA_DEF
+
+config DDR_FPGA
+	bool "DDR in BP2016 FPGA"
+    depends on BP2016_FPGA_DEF
+
+endchoice
+
+endif

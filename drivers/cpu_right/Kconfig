@@ -1,0 +1,5 @@
+config DRV_CPU_RIGHT
+    bool "enable cpu right function"
+    default n
+    help
+		cpu right module function

@@ -1,0 +1,22 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+config CPU_V7
+    bool
+
+if CPU_V7 
+
+config CPU_NAME 
+    string
+    default "armv7"
+
+menu "Target CPU Variant"
+
+config HG_ARCH_ARM_CORTEX_A7
+	bool "maybe define later"
+
+endmenu #prompt "Target Architecture Variant"
+
+endif #HG_ARCH_ARM

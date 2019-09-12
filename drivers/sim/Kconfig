@@ -1,0 +1,5 @@
+config DRV_SIM
+    bool "enable sim driver"
+    default n
+    help
+		SIM driver

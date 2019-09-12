@@ -1,0 +1,11 @@
+ifdef CONFIG_BP2016_EVK
+    obj-y += bp2016_evk/
+endif
+
+ifdef CONFIG_BP2016_OEM
+    obj-y += bp2016_oem/
+endif
+
+ifdef CONFIG_BP2016_FPGA_DEF
+    obj-y += bp2016_fpga/
+endif

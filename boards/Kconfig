@@ -1,0 +1,39 @@
+choice
+	prompt "Board select"
+	default BP2016_EVK 
+	help
+	  Select which Board do you want to build 
+
+config BP2016_EVK 
+	bool "BP2016 EVK"
+
+config BP2016_FPGA_DEF
+	bool "BP2016 FPGA default"
+
+config BP2016_OEM
+	bool "BP2016 OEM"
+
+endchoice
+
+if BP2016_EVK
+
+config BOARD_NAME
+    string
+    default "bp2016_evk"
+
+endif
+
+if BP2016_FPGA_DEF
+
+config BOARD_NAME
+    string
+    default "bp2016_fpga_def"
+
+endif
+
+
+if BP2016_OEM
+config BOARD_NAME
+    string
+    default "bp2016_oem"
+endif

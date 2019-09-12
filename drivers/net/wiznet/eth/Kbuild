@@ -1,0 +1,2 @@
+obj-y += socket.o   \
+         w5500.o

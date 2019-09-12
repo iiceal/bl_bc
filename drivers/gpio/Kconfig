@@ -1,0 +1,5 @@
+config DRV_GPIO
+    bool "enable gpio driver"
+    default n
+    help
+		gpio driver

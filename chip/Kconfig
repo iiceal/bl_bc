@@ -1,0 +1,82 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+choice
+	prompt "Project"
+	default HG_PROJECT_BP2016 
+	help
+	  Specific project to use
+
+config HG_PROJECT_BP2016
+	bool "BP2016"
+	select CPU_V7
+
+endchoice
+
+if HG_PROJECT_BP2016
+
+menu "Chip option"
+
+config HG_PROJECT_NAME
+   string 
+   default "bp2016"
+
+config SRAM_BL_START
+    hex "Bootloader run start address"
+	default 0x290000
+    help
+        config bl boot address
+
+config USE_IRQ
+    bool "enable gic"
+    default y
+    help
+    	enable gic driver.
+
+config MMU_ENABLE
+    bool "enable mmu"
+    default y
+    help
+    	enable mmu.
+
+config SYS_MALLOC_CLEAR_ON_INIT
+	bool "Init with zeros the memory reserved for malloc (slow)"
+	default y
+	help
+	  This setting is enabled by default. The reserved malloc
+	  memory is initialized with zeros, so first malloc calls
+	  will return the pointer to the zeroed memory. But this
+	  slows the boot time.
+
+	  It is recommended to disable it, when CONFIG_SYS_MALLOC_LEN
+	  value, has more than few MiB, e.g. when uses bzip2 or bmp logo.
+	  Then the boot time can be significantly reduced.
+	  Warning:
+	  When disabling this, please check if malloc calls, maybe
+	  should be replaced by calloc - if one expects zeroed memory.
+
+config MALLOC_LEN_KB 
+	int	"malloc address space size"
+	range 48  256
+	default 64
+	help
+        Alloc malloc space size, if the size too small, it will lead to malloc failed
+        so if some malloc failed, you can change this value
+
+config SYS_MALLOC_DEBUG
+	bool "malloc debug interface for stats memory usage"
+	default y
+	help
+        Statistics on current memory usage
+
+config BB_MMU_ENABLE
+    bool "enable BB mmu"
+    default n 
+    select MMU_ENABLE
+    help
+    	enable BB mmu.
+endmenu
+
+endif

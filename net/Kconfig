@@ -1,0 +1,17 @@
+#
+# Net configuration
+#
+
+menu "Networking"
+
+config NET
+	bool "Networking support"
+	default n
+    select DRV_NET
+
+if NET
+source net/lwip/port/Kconfig
+source net/lwip/Kconfig
+endif
+
+endmenu

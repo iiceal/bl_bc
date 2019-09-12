@@ -1,0 +1,20 @@
+obj-y += \
+console.o	\
+		 ctype.o	\
+		 div64.o	\
+		 dlmalloc.o \
+		 bl_cmd.o	\
+		 bl_shell.o \
+		 misc.o		\
+		 string.o	\
+         upgrade.o  \
+         crc.o  \
+		 vsprintf.o
+
+obj-$(CONFIG_BUILD_ENABLE_UNWIND) += dump_stack.o
+
+obj-$(CONFIG_LOAD_XMODEM) += xyzModem.o \
+                             load_xmodem.o
+
+obj-$(CONFIG_USE_IRQ) += gic400/gic400.o	\
+						 irq/irq.o

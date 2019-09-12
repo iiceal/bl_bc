@@ -1,0 +1,10 @@
+menu "boot parameter"
+
+config DBG_SERIAL_NUM
+	int	"debug serial port number for printf"
+	range 0  7
+	default 0
+	help
+        This is debug serial port number, the vailid port number is 0~7
+
+endmenu

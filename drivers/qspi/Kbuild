@@ -1,0 +1,11 @@
+obj-y += qspi_hw.o	\
+		 qspi_wrapper.o	\
+		 flash.o	\
+		 fl_common.o
+
+obj-$(CONFIG_QSPI_S25FL512S) += fl_s25fl512s.o
+obj-$(CONFIG_QSPI_W25Q256FV) += fl_w25q256fv.o
+obj-$(CONFIG_QSPI_GD25Q512MC) += fl_gd25q512mc.o
+obj-$(CONFIG_QSPI_GD25Q256D) += fl_gd25q256d.o
+
+#ccflags-$(CONFIG_HG_PROJECT_BP2016) += -I./include/ -I./chip/bp2016/include/

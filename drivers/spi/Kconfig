@@ -1,0 +1,25 @@
+menuconfig DRV_SPI
+    bool "enable spi driver"
+    default n
+    help
+		SPI driver
+
+if DRV_SPI
+
+if DRV_NET
+config W5500_SPI_BUS
+    int "w5500 spi bus index"
+    range 0 2
+    default 0
+    help
+        this indicates w5500 phy use which spi bus
+
+config W5500_SPI_CS
+    int "w5500 spi bus cs"
+    range 0 8
+    default 0
+    help
+        this indecates w5500 phy use spi bus which cs
+endif #DRV_NET
+
+endif #DRV_SPI

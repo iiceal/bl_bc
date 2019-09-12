@@ -1,0 +1,6 @@
+config DRV_IOMUX
+    bool "enable iomux function"
+    default n
+    depends on HG_PROJECT_BP2016
+    help
+		module iomux function
