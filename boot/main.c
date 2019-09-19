@@ -165,41 +165,6 @@ bool uart_get_input(U32 *port, u8 *c)
     return false;
 }
 
-#ifdef CONFIG_BOOT_COUNT_DOWN
-void counting_down(void)
-{
-    U64 s, e;
-    U8 c_input;
-    U32 port = 0, skip_s = 0, delay_ms = 0;
-    U32 time_out = CONFIG_BOOT_COUNT_DOWN_SEC * 1000;
-    if(0 == time_out){
-        printf("boot counting down bypass...\n");
-        return;
-    }
-    s = arch_counter_get_current();
-    while(1){
-        if(true == uart_get_input(&port, &c_input)){
-                SHELL_INIT();
-        }
-        e = arch_counter_get_current();
-        delay_ms = (((U32)(e-s))/TICKS_PER_MS) + 1;
-        if(delay_ms > time_out){  // 3s
-            printf("no input in %dS, continue...\n", CONFIG_BOOT_COUNT_DOWN_SEC);
-            break;
-        }else{
-            if((delay_ms % 1000) == 0){
-                printf("skip %d s...\n", ++skip_s);
-                mdelay(1);
-            }
-        }
-
-        if(delay_ms > time_out){  // 3s
-            printf("no upgrade tool detected in %dms, continue...\n", time_out);
-            break;
-        }
-    }
-}
-#endif
 
 #ifdef CONFIG_AUTO_UPGRADE
 int auto_upgrade(void)
@@ -243,6 +208,47 @@ int auto_upgrade(void)
 }
 #endif
 
+#ifdef CONFIG_BOOT_COUNT_DOWN
+int counting_down(void)
+{
+    U32 ret = 0;
+    U64 s, e;
+    U8 c_input;
+    U32 port = 0, skip_s = 0, delay_ms = 0;
+    U32 time_out = CONFIG_BOOT_COUNT_DOWN_SEC * 1000;
+    if(0 == time_out){
+        printf("boot counting down bypass...\n");
+        return ret;
+    }
+    s = arch_counter_get_current();
+    while(1){
+        if(true == uart_get_input(&port, &c_input)){
+//                SHELL_INIT();
+        
+            ret = 1;
+            break;
+        }
+        e = arch_counter_get_current();
+        delay_ms = (((U32)(e-s))/TICKS_PER_MS) + 1;
+        if(delay_ms > time_out){  // 3s
+            printf("no input in %dS, continue...\n", CONFIG_BOOT_COUNT_DOWN_SEC);
+            break;
+        }else{
+            if((delay_ms % 1000) == 0){
+                printf("skip %d s...\n", ++skip_s);
+                mdelay(1);
+            }
+        }
+
+        if(delay_ms > time_out){  // 3s
+            printf("no upgrade tool detected in %dms, continue...\n", time_out);
+            break;
+        }
+    }
+    return ret;
+}
+#endif
+
 extern void print_boot_par(void);
 extern void copy_rom_run_paramter_to_dst(void);
 
@@ -250,6 +256,8 @@ extern void upgrade_start(void);
 extern void init_spinor(void);
 void boot_main(void)
 {
+    int ret = 0;
+    ret = ret;
     printf("Bink: BL start.\n ");
     chip_early_init_f();
     early_system_init();
@@ -264,14 +272,15 @@ void boot_main(void)
 //    board_init_f();
 
 #ifdef CONFIG_AUTO_UPGRADE
-    int ret;
    ret =  auto_upgrade();
    if(ret == 1)
        goto UPGRADE;
 #endif
 
 #ifdef CONFIG_BOOT_COUNT_DOWN
-    counting_down();
+   ret = counting_down();
+   if(ret == 1)
+       goto UPGRADE;
 #endif
 
     // try to start ecos or linux
@@ -279,7 +288,7 @@ void boot_main(void)
     boot_parse_init();
 //    printf("start BP fail, start shell...\n");
 //    SHELL_INIT();
-//UPGRADE:
+UPGRADE:
 
     while (1)
     {
