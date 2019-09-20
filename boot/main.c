@@ -171,8 +171,11 @@ int auto_upgrade(void)
 {
     U64 s, e;
     U8 c_input;
-    U32 port = 0, delay_ms = 0;
+    U32 port = 0, delay_ms = 0, skip_s = 0;
     U32 time_out = CONFIG_AUTO_UPGRADE_DELAY_MS;
+#ifdef CONFIG_BOOT_COUNT_DOWN
+    U32 time_out_count = CONFIG_BOOT_COUNT_DOWN_SEC * 1000;
+#endif
     U32 ret = 0;
     if(0 == time_out){
         printf("auto_upgrade bypass...\n");
@@ -194,12 +197,27 @@ int auto_upgrade(void)
                 printf("Get User Stop To Bootloader Command,\nStart bootloader shell.\n\n");
 //                SHELL_INIT();
                 ret = 1;
+                return ret;
             }
         }
         e = arch_counter_get_current();
         delay_ms = (((U32)(e-s))/TICKS_PER_MS) + 1;
         if(delay_ms > time_out){  // 3s
             printf("no upgrade tool detected in %dms, continue...\n", time_out);
+#ifdef CONFIG_BOOT_COUNT_DOWN
+           if(delay_ms > time_out_count)
+            {
+            
+                printf("no upgrade tool detected in %ds, break.\n",++skip_s);
+                break;
+            }
+            if(delay_ms%1000 == 0)
+            {   
+                printf("no upgrade tool detected in %ds, continue...\n",++skip_s);
+            }
+            
+            continue;
+#endif
             break;
         }
     }
@@ -223,9 +241,20 @@ int counting_down(void)
     s = arch_counter_get_current();
     while(1){
         if(true == uart_get_input(&port, &c_input)){
+            if(PK_HEADER == c_input){
+#ifdef CONFIG_UPV_SERIAl
+                upgrade_start();
+#else
+//                printf("upgrade tool in pc detected, but not support in this version, start shell...\n");
 //                SHELL_INIT();
-        
-            ret = 1;
+#endif
+            }
+            if((KEY_SPACE == c_input) || (KEY_ESC == c_input))
+            {
+                printf("Get User Stop To Bootloader Command,\nStart bootloader shell.\n\n");
+//                SHELL_INIT();
+                ret = 1;
+            }
             break;
         }
         e = arch_counter_get_current();
@@ -277,13 +306,8 @@ void boot_main(void)
        goto UPGRADE;
 #endif
 
-#ifdef CONFIG_BOOT_COUNT_DOWN
-   ret = counting_down();
-   if(ret == 1)
-       goto UPGRADE;
-#endif
 
-    // try to start ecos or linux
+// try to start ecos or linux
 //    printf("try to start BP...\n");
     boot_parse_init();
 //    printf("start BP fail, start shell...\n");
