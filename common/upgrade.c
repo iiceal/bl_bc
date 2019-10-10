@@ -14,7 +14,7 @@
 ****************************************************************************************/
 
 
-//#define UPV_DEBUG
+#define UPV_DEBUG
 #ifdef UPV_DEBUG
 #define upgrade_printf(msg...)  \
         do{ \
@@ -26,7 +26,7 @@
 
 
 /**********************************************************/
-#define bink_debug
+//#define bink_debug
 #ifdef bink_debug
 #define d_printf(msg...) printf(msg)
 #else
@@ -331,6 +331,7 @@ void upgrade_flash(int info)
     t1 = arch_counter_get_current(); 
     t_end = arch_counter_get_current();
     cost = (unsigned long)(t1-t0)/CONFIG_COUNTER_FREQ/1000;
+    cost = cost;
     d_printf("BDebug: cost = %d.\n",cost);
     d_printf("BDebug: end*************************,t0 = %d,t1 = %d. \n\n\n",t0,t1);
 #else
