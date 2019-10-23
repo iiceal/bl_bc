@@ -347,7 +347,7 @@ CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 LDFLAGS		:= 
 OBJDUMP_FLAGS = --target=binary  --architecture=$(HG_PROCESSOR_TYPE) --disassemble-all -z
 
-KBUILD_CFLAGS   := $(call cc-option,-march=armv7-a)
+KBUILD_CFLAGS   := $(call cc-option,-march=armv7-a) -mthumb
 KBUILD_AFLAGS   := -D__ASSEMBLY__  $(call cc-option,-march=armv7-a)
 
 KBUILD_CFLAGS += -mno-thumb-interwork -fno-stack-protector -fno-builtin -ffreestanding
@@ -553,7 +553,8 @@ endif # $(dot-config)
 # Defaults final_target but it is usually overridden in the arch makefile
 
 GITVER := $(shell git log --dense --pretty=oneline -n1 | head -c8)
-GETDATE = $(shell date +%Y-%m-%d__%H:%M:%S)
+#GETDATE = $(shell date +%Y-%m-%d__%H:%M:%S)
+GETDATE = $(shell date +%Y-%m-%d)
 
 KBUILD_CFLAGS	+= -DHGVERSION=\"$(GITVER)\"
 KBUILD_CFLAGS	+= -DHGBUILDDATE=\"$(GETDATE)\"
@@ -564,6 +565,18 @@ TARGET_BASE      = copy_bloader
 else
 TARGET_BASE      = bloader_$(PROJECT_NAME)#_$(GITVER)
 endif
+
+define print_info
+	printf "\nFile Size:\n"
+	size $1
+	printf "\nBiggest object files:\n"
+	$(OBJDUMP) -t $1 | egrep '\.text|\.rodata' \
+	   | sed 's/^[^.]*\([.][^ \t]*\)[ \t]*\([^ \t]*\)/\2 \1 /' \
+	   | sort \
+	   | awk '{a=strtonum("0x"$$1);sum+=a;printf("%-35s(%-8s) %5d (%d)\n",$$3,$$2,a,sum);}' \
+	| tail
+endef
+
 
 CONFIG_PADDING    := 1024k
 TARGET_BIN       = $(TARGET_BASE).bin
@@ -589,6 +602,7 @@ all: final_target
 	$(Q)$(OBJDUMP) -D $(FINAL_TARGET).elf >$(FINAL_TARGET).lst
 	#$(Q)$(LD) -o $(FINAL_TARGET).elf $(final_target-init) $(drivers-y) $(PLATFORM_MAP)
 	#@./utils/bin2hex.bin $(TARGET_BIN) $(TARGET_ASCII_HEX) $(CONFIG_PADDING)
+	-@$(call print_info, $(FINAL_TARGET).elf)
 
 
 # include $(srctree)/arch/$(SRCARCH)/Makefile
@@ -756,7 +770,9 @@ final_target-alldirs	:= $(sort $(final_target-dirs) $(patsubst %/,%,$(filter %/,
 		     $(core-n) $(core-) $(drivers-n) $(drivers-) \
 		     $(net-n)  $(net-)  $(libs-n)    $(libs-))))
 
+ifdef CONFIG_COPY_BL_TO_BL_START
 final_target-alldirs += copy_bl
+endif
 
 head-y		:= $(patsubst %/, %/head-in.o, $(head-y))
 init-y		:= $(patsubst %/, %/built-in.o, $(init-y))

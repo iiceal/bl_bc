@@ -1,5 +1,10 @@
 #include <common.h>
 
+#ifdef CONFIG_ENABLE_TRACE
+#define mmu_debug(fmt, args...)  printf("%s: %d " fmt, __func__, __LINE__, ##args)
+#else
+#define mmu_debug(fmt, args...)
+#endif
 
 unsigned long ttb_addr = CONFIG_TTB_BASE;
 static BOOL mmu_enable_flag = false;
@@ -152,13 +157,6 @@ BOOL is_mmu_enable(void)
     return mmu_enable_flag;
 }
 
-#ifdef MMU_DEBUG
-#define mmu_debug(fmt, args...)  printf("MMU: " fmt "\n", ##args);
-#else
-#define mmu_debug(fmt, args...)
-#endif
-
-
 void mmu_setup(void)
 {
     int i;
@@ -166,7 +164,7 @@ void mmu_setup(void)
 
     reg = get_cr(); /* get control reg. */
     if (reg & CR_M) {
-        mmu_debug("mmu had configed completed\n");
+        printf("mmu had configed completed\n");
         return;
     }
 
@@ -182,9 +180,7 @@ void mmu_setup(void)
     bb_iram_mmu_setup();
 #endif
     set_section_dcache(0, DCACHE_WRITEBACK);
-    modify_section_dcache(3, 2, DCACHE_OFF);
-    modify_section_dcache(4, 2, DCACHE_WRITEBACK);
-    modify_section_dcache(5, 2, DCACHE_OFF);
+    set_section_dcache(3, DCACHE_WRITEBACK);
 
     /* Copy the page table address to cp15 */
     asm volatile("mcr p15, 0, %0, c2, c0, 0" : : "r"(ttb_addr) : "memory");

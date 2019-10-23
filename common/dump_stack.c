@@ -1,7 +1,6 @@
 #include <unwind.h>
 #include <bl_common.h>
 
-#if 0
 static _Unwind_Reason_Code stack_func(struct _Unwind_Context* ctx, void* arg)
 {
 	_Unwind_Ptr rs;
@@ -40,5 +39,3 @@ void dump_stack(void)
 	ret = _Unwind_Backtrace(stack_func, &depth);
 	printf("ret = %d \n", ret);
 }
-
-#endif

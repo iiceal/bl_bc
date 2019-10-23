@@ -2,16 +2,14 @@
 #include "iomap.h"
 #include "arm-gic.h"
 
-#define writel_relaxed(v,c)	((*(volatile u32 *) (c)) = (v))
-#define readl_relaxed(c)	(*(volatile u32 *) (c))
-
-
-#ifdef GIC_DEBUG
-#define gic_debug(fmt, args...)  printf("GIC: " fmt "\n", ##args);
+#ifdef CONFIG_ENABLE_TRACE
+#define gic_debug(fmt, args...)  printf("%s: %d " fmt, __func__, __LINE__, ##args)
 #else
 #define gic_debug(fmt, args...)
 #endif
 
+#define writel_relaxed(v,c)	((*(volatile u32 *) (c)) = (v))
+#define readl_relaxed(c)	(*(volatile u32 *) (c))
 
 static U32 gic_dist_base, gic_cpu_base;
 
@@ -32,7 +30,7 @@ static U8 gic_get_cpumask(U32 base)
 	}
 
 	if (!mask)
-		gic_debug("GIC CPU mask not found \n"); /*hardware configure error*/
+		printf("GIC CPU mask not found \n"); /*hardware configure error*/
 
 	return mask;
 }
@@ -115,7 +113,7 @@ static void gic_unmask_irq_(int irq, U32 base)
 	u32 mask = 1 << (irq % 32);
 
 	writel_relaxed(mask, base + GIC_DIST_ENABLE_SET + (irq / 32) * 4);
-//	gic_debug("gic_unmask_irq, irq %d: 0x%x->0x%x\n",
+//	printf("gic_unmask_irq, irq %d: 0x%x->0x%x\n",
 //			irq ,mask, base + GIC_DIST_ENABLE_SET + (irq / 32) * 4);
 }
 

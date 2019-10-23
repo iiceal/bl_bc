@@ -11,6 +11,6 @@ struct fls_fmt_data {
 };
 
 /*flags*/
-#define		FLS_FLAGS_VALID		(1 << 0)	
+#define		FLS_FLAGS_VALID		(3 << 0)
 
 #endif

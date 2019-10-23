@@ -8,8 +8,6 @@ static u32 go_exec_addr(u32 (*entry)(void))
 }
 
 extern void boot_parse_init(void);
-extern void v7_dma_flush_range(u32, u32);
-extern void v7_dma_clean_range(u32, u32);
 static u32 go_cmd_entry_func(BL_CNXT_T *pCnxt, u32 argc, const char **argv)
 {
     u32 (*addr_go)(void);
@@ -19,14 +17,6 @@ static u32 go_cmd_entry_func(BL_CNXT_T *pCnxt, u32 argc, const char **argv)
         return RET_FAIL;
     } else if(2 == argc){
         addr_go = (u32 (*)(void))simple_strtoul(argv[1], NULL, 16);
-        //v7_dma_flush_range((U32)addr_go, CONFIG_SRAM_BL_START);
-        if((CONFIG_SRAM_START <= (U32)addr_go) && ((U32)addr_go <= CONFIG_SRAM_BL_START)){
-            v7_dma_clean_range((U32)addr_go, CONFIG_SRAM_BL_START);
-            printf("clean 0x%x--->0x%x\n", (U32)addr_go, CONFIG_SRAM_BL_START);
-        }else{
-            v7_dma_clean_range((U32)addr_go, (U32)addr_go + 0x200000);
-            printf("clean 0x%x--->0x%x\n", (U32)addr_go, (U32)addr_go + 0x200000);
-        }
         go_exec_addr(addr_go);
         printf("\n$$#$#$#$&& return from go_exec_addr &&&&&&&&&&\n\n\n");
     } else {

@@ -1,13 +1,5 @@
 #include <drivers/drv_ddr.h>
 
-
-#ifdef DDR_DEBUG
-#define ddr_debug(fmt, args...)  printf("DDR: " fmt "\n", ##args);
-#else
-#define ddr_debug(fmt, args...)
-#endif
-
-
 #ifdef CONFIG_DDR_FPGA
 void ddr_phy_init(void)
 {
@@ -239,15 +231,15 @@ int ddr_init(void)
 
     /*Setp 2*/
     ddr_rd_st = REG_READ_ctrl(0xC0190004); /*read and reset value?*/
-    ddr_debug("2. ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
     while (ddr_rd_st != 0) {
         ddr_rd_st = REG_READ_ctrl(0xC0190004);
     }
-    ddr_debug("2. ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
 
     /*Setp 3*/
     ddr_controller_init();
-    ddr_debug("3. ddr controller init done\n");
+    ddr_printf("3. ddr controller init done\n");
 
     /*Setp 4*/
     REG_READ_ctrl(0xC0190030);
@@ -262,18 +254,18 @@ int ddr_init(void)
     /*phy init */
     /*Setp 6*/
     pgcr = REG_READ_ctrl(0xC01A0008);
-    ddr_debug("6. phy pgcr = 0x%x\n", pgcr);
-    pgcr = pgcr;
+    printf("6. phy pgcr = 0x%x\n", pgcr);
+
     /*Setp 7*/
     ddr_phy_init();
-    ddr_debug("7. ddr phy init done\n");
+    ddr_printf("7. ddr phy init done\n");
 
     /*Setp 8*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    ddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     while (pgsr != 0x7) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        ddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     }
 
     /*Step 9*/
@@ -281,10 +273,10 @@ int ddr_init(void)
 
     /*Step 10*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    ddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     while (pgsr != 0xf) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        ddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     }
 
     /*Step 11*/
@@ -295,15 +287,15 @@ int ddr_init(void)
     swstat = REG_READ_ctrl(0xC0190324);
     while (swstat != 0x1)
         swstat = REG_READ_ctrl(0xC0190324);
-    ddr_debug("ddr swstat: 0x%x\n", swstat);
+    ddr_printf("ddr swstat: 0x%x\n", swstat);
 
     /*Step 14*/
     ddr_rd_st = REG_READ_ctrl(0xC0190004);
-    ddr_debug("ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("ddr rd status: 0x%x\n", ddr_rd_st);
     while (ddr_rd_st != 1) {
         ddr_rd_st = REG_READ_ctrl(0xC0190004);
     }
-    ddr_debug("ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("ddr rd status: 0x%x\n", ddr_rd_st);
 
     /*Step 15*/
     REG_WRITE_ctrl(0xC0190030, 0x00000000);
@@ -311,52 +303,63 @@ int ddr_init(void)
     return 0;
 }
 #endif
+
 // ddr controller init func
 #include <pll.h>
 #include <drivers/drv_clk.h>
 #include <drivers/drv_reset.h>
+#include "fastboot.h"
 void ddrc_init(void)
 {
 #ifdef CONFIG_LPDDR
-    if(RET_FAILED == pll1_set_rate_kHz(800000)){
-        ddr_debug("pll1 set 800M error!\n");
+  #ifdef CONFIG_FASTBOOT
+    // for fastboot, (bp2016)if fw call go 0 api, set pll1 maybe hang.
+    // fastboot not set pll1 again, only re-config ddr_printf
+    if(RET_FAILED == fastboot_pll1_set(800000)){
+        ddr_printf("fastboot pll1 set 800M error!\n");
         return;
     }
+  #else
+    if(RET_FAILED == pll1_set_rate_kHz(800000)){
+        ddr_printf("pll1 set 800M error!\n");
+        return;
+    }
+  #endif
+
     if(CLK_OP_SUCCESS != clk_set_rate_kHz(CLK_DDR, 200000)){
-        ddr_debug("lpddr clk set 200M error!\n");
+        ddr_printf("lpddr clk set 200M error!\n");
         return;
     }
     swrst_ddr_reset();
-    ddr_debug("\nlpddr init~~~!\n");
+    ddr_printf("\nlpddr init~~~!\n");
     lpddr_init();
 #elif CONFIG_LPDDR2
     if(RET_FAILED == pll1_set_rate_kHz(800000)){
-        ddr_debug("pll1 set 800M error!\n");
+        ddr_printf("pll1 set 800M error!\n");
         return;
     }
     if(CLK_OP_SUCCESS != clk_set_rate_kHz(CLK_DDR, 200000)){
-        ddr_debug("ddr clk set 200M error!\n");
+        ddr_printf("ddr clk set 200M error!\n");
         return;
     }
     swrst_ddr_reset();
-    ddr_debug("\nlpddr2 init~~~!\n");
+    ddr_printf("\nlpddr2 init~~~!\n");
     lpddr2_init();
 #elif CONFIG_DDR3
     if(RET_FAILED == pll1_set_rate_kHz(1060000)){
-        ddr_debug("pll1 set 1060M error!\n");
+        ddr_printf("pll1 set 1060M error!\n");
         return;
     }
     if(CLK_OP_SUCCESS != clk_set_rate_kHz(CLK_DDR, 530000)){
-        ddr_debug("ddr clk set 530M error!\n");
+        ddr_printf("ddr clk set 530M error!\n");
         return;
     }
     swrst_ddr_reset();
-    ddr_debug("\nddr3 init~~~!\n");
+    ddr_printf("\nddr3 init~~~!\n");
     ddr3_init();
 #elif CONFIG_DDR_FPGA
     swrst_ddr_reset();
-    ddr_debug("\nddr-fpga init~~~!\n");
+    ddr_printf("\nddr-fpga init~~~!\n");
     ddr_init();
 #endif
 }
-

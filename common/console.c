@@ -22,7 +22,7 @@
  */
 
 #include <common.h>
-
+#if 0
 int getc(void)
 {
 	return serial_getc();
@@ -42,7 +42,9 @@ void puts(const char *s)
 {
 	serial_puts(s);
 }
+#endif
 
+#if 0
 int printf(const char *fmt, ...)
 {
 	va_list args;
@@ -76,4 +78,4 @@ int vprintf(const char *fmt, va_list args)
 	puts(printbuffer);
 	return i;
 }
-
+#endif

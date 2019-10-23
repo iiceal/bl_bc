@@ -6,6 +6,7 @@
 extern void qspi_ahb_write_enable(u8 wren_cmd);
 extern void qspi_init_low(int irq_enable, int disp_log, int rd_thr_en);
 
+int fl_performance_dmaread(void);
 #define BUF_NUM (2048)
 static u8 dbuf[BUF_NUM];
 static u32 qspi_controller_init = 0;
@@ -148,6 +149,9 @@ int fl_get_test_type(u32 argc, const char **argv)
 
     if (strcmp(argv[1], "prs") == 0)
         return QSPI_TEST_ALL;
+
+    if (strcmp(argv[1], "perf") == 0)
+        return QSPI_PERF;
 
     if (strcmp(argv[1], "lock") == 0)
         return QSPI_TEST_BLOCK_LOCK;
@@ -366,6 +370,8 @@ int fl_cmd_entry_funcing(u32 argc, const char **argv)
         return fl_auto_verify();
     case QSPI_TEST_ALL:
         return fl_all_verify();
+    case QSPI_PERF:
+        return fl_performance_dmaread();
     default:
         break;
     }
@@ -699,3 +705,41 @@ int fl_all_verify(void)
 
     return RET_PASS;
 }
+
+int vvflag = 0;
+int fl_performance_dmaread(void)
+{
+	unsigned int chip_size=0;
+    unsigned long long s, e;
+    u32 us=0;
+    int i=0;
+    int cmd = SPINOR_OP_READ_QUAD_IO;
+    int dfs = 32;
+
+    if(fl_dev->config_quad(1) != 0)
+        return -1;
+
+    //printf("############## dmaread cmd 0x%x dfs %d ####################\n", cmd, dfs);
+	chip_size = fl_dev->blk_len*fl_dev->blk_num;
+
+	for(i=0; i<chip_size;)
+	{
+        if((0==i) || (i== 0x1000000) || (i==0x3000000))
+        {
+		    fl_dev->config_4byte_extend(i, i&0x3000000);
+            vvflag = 0;
+        }
+
+        s = timer_get_tick();
+        fl_dma_read(cmd, i, frdbuf, 256, 0);
+        e = timer_get_tick();
+		i+=256;
+
+        us += tick_to_us((unsigned long) (e - s));
+	}
+
+    //us = tick_to_us((unsigned long) (e - s));
+    printf("###### dmaread cmd 0x%x dfs=%d all chip need: %d us (%d ms)\n\n", cmd, dfs, us, us / 1000);
+    return 0;
+}
+

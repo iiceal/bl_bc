@@ -1,6 +1,5 @@
 #include <common.h>
-
-#if 0
+ 
 static uint	dp_last_addr, dp_last_size;
 static uint	dp_last_length = 0x40;
 
@@ -231,4 +230,3 @@ void register_common_cmd(DYN_SHELL_ITEM_T* p_common_shell)
 			do_mem_stats); 
 #endif
 }
-#endif

@@ -1,0 +1,150 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+sram             0x0000000000100000 0x0000000000070000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD copy_loader.o
+LOAD start.o
+LOAD v7_cp15.o
+LOAD input_bl.o
+LOAD /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/libgcc.a
+
+.text           0x0000000000100000      0x3a8
+ *start.o(.text)
+ .text          0x0000000000100000      0x1a0 start.o
+                0x0000000000100000                _start
+                0x0000000000100040                _TEXT_BASE
+                0x00000000001001a0                . = ALIGN (0x4)
+ *(.text*)
+ .text          0x00000000001001a0       0xcc copy_loader.o
+                0x00000000001001a0                boot_main
+ .text          0x000000000010026c      0x138 v7_cp15.o
+                0x000000000010026c                v7_dma_inv_range
+                0x00000000001002b4                v7_dma_clean_range
+                0x00000000001002e8                v7_dma_flush_range
+                0x000000000010031c                v7_inv_l1_l2_dcache
+ .text          0x00000000001003a4        0x0 input_bl.o
+                0x00000000001003a8                . = ALIGN (0x8)
+ *fill*         0x00000000001003a4        0x4 
+                0x00000000001003a8                __code_end__ = .
+
+.spiflash_input_data
+                0x00000000001003a8     0x81b8
+ .spiflash_input_data
+                0x00000000001003a8     0x81b8 input_bl.o
+                0x00000000001003a8                input_data_bl
+                0x0000000000108560                input_data_bl_end
+
+.glue_7         0x0000000000108560        0x0
+ .glue_7        0x0000000000000000        0x0 linker stubs
+
+.glue_7t        0x0000000000108560        0x0
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+
+.vfp11_veneer   0x0000000000108560        0x0
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+
+.v4_bx          0x0000000000108560        0x0
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.iplt           0x0000000000108560        0x0
+ .iplt          0x0000000000000000        0x0 copy_loader.o
+
+.data           0x0000000000108560        0x0
+                0x0000000000108560                __data_start = .
+ *(.data*)
+ .data          0x0000000000108560        0x0 copy_loader.o
+ .data          0x0000000000108560        0x0 start.o
+ .data          0x0000000000108560        0x0 v7_cp15.o
+ .data          0x0000000000108560        0x0 input_bl.o
+                0x0000000000108560                __data_end__ = .
+                0x0000000000108560                . = ALIGN (0x4)
+
+.igot.plt       0x0000000000108560        0x0
+ .igot.plt      0x0000000000000000        0x0 copy_loader.o
+
+.rel.dyn        0x0000000000108560        0x0
+                0x0000000000108560                __rel_dyn_start = .
+ *(.rel*)
+ .rel.iplt      0x0000000000000000        0x0 copy_loader.o
+                0x0000000000108560                __rel_dyn_end = .
+
+.dynsym         0x0000000000108560        0x0
+                0x0000000000108560                __dynsym_start = .
+ *(.dynsym)
+                0x0000000000108560                _end = .
+
+.bss            0x0000000000108560        0x0
+                0x0000000000108560                __bss_start = .
+ *(.bss*)
+ .bss           0x0000000000108560        0x0 copy_loader.o
+ .bss           0x0000000000108560        0x0 start.o
+ .bss           0x0000000000108560        0x0 v7_cp15.o
+ .bss           0x0000000000108560        0x0 input_bl.o
+ *(COMMON)
+                0x0000000000108560                . = ALIGN (0x4)
+                0x0000000000108560                __bss_end__ = .
+                0x0000000000000001                ASSERT (! (((__bss_end__ - ORIGIN (sram)) >= 0x70000)), program memory overrun error!!, please reduce BLcase number)
+
+/DISCARD/
+ *(.dynstr*)
+ *(.dynamic*)
+ *(.plt*)
+ *(.interp*)
+ *(.gnu*)
+OUTPUT(fastboot.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000      0x2b9
+ .debug_info    0x0000000000000000      0x1ef copy_loader.o
+ .debug_info    0x00000000000001ef       0x64 start.o
+ .debug_info    0x0000000000000253       0x66 v7_cp15.o
+
+.debug_abbrev   0x0000000000000000      0x189
+ .debug_abbrev  0x0000000000000000      0x161 copy_loader.o
+ .debug_abbrev  0x0000000000000161       0x14 start.o
+ .debug_abbrev  0x0000000000000175       0x14 v7_cp15.o
+
+.debug_loc      0x0000000000000000      0x153
+ .debug_loc     0x0000000000000000      0x153 copy_loader.o
+
+.debug_aranges  0x0000000000000000       0x60
+ .debug_aranges
+                0x0000000000000000       0x20 copy_loader.o
+ .debug_aranges
+                0x0000000000000020       0x20 start.o
+ .debug_aranges
+                0x0000000000000040       0x20 v7_cp15.o
+
+.debug_ranges   0x0000000000000000       0x20
+ .debug_ranges  0x0000000000000000       0x20 copy_loader.o
+
+.debug_line     0x0000000000000000      0x184
+ .debug_line    0x0000000000000000       0x61 copy_loader.o
+ .debug_line    0x0000000000000061       0xa7 start.o
+ .debug_line    0x0000000000000108       0x7c v7_cp15.o
+
+.debug_str      0x0000000000000000      0x19b
+ .debug_str     0x0000000000000000      0x19b copy_loader.o
+                                        0x1a8 (size before relaxing)
+
+.comment        0x0000000000000000        0xf
+ .comment       0x0000000000000000        0xf copy_loader.o
+                                         0x10 (size before relaxing)
+
+.ARM.attributes
+                0x0000000000000000       0x35
+ .ARM.attributes
+                0x0000000000000000       0x37 copy_loader.o
+ .ARM.attributes
+                0x0000000000000037       0x21 start.o
+ .ARM.attributes
+                0x0000000000000058       0x21 v7_cp15.o
+ .ARM.attributes
+                0x0000000000000079       0x21 input_bl.o
+
+.debug_frame    0x0000000000000000       0x28
+ .debug_frame   0x0000000000000000       0x28 copy_loader.o

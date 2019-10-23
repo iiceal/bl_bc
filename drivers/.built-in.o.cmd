@@ -1,0 +1,1 @@
+cmd_drivers/built-in.o :=  arm-eabi-ld    -r -o drivers/built-in.o drivers/qspi/built-in.o drivers/dma/built-in.o drivers/uart/built-in.o drivers/reset/built-in.o drivers/clk/built-in.o drivers/ddr/built-in.o 

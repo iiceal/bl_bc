@@ -42,6 +42,7 @@ config MMU_ENABLE
     	enable mmu.
 
 config SYS_MALLOC_CLEAR_ON_INIT
+    depends on COMMON_MALLOC
 	bool "Init with zeros the memory reserved for malloc (slow)"
 	default y
 	help
@@ -58,6 +59,7 @@ config SYS_MALLOC_CLEAR_ON_INIT
 	  should be replaced by calloc - if one expects zeroed memory.
 
 config MALLOC_LEN_KB 
+    depends on COMMON_MALLOC
 	int	"malloc address space size"
 	range 48  256
 	default 64
@@ -66,6 +68,7 @@ config MALLOC_LEN_KB
         so if some malloc failed, you can change this value
 
 config SYS_MALLOC_DEBUG
+    depends on COMMON_MALLOC
 	bool "malloc debug interface for stats memory usage"
 	default y
 	help

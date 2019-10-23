@@ -3,10 +3,8 @@
 #include <pll.h>
 #include <drivers/drv_clk.h>
 
-//#define CLK_DEBUG
-
-#ifdef CLK_DEBUG
-#define clk_debug(fmt, args...)  printf("CLK:"fmt"\n", ##args);
+#ifdef CONFIG_ENABLE_TRACE
+#define clk_debug(fmt, args...)  printf(fmt"\n", ##args);
 //#define clk_debug(fmt, args...)  printf("%d "fmt"\n", __LINE__, ##args);
 #else
 #define clk_debug(fmt, args...)

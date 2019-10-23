@@ -1,0 +1,676 @@
+Archive member included because of file (symbol)
+
+/opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+                              chip/built-in.o (__aeabi_uidiv)
+/opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+                              common/built-in.o (__aeabi_idiv)
+/opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+                              /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+                              common/built-in.o (__aeabi_llsr)
+
+Allocating common symbols
+Common symbol       size              file
+
+upgrade_send_buffer
+                    0x80              common/built-in.o
+ram_save_addr       0x4               common/built-in.o
+upgrade_recv_data_len
+                    0x2               common/built-in.o
+_in_buf_pong        0x100             chip/built-in.o
+ram_save_len        0x4               common/built-in.o
+in_buf              0x100             chip/built-in.o
+bbfw_bak            0x18              chip/built-in.o
+bbfw_main           0x18              chip/built-in.o
+upgrade_recv_data_type
+                    0x2               common/built-in.o
+reserved_save       0x4               chip/built-in.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+sram             0x0000000000300000 0xffffffffffff5000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+START GROUP
+LOAD cpu/head-in.o
+LOAD chip/built-in.o
+LOAD common/built-in.o
+LOAD boot/built-in.o
+LOAD boards/built-in.o
+LOAD drivers/built-in.o
+LOAD fs/built-in.o
+LOAD cmd/built-in.o
+LOAD net/built-in.o
+LOAD /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a
+END GROUP
+
+.text           0x0000000000300000     0x8090
+ *head-in.o(.text)
+ .text          0x0000000000300000      0x580 cpu/head-in.o
+                0x0000000000300000                _start
+                0x0000000000300040                _TEXT_BASE
+                0x0000000000300210                arch_timer_get_cntfrq
+                0x0000000000300216                arch_counter_get_cntpct
+                0x000000000030021c                arch_counter_get_cntvct
+                0x0000000000300222                arch_timer_starting_cpu
+                0x0000000000300290                arch_counter_get_current
+                0x00000000003002d0                cpu_abort_info
+                0x0000000000300318                do_exception
+                0x0000000000300358                v7_dma_inv_range
+                0x00000000003003a0                v7_dma_clean_range
+                0x00000000003003d4                v7_dma_flush_range
+                0x0000000000300408                v7_inv_l1_l2_dcache
+                0x0000000000300490                set_section_dcache
+                0x00000000003004a8                modify_section_dcache
+                0x00000000003004c0                dram_bank_mmu_setup
+                0x00000000003004d8                iram_mmu_setup
+                0x00000000003004ee                bb_iram_mmu_setup
+                0x0000000000300502                is_mmu_enable
+                0x000000000030050c                mmu_setup
+                0x0000000000300580                __cmd_descriptor_handle_begin = .
+ *(func.get_case_descriptor)
+                0x0000000000300580                __cmd_descriptor_handle_end = .
+                0x0000000000300580                . = ALIGN (0x4)
+ *(.spiflash_input_data)
+ *(SORT(.rodata*))
+ .rodata        0x0000000000300580       0x20 cpu/head-in.o
+ .rodata        0x00000000003005a0       0x75 chip/built-in.o
+ *fill*         0x0000000000300615        0x3 
+ .rodata        0x0000000000300618      0x150 common/built-in.o
+                0x0000000000300618                _ctype
+ .rodata        0x0000000000300768       0xa2 drivers/built-in.o
+ .rodata.str1.1
+                0x000000000030080a       0xb3 cpu/head-in.o
+ .rodata.str1.1
+                0x00000000003008bd      0x6a5 chip/built-in.o
+                                        0x73c (size before relaxing)
+ .rodata.str1.1
+                0x0000000000300f62      0x649 common/built-in.o
+                                        0x66b (size before relaxing)
+ .rodata.str1.1
+                0x00000000003015ab      0x151 boot/built-in.o
+ .rodata.str1.1
+                0x00000000003016fc      0x4b2 drivers/built-in.o
+                                        0x4fa (size before relaxing)
+                0x0000000000301bb0                . = ALIGN (0x4)
+ *fill*         0x0000000000301bae        0x2 
+ *(.text*)
+ .text          0x0000000000301bb0      0xf00 chip/built-in.o
+                0x0000000000301bb0                pll_init
+                0x0000000000301bd4                pll_print
+                0x0000000000301c38                pll_test
+                0x0000000000301c78                clk_en_set
+                0x0000000000301c9c                pin_mux_set
+                0x0000000000301c9e                prcm_init
+                0x0000000000301ca2                chip_early_init_f
+                0x0000000000301cb8                early_system_init
+                0x0000000000301d04                pow
+                0x0000000000301d1c                get_M_N_NO
+                0x0000000000301e14                pll0_set_rate_kHz
+                0x0000000000301eb4                pll0_get_rate_kHz
+                0x0000000000301ee0                pll1_set_rate_kHz
+                0x0000000000301f6c                pll1_get_rate_kHz
+                0x0000000000301f9c                pll2_set_rate_kHz
+                0x0000000000302028                pll2_get_rate_kHz
+                0x0000000000302054                pll3_set_rate_kHz
+                0x00000000003020ec                pll3_get_rate_kHz
+                0x0000000000302134                do_go_exec
+                0x000000000030213e                check_bl2fw_hdr
+                0x00000000003021b8                check_bl2fw_sign_async
+                0x00000000003022e8                check_bl2fw_sign
+                0x0000000000302398                boot_bb_fw_speed
+                0x00000000003023f8                boot_bb_fw
+                0x0000000000302458                print_bl2fw_info
+                0x0000000000302560                copy_rom_run_paramter_to_dst
+                0x0000000000302574                boot_parse_init
+                0x0000000000302588                get_flash_mbr_dbuf
+                0x0000000000302590                get_flash_mbr
+                0x0000000000302620                is_mbr_cfg_valid
+                0x0000000000302630                print_mbr_info
+                0x0000000000302734                read_mbr_cfg
+                0x0000000000302784                copy_mbr_cfg_from_rsv
+                0x00000000003027ac                is_bl2fw_data_valid
+                0x0000000000302810                is_bl2fw_data_valid_new
+                0x000000000030284c                is_bl2fw_hdr_valid
+                0x0000000000302924                get_bl2fw_hdr_aes_enkey
+                0x0000000000302944                get_bl2fw_hdr_version
+                0x0000000000302950                is_bl2fw_hdr_apkey_enabled
+                0x0000000000302964                is_bl2fw_hdr_linux_flags
+                0x0000000000302978                get_bl2fw_hdr_fls_addr
+                0x0000000000302984                get_bl2fw_hdr_fls_size
+                0x0000000000302990                get_bl2fw_hdr_load_addr
+                0x000000000030299c                get_bl2fw_hdr_exec_addr
+                0x00000000003029a8                get_bl2fw_hdr_flags
+                0x00000000003029b8                get_bl2fw_hdr_dbuf
+                0x00000000003029c8                print_bl2fw_hdr_info
+ .text          0x0000000000302ab0     0x1a98 common/built-in.o
+                0x0000000000302ab0                __div64_32
+                0x0000000000302b3e                malloc
+                0x0000000000302b42                free
+                0x0000000000302b44                set_random
+                0x0000000000302b54                hg_pseudo_random_sequence
+                0x0000000000302b74                printf_buf_fmt_32bit
+                0x0000000000302bb4                printf_buf
+                0x0000000000302bf0                strncasecmp
+                0x0000000000302c3c                strcasecmp
+                0x0000000000302c44                strcpy
+                0x0000000000302c52                strncpy
+                0x0000000000302c66                strcat
+                0x0000000000302c80                strncat
+                0x0000000000302ca6                strcmp
+                0x0000000000302cc0                strncmp
+                0x0000000000302ce2                strchr
+                0x0000000000302cfa                strlen
+                0x0000000000302d0a                strrchr
+                0x0000000000302d2a                strnlen
+                0x0000000000302d44                strdup
+                0x0000000000302d66                strspn
+                0x0000000000302d82                strpbrk
+                0x0000000000302da2                strtok
+                0x0000000000302de8                strsep
+                0x0000000000302e06                strswab
+                0x0000000000302e2c                memset
+                0x0000000000302e6e                bcopy
+                0x0000000000302e82                memcpy
+                0x0000000000302ec0                strlcpy
+                0x0000000000302eee                memmove
+                0x0000000000302f20                memcmp
+                0x0000000000302f3a                memscan
+                0x0000000000302f50                strstr
+                0x0000000000302f96                memchr
+                0x0000000000302fb2                memchr_inv
+                0x0000000000303068                upgrade_get_serial_buffer
+                0x0000000000303124                upgrade_get_send_buff
+                0x000000000030312c                upgrade_package_data
+                0x00000000003031b0                upgrade_send_ack
+                0x00000000003031e8                upgrade_send_version
+                0x0000000000303220                upgrade_get_cmd
+                0x000000000030326c                process_start
+                0x000000000030329c                process_data
+                0x0000000000303378                upgrade_get_start_data
+                0x00000000003033cc                upgrade_get_exec_data
+                0x0000000000303400                upgrade_start_data_valid
+                0x000000000030344c                process_connected
+                0x00000000003034c0                upgrade_global_para_reset
+                0x00000000003034ec                upgrade_send_nack
+                0x0000000000303570                upgrade_flash
+                0x00000000003035a8                process_idle
+                0x00000000003035ec                upgrade_exec_data_valid
+                0x0000000000303638                process_exec_data
+                0x00000000003036a8                upgrade_data_check
+                0x0000000000303884                upgrade_stat_m_init
+                0x00000000003038f4                upgrade_processing
+                0x0000000000303a28                upgrade_start
+                0x0000000000303ab8                crc32_no_comp
+                0x0000000000303ae8                crc32
+                0x0000000000303af4                crc16
+                0x0000000000304180                simple_strtoul
+                0x00000000003041f0                strict_strtoul
+                0x0000000000304232                simple_strtol
+                0x000000000030424c                ustrtoul
+                0x0000000000304288                simple_strtoull
+                0x000000000030431c                ustrtoull
+                0x000000000030436a                trailing_strtoln
+                0x00000000003043a8                trailing_strtol
+                0x00000000003043ae                vsprintf
+                0x00000000003043b2                sprintf
+                0x00000000003043cc                printf
+                0x00000000003043fa                vprintf
+                0x000000000030441c                panic_str
+                0x0000000000304434                panic
+                0x0000000000304458                __assert_fail
+                0x0000000000304468                simple_itoa
+                0x000000000030449c                print_grouped_ull
+                0x00000000003044f4                str2off
+                0x000000000030451e                str2long
+ .text          0x0000000000304548      0x4c8 boot/built-in.o
+                0x0000000000304548                _serial_init
+                0x00000000003045e8                _serial_deinit
+                0x00000000003045ea                _serial_tstc
+                0x00000000003045f6                _serial_getc
+                0x0000000000304608                _serial_putc_hw
+                0x000000000030461a                _serial_putc
+                0x0000000000304632                _serial_puts
+                0x0000000000304644                dbg_serial_init
+                0x000000000030464e                upv_serial_init
+                0x000000000030465c                serial_enable_rtscts
+                0x000000000030465e                serial_getc
+                0x0000000000304662                serial_tstc
+                0x000000000030466e                serial_putc
+                0x0000000000304672                serial_puts
+                0x0000000000304676                ctrlc
+                0x0000000000304696                getc
+                0x000000000030469a                tstc
+                0x00000000003046a6                putc
+                0x00000000003046aa                puts
+                0x00000000003046b0                timer_get_tick32
+                0x00000000003046b8                timer_get_tick
+                0x00000000003046bc                timeout_setup_ms
+                0x00000000003046d4                timeout_setup_us
+                0x00000000003046ea                timeout_check
+                0x0000000000304704                mdelay
+                0x000000000030471e                udelay
+                0x0000000000304738                fast_boot
+                0x00000000003047e8                fastboot_pll1_set
+                0x0000000000304808                fastboot_save_para
+                0x000000000030487c                uart_get_input
+                0x00000000003048c4                counting_down
+                0x0000000000304944                auto_upgrade
+                0x00000000003049b0                boot_main
+ .text          0x0000000000304a10       0x16 boards/built-in.o
+                0x0000000000304a10                global_iomux_set
+                0x0000000000304a12                board_init_f
+ *fill*         0x0000000000304a26        0x2 
+ .text          0x0000000000304a28     0x34b4 drivers/built-in.o
+                0x0000000000304a28                qspi_hw_init
+                0x0000000000304a36                qspi_ahb_enable
+                0x0000000000304a40                qspi_reg_enable
+                0x0000000000304a4a                qspi_push_data_8bit
+                0x0000000000304a52                qspi_push_data_16bit
+                0x0000000000304a5a                qspi_push_data_32bit
+                0x0000000000304a62                qspi_get_data_8bit
+                0x0000000000304a6c                qspi_get_data_16bit
+                0x0000000000304a76                qspi_get_data_32bit
+                0x0000000000304a7e                qspi_set_rx_fifo_level
+                0x0000000000304a88                qspi_set_tx_fifo_level
+                0x0000000000304a92                qspi_get_rx_fifo_d_num
+                0x0000000000304a9a                qspi_get_tx_fifo_d_num
+                0x0000000000304aa2                qspi_cache_flash
+                0x0000000000304aaa                qspi_set_baudr
+                0x0000000000304ab6                qspi_clr_all_interrupts
+                0x0000000000304abe                qspi_get_interrupt_status
+                0x0000000000304ac6                qspi_rx_full_inten
+                0x0000000000304ada                qspi_tx_empty_inten
+                0x0000000000304aee                qspi_set_rx_ndf
+                0x0000000000304af8                qspi_rx_fifo_flush
+                0x0000000000304b00                qspi_is_busy
+                0x0000000000304b0c                qspi_tx_init
+                0x0000000000304b20                qspi_tx_init_4
+                0x0000000000304b3c                qspi_rx_get_e2prmode
+                0x0000000000304b94                qspi_rx_init
+                0x0000000000304c00                qspi_set_dma_ctrl
+                0x0000000000304c08                qspi_set_dma_tdlr
+                0x0000000000304c10                qspi_set_dma_rdlr
+                0x0000000000304c18                qspi_polling_raw_status
+                0x0000000000304c4c                qspi_irq_read_status
+                0x0000000000304c80                get_qspiflash_dr
+                0x0000000000304ec0                qspi_get_timer_tick_save
+                0x0000000000304ecc                qspi_wren
+                0x0000000000304f00                qspi_ahb_read_enable
+                0x0000000000304f40                qspi_ahb_write_enable
+                0x0000000000304f4e                qspi_send_xx_data
+                0x0000000000304fb0                qspi_get_rx_ndf
+                0x0000000000304ff2                qspi_get_rx_thr
+                0x0000000000305014                qspi_dma_read_start_once
+                0x000000000030505e                qspi_dma_read_start_new
+                0x0000000000305078                qspi_read_page_data
+                0x00000000003051b0                qspi_dma_write_page
+                0x000000000030529c                qspi_dma_send_read_cmd
+                0x00000000003053a4                qspi_dma_read_start
+                0x0000000000305440                qspi_dma_read_page
+                0x00000000003054cc                qspi_dma_send_cmd_data
+                0x000000000030556c                spansion_qspi_dma_send_cmd_data
+                0x0000000000305618                qspi_read_xx_data
+                0x00000000003056b8                qspi_init_low
+                0x00000000003056d4                qspi_read_spansion_data
+                0x000000000030578c                fl_rescan
+                0x00000000003057e0                fl_reset
+                0x00000000003057fc                fl_read_id
+                0x0000000000305884                fl_protect
+                0x000000000030592c                fl_read
+                0x00000000003059c4                fl_dma_read
+                0x00000000003059da                fl_ahbread
+                0x0000000000305a84                init_spinor
+                0x0000000000305ab0                spinor_hw_read_page
+                0x0000000000305ad4                fl_upgrade_if
+                0x0000000000305bac                qspi_fl_read_rdid
+                0x0000000000305bc0                qspi_fl_read_devid
+                0x0000000000305bd4                qspi_fl_read_page
+                0x0000000000305bd8                qspi_fl_read_status
+                0x0000000000305bf4                qspi_fl_wait_wel
+                0x0000000000305d02                qspi_w25q256fv_quad_disable
+                0x0000000000305d26                qspi_w25q256fv_write_page
+                0x0000000000305db4                qspi_w25q256fv_dma_write_page
+                0x0000000000305e38                qspi_w25q256fv_erase
+                0x0000000000305ea4                qspi_w25q256fv_erase_all
+                0x0000000000305f0c                qspi_w25q256fv_4byte_extend
+                0x0000000000305f3c                qspi_w25q256fv_quad
+                0x0000000000305f6a                qspi_w25q256fv_wps_op
+                0x0000000000305fac                qspi_w25q256fv_prot_region
+                0x000000000030603c                qspi_w25q256fv_read_status
+                0x000000000030608c                qspi_w25q256fv_reset
+                0x00000000003060c0                qspi_w25q256fv_read_block_lock_status
+                0x000000000030610c                qspi_w25q256fv_block_lock
+                0x0000000000306148                qspi_w25q256fv_block_unlock
+                0x0000000000306180                qspi_w25q256fv_global_lock
+                0x000000000030618a                qspi_w25q256fv_global_unlock
+                0x0000000000306194                qspi_w25q256fv_deep_power_down
+                0x00000000003061ce                dma_init
+                0x00000000003061e8                dma_deinit
+                0x0000000000306204                dmac_enable
+                0x000000000030620e                is_dma_init
+                0x0000000000306228                dma_ch_disable
+                0x0000000000306236                syn_lock
+                0x0000000000306238                syn_unlock
+                0x000000000030623a                lli_lock
+                0x0000000000306250                lli_unlock
+                0x000000000030625c                get_lli_node_start_addr
+                0x0000000000306278                dma_get_valid_ch
+                0x00000000003062cc                dma_free_ch
+                0x00000000003062e8                dma_wait_ch_done
+                0x0000000000306314                dma_wait_channel_done_polling
+                0x0000000000306340                dma_close_ch
+                0x000000000030634e                dma_ch_sar_set
+                0x000000000030636a                dma_ch_dar_set
+                0x0000000000306386                dma_ch_int_ctl
+                0x00000000003063bc                dma_dir_base
+                0x0000000000306484                dma_p2m_base
+                0x00000000003064b2                dma_p2m_single
+                0x0000000000306544                dma_m2p_base
+                0x0000000000306572                dma_m2p_single
+                0x000000000030660c                dma_qspiflash_read_polling_new
+                0x0000000000306652                dma_qspiflash_write_page_polling
+                0x0000000000306698                flash_read_dma_init_once
+                0x0000000000306708                flash_dma_read_start
+                0x0000000000306738                flash_dma_read_wait_done
+                0x0000000000306750                flash_dma_read_finished
+                0x0000000000306760                get_dmac_controller
+                0x000000000030677c                get_hwp_dma
+                0x000000000030679c                dmac_read_id
+                0x00000000003067ae                dmac_read_compver
+                0x00000000003067c0                dma_enable
+                0x00000000003067d2                dma_disable
+                0x00000000003067e4                dmac_int_enable
+                0x00000000003067f6                dmac_int_disable
+                0x0000000000306808                dmac_ch_idle
+                0x0000000000306824                dmac_ch_enable
+                0x000000000030683a                dmac_ch_disable
+                0x0000000000306870                dmac_ch_suspend
+                0x0000000000306888                dmac_ch_abort
+                0x000000000030689e                dmac_int_status_get
+                0x00000000003068aa                dmac_reset
+                0x00000000003068be                dmac_ch_sar_set
+                0x00000000003068c2                dmac_ch_dar_set
+                0x00000000003068c6                dmac_ch_block_ts_set
+                0x00000000003068d0                dmac_ch_ctl_lli_enable
+                0x00000000003068da                dmac_ch_ctl_lli_disable
+                0x00000000003068e4                dmac_ch_ctl_IOC_BlkTfr_enable
+                0x00000000003068ee                dmac_ch_ctl_IOC_BlkTfr_disable
+                0x00000000003068f8                dmac_ch_ctl_src_msize_set
+                0x0000000000306906                dmac_ch_ctl_dst_msize_set
+                0x0000000000306914                dmac_ch_ctl_src_tr_width_set
+                0x0000000000306922                dmac_ch_ctl_dst_tr_width_set
+                0x0000000000306930                dmac_ch_ctl_src_inc_set
+                0x000000000030693e                dmac_ch_ctl_dst_inc_set
+                0x000000000030694c                dmac_ch_cfg_priority_set
+                0x000000000030695a                dmac_ch_cfg_dst_per_set
+                0x0000000000306968                dmac_ch_cfg_src_per_set
+                0x0000000000306976                dmac_ch_cfg_tt_fc_set
+                0x0000000000306982                dmac_ch_cfg_dst_multblk_type_set
+                0x0000000000306990                dmac_ch_cfg_src_multblk_type_set
+                0x000000000030699c                dmac_ch_llp_loc_set
+                0x00000000003069a4                dmac_ch_data_left_in_fifo
+                0x00000000003069ac                dmac_ch_completed_block_trans_size
+                0x00000000003069b4                dmac_ch_int_status_get
+                0x00000000003069ba                dmac_ch_int_status_ctl
+                0x00000000003069ea                dmac_ch_int_signal_ctl
+                0x0000000000306a1a                dmac_ch_int_disable_all
+                0x0000000000306a26                dmac_ch_int_clear
+                0x0000000000306a40                serial_reset_rx_fifo
+                0x0000000000306a5c                get_fifo_addr
+                0x0000000000306a60                uart_init
+                0x0000000000306b34                uart_send_buffer
+                0x0000000000306b6c                uart_get_serial_buffer
+                0x0000000000306bd0                serial_port_valid
+                0x0000000000306bda                serial_hwp_get
+                0x0000000000306bf0                serial_irq_num_get
+                0x0000000000306c04                __serial_tstc
+                0x0000000000306c0c                __serial_getc_direct
+                0x0000000000306c10                __serial_getc
+                0x0000000000306c1a                serial_putc_hw
+                0x0000000000306c24                serial_test_te
+                0x0000000000306c2c                serial_putc_hw_direct
+                0x0000000000306c30                serial_data_len_set
+                0x0000000000306c3c                serial_stop_bit_set
+                0x0000000000306c48                serial_parity_en_set
+                0x0000000000306c5c                serial_DLA_en
+                0x0000000000306c70                serial_FIFO_en
+                0x0000000000306c84                serial_FIFO_reset
+                0x0000000000306c92                serial_dma_mode_set
+                0x0000000000306c9e                serial_tx_trigger_set
+                0x0000000000306caa                serial_rx_trigger_set
+                0x0000000000306cb6                serial_int_enable
+                0x0000000000306cbe                serial_int_disable
+                0x0000000000306cc8                uart_clock_enable
+                0x0000000000306cca                uart_config_set
+                0x0000000000306ce8                uart_para_config_init
+                0x0000000000306cfe                calc_divisor
+                0x0000000000306d22                uart_bautrate_set
+                0x0000000000306e14                swrst_cpu1_reset
+                0x0000000000306e1a                swrst_ddr_reset
+                0x0000000000306e20                swrst_rom_reset
+                0x0000000000306e26                swrst_ram_reset
+                0x0000000000306e2c                swrst_bb_reset
+                0x0000000000306e32                swrst_mp_reset
+                0x0000000000306e38                swrst_dmac0_reset
+                0x0000000000306e3e                swrst_dmac1_reset
+                0x0000000000306e44                swrst_qspi_reset
+                0x0000000000306e4a                swrst_sd_reset
+                0x0000000000306e50                swrst_uart0_reset
+                0x0000000000306e56                swrst_uart1_reset
+                0x0000000000306e5c                swrst_uart2_reset
+                0x0000000000306e62                swrst_uart3_reset
+                0x0000000000306e68                swrst_uart4_reset
+                0x0000000000306e6e                swrst_uart5_reset
+                0x0000000000306e74                swrst_uart6_reset
+                0x0000000000306e7a                swrst_uart7_reset
+                0x0000000000306e80                swrst_i2c0_reset
+                0x0000000000306e86                swrst_i2c1_reset
+                0x0000000000306e8c                swrst_spi0_reset
+                0x0000000000306e92                swrst_spi1_reset
+                0x0000000000306e98                swrst_spi2_reset
+                0x0000000000306e9e                swrst_spi3_reset
+                0x0000000000306ea4                swrst_sim0_reset
+                0x0000000000306eaa                swrst_sim1_reset
+                0x0000000000306eb0                swrst_sim2_reset
+                0x0000000000306eb6                swrst_pwm_reset
+                0x0000000000306ebc                swrst_gpio_reset
+                0x0000000000306ec2                swrst_timer_reset
+                0x0000000000306ec8                swrst_global_reset
+                0x0000000000306ee8                swrst_gic_reset
+                0x0000000000307338                clk_disable
+                0x0000000000307500                clk_enable
+                0x00000000003076c8                clk_get_rate_kHz
+                0x0000000000307798                clk_set_rate_kHz
+                0x0000000000307850                ddr_burst_write
+                0x0000000000307888                ddr_burst_read
+                0x000000000030789c                lpddr_init
+                0x0000000000307eb0                ddrc_init
+ .text          0x0000000000307edc       0xac /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+                0x0000000000307edc                __udivsi3
+                0x0000000000307edc                __aeabi_uidiv
+                0x0000000000307f6c                __aeabi_uidivmod
+ .text          0x0000000000307f88       0xe0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+                0x0000000000307f88                __aeabi_idiv
+                0x0000000000307f88                __divsi3
+                0x000000000030804c                __aeabi_idivmod
+ .text          0x0000000000308068        0x4 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+                0x0000000000308068                __aeabi_ldiv0
+                0x0000000000308068                __aeabi_idiv0
+ .text          0x000000000030806c       0x18 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+                0x000000000030806c                __aeabi_llsr
+                0x000000000030806c                __lshrdi3
+ *fill*         0x0000000000308084        0x4 
+ .text.__stub   0x0000000000308088        0x8 linker stubs
+                0x0000000000308090                . = ALIGN (0x8)
+ *fill*         0x0000000000308090        0x0 
+                0x0000000000308090                __code_end__ = .
+
+.glue_7         0x0000000000308090        0x0
+ .glue_7        0x0000000000000000        0x0 linker stubs
+
+.glue_7t        0x0000000000308090        0x0
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+
+.vfp11_veneer   0x0000000000308090        0x0
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+
+.v4_bx          0x0000000000308090        0x0
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.iplt           0x0000000000308090        0x0
+ .iplt          0x0000000000000000        0x0 cpu/head-in.o
+
+.data           0x0000000000308090      0x128
+                0x0000000000308090                __data_start = .
+ *(.data*)
+ .data          0x0000000000308090        0x4 cpu/head-in.o
+                0x0000000000308090                ttb_addr
+ .data          0x0000000000308094        0x4 chip/built-in.o
+                0x0000000000308094                pll3_ref_clk_khz
+ .data          0x0000000000308098       0x4c common/built-in.o
+                0x000000000030809c                select_id
+                0x00000000003080a0                version_curr
+                0x00000000003080e0                upgrade_recv_serial_buffer
+ .data          0x00000000003080e4        0x0 boot/built-in.o
+ .data          0x00000000003080e4        0x0 boards/built-in.o
+ .data          0x00000000003080e4       0xd4 drivers/built-in.o
+                0x00000000003080e4                fl_info
+                0x00000000003081ac                rdch
+                0x00000000003081b0                serial_irq_num
+ .data          0x00000000003081b8        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .data          0x00000000003081b8        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .data          0x00000000003081b8        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .data          0x00000000003081b8        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+                0x00000000003081b8                __data_end__ = .
+                0x00000000003081b8                . = ALIGN (0x4)
+
+.igot.plt       0x00000000003081b8        0x0
+ .igot.plt      0x0000000000000000        0x0 cpu/head-in.o
+
+.rel.dyn        0x00000000003081b8        0x0
+                0x00000000003081b8                __rel_dyn_start = .
+ *(.rel*)
+ .rel.iplt      0x0000000000000000        0x0 cpu/head-in.o
+                0x00000000003081b8                __rel_dyn_end = .
+
+.dynsym         0x00000000003081b8        0x0
+                0x00000000003081b8                __dynsym_start = .
+ *(.dynsym)
+                0x00000000003081b8                _end = .
+
+.bss            0x00000000003081b8     0x224c
+                0x00000000003081b8                __bss_start = .
+ *(.bss*)
+ .bss           0x00000000003081b8        0x5 cpu/head-in.o
+ *fill*         0x00000000003081bd        0x3 
+ .bss           0x00000000003081c0     0x1340 chip/built-in.o
+ .bss           0x0000000000309500       0xb2 common/built-in.o
+                0x000000000030950c                upgrade_state
+                0x0000000000309510                recv_data_len_total
+                0x0000000000309514                exec_addr
+                0x0000000000309518                upgrade_send_nack_total
+ .bss           0x00000000003095b2        0x0 boot/built-in.o
+ .bss           0x00000000003095b2        0x0 boards/built-in.o
+ *fill*         0x00000000003095b2        0xe 
+ .bss           0x00000000003095c0      0xb64 drivers/built-in.o
+                0x0000000000309600                dma_qspiflash_write_buf
+                0x0000000000309740                fl_dev
+                0x000000000030a120                wrch
+ .bss           0x000000000030a124        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .bss           0x000000000030a124        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .bss           0x000000000030a124        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .bss           0x000000000030a124        0x0 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+ *(COMMON)
+ *fill*         0x000000000030a124       0x1c 
+ COMMON         0x000000000030a140      0x234 chip/built-in.o
+                0x000000000030a140                _in_buf_pong
+                0x000000000030a240                in_buf
+                0x000000000030a340                bbfw_bak
+                0x000000000030a358                bbfw_main
+                0x000000000030a370                reserved_save
+ COMMON         0x000000000030a374       0x8e common/built-in.o
+                0x000000000030a374                upgrade_send_buffer
+                0x000000000030a3f4                ram_save_addr
+                0x000000000030a3f8                upgrade_recv_data_len
+                0x000000000030a3fc                ram_save_len
+                0x000000000030a400                upgrade_recv_data_type
+                0x000000000030a404                . = ALIGN (0x4)
+ *fill*         0x000000000030a402        0x2 
+                0x000000000030a404                __bss_end__ = .
+                0x0000000000000001                ASSERT (! (((__bss_end__ - ORIGIN (sram)) >= 0xffffffffffff5000)), program memory overrun error!!, please reduce BLcase number)
+
+/DISCARD/
+ *(.dynstr*)
+ *(.dynamic*)
+ *(.plt*)
+ *(.interp*)
+ *(.gnu*)
+OUTPUT(bloader_bp2016.elf elf32-littlearm)
+
+.comment        0x0000000000000000        0xf
+ .comment       0x0000000000000000        0xf cpu/head-in.o
+                                         0x30 (size before relaxing)
+ .comment       0x0000000000000000       0x50 chip/built-in.o
+ .comment       0x0000000000000000       0x80 common/built-in.o
+ .comment       0x0000000000000000       0x40 boot/built-in.o
+ .comment       0x0000000000000000       0x10 boards/built-in.o
+ .comment       0x0000000000000000       0xf0 drivers/built-in.o
+
+.ARM.attributes
+                0x0000000000000000       0x31
+ .ARM.attributes
+                0x0000000000000000       0x31 cpu/head-in.o
+ .ARM.attributes
+                0x0000000000000031       0x35 chip/built-in.o
+ .ARM.attributes
+                0x0000000000000066       0x35 common/built-in.o
+ .ARM.attributes
+                0x000000000000009b       0x35 boot/built-in.o
+ .ARM.attributes
+                0x00000000000000d0       0x35 boards/built-in.o
+ .ARM.attributes
+                0x0000000000000105       0x33 drivers/built-in.o
+ .ARM.attributes
+                0x0000000000000138       0x1b /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x0000000000000153       0x1b /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000000000000016e       0x1b /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x0000000000000189       0x1b /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+
+.debug_frame    0x0000000000000000       0x40
+ .debug_frame   0x0000000000000000       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000000020       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+
+.debug_line     0x0000000000000000      0x24c
+ .debug_line    0x0000000000000000       0xa1 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .debug_line    0x00000000000000a1       0xb2 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .debug_line    0x0000000000000153       0x77 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00000000000001ca       0x82 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+
+.debug_info     0x0000000000000000      0x2b8
+ .debug_info    0x0000000000000000       0xae /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .debug_info    0x00000000000000ae       0xae /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .debug_info    0x000000000000015c       0xae /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x000000000000020a       0xae /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+
+.debug_abbrev   0x0000000000000000       0x50
+ .debug_abbrev  0x0000000000000000       0x14 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x0000000000000014       0x14 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x0000000000000028       0x14 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x000000000000003c       0x14 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)
+
+.debug_aranges  0x0000000000000000       0x80
+ .debug_aranges
+                0x0000000000000000       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x0000000000000020       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000040       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x0000000000000060       0x20 /opt/gcc/arm-eabi-4.8/bin/../lib/gcc/arm-eabi/4.8/thumb/thumb2/libgcc.a(_lshrdi3.o)

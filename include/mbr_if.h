@@ -14,7 +14,7 @@
 #define		AP_FW_BACKUP_NAME	"ap.firmware-bk"
 
 /*flags*/
-#define		FLS_DATA_FLAGS_VALID	(1 << 0)	
+#define		FLS_DATA_FLAGS_VALID	((0x01 | 0x02) << 0)
 
 
 

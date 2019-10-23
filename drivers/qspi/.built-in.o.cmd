@@ -1,0 +1,1 @@
+cmd_drivers/qspi/built-in.o :=  arm-eabi-ld    -r -o drivers/qspi/built-in.o drivers/qspi/qspi_hw.o drivers/qspi/qspi_wrapper.o drivers/qspi/flash.o drivers/qspi/fl_common.o drivers/qspi/fl_w25q256fv.o 

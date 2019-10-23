@@ -24,7 +24,7 @@ REG_WRITE_ctrl(0xC01A001c,0x07a52eda);//43847914.0 ps
 REG_WRITE_ctrl(0xC01A0020,0x042ab6ad);//44332570.0 ps
     REG_WRITE_ctrl(0xC01A01d4, 0x3db0a009);
     REG_WRITE_ctrl(0xC01A0214, 0x3db0a009);
-    printf("0xc01a0008 = %x\n", REG_READ_ctrl(0xc01a0008));
+    ddr_printf("0xc01a0008 = %x\n", REG_READ_ctrl(0xc01a0008));
 }
 
 void ddr3_controller_init(void)
@@ -242,15 +242,15 @@ int ddr3_init(void)
 
     /*Setp 2*/
     ddr_rd_st = REG_READ_ctrl(0xC0190004); /*read and reset value?*/
-    printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
     while (ddr_rd_st != 0) {
         ddr_rd_st = REG_READ_ctrl(0xC0190004);
     }
-    printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
 
     /*Setp 3*/
     ddr3_controller_init();
-    printf("3. ddr controller init done\n");
+    ddr_printf("3. ddr controller init done\n");
 
     /*Setp 4*/
     REG_READ_ctrl(0xC0190030);
@@ -269,14 +269,14 @@ int ddr3_init(void)
 
     /*Setp 7*/
     ddr3_phy_init();
-    printf("7. ddr phy init done\n");
+    ddr_printf("7. ddr phy init done\n");
 
     /*Setp 8*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    printf("8. ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     while (pgsr != 0x7) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        printf("8. ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     }
 
     /*Step 9*/
@@ -284,10 +284,10 @@ int ddr3_init(void)
 
     /*Step 10*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    printf("ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     while (pgsr != 0xf) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        printf("ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     }
 
     /*Step 11*/
@@ -298,15 +298,15 @@ int ddr3_init(void)
     swstat = REG_READ_ctrl(0xC0190324);
     while (swstat != 0x1)
         swstat = REG_READ_ctrl(0xC0190324);
-    printf("ddr swstat: 0x%x\n", swstat);
+    ddr_printf("ddr swstat: 0x%x\n", swstat);
 
     /*Step 14*/
     ddr_rd_st = REG_READ_ctrl(0xC0190004);
-    printf("ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("ddr rd status: 0x%x\n", ddr_rd_st);
     while (ddr_rd_st != 1) {
         ddr_rd_st = REG_READ_ctrl(0xC0190004);
     }
-    printf("ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("ddr rd status: 0x%x\n", ddr_rd_st);
 
     /*Step 15*/
     REG_WRITE_ctrl(0xC0190030, 0x00000000);
@@ -316,10 +316,9 @@ int ddr3_init(void)
 	//mdelay(10);
     //REG_WRITE_ctrl(0xC01a0004, 0x00000183);  //enable data trainning + dll reset
 	//mdelay(10);
-	printf("0xC01A000c = %x\n", REG_READ_ctrl(0xC01A000c));
+	ddr_printf("0xC01A000c = %x\n", REG_READ_ctrl(0xC01A000c));
     //REG_WRITE_ctrl(0xC01a01d4, 0x3db0800a); // lichunlei 20181207 , ddr3l , 510m~540m
     //REG_WRITE_ctrl(0xC01a0214, 0x3db0800a);
     return 0;
 }
-
 #endif

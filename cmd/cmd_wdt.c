@@ -19,6 +19,7 @@ static u32 wdt_get_hw_base(int index)
     return 0;
 }
 
+#ifdef CONFIG_USE_IRQ
 static u32 wdt_get_hw_irqnum(int index)
 {
     switch(index) {
@@ -31,6 +32,7 @@ static u32 wdt_get_hw_irqnum(int index)
     }
     return 0;
 }
+#endif
 
 int wdt_test(int index, int torr_index)
 {
@@ -92,6 +94,7 @@ int wdt_test(int index, int torr_index)
     return 0;
 }
 
+#ifdef CONFIG_USE_IRQ
 static int wdt_irq_handler(int irq, void *dev_id)
 {
     u32 time_count = timer_get_tick32();
@@ -142,6 +145,7 @@ int wdt_rsp_mode_test(int index, int torr_index)
     }
     return 0;
 }
+#endif
 
 static u32 wdt_cmd_entry_func(BL_CNXT_T *pCnxt, u32 argc, const char **argv)
 {
@@ -168,7 +172,12 @@ static u32 wdt_cmd_entry_func(BL_CNXT_T *pCnxt, u32 argc, const char **argv)
     if (rsp_mode == 0)
         return wdt_test(index, torr_index);
         
-   return wdt_rsp_mode_test(index, torr_index);
+#ifdef CONFIG_USE_IRQ
+    return wdt_rsp_mode_test(index, torr_index);
+#else
+    printf("no irq, can not test resp mode...\n");
+    return 0;
+#endif
 }
 
 static u8 *short_description(void)

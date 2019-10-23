@@ -2,6 +2,10 @@ obj-y += serial.o	\
 		 timer.o
 
 
+ifdef CONFIG_FASTBOOT
+obj-y += fastboot.o
+endif
+
 ifndef CONFIG_COPY_BL_TO_BL_START
 obj-y += main.o
 endif

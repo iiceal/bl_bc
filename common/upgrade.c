@@ -1,5 +1,4 @@
-//#ifdef CONFIG_UPV_SERIAl
-#ifdef CONFIG_AUTO_UPGRADE
+#ifdef CONFIG_UPV_SERIAl
 #include <common.h>
 #include "regs/uart.h"
 #include "upgrade.h"
@@ -13,33 +12,15 @@
 *        |             |               |                      |               |       |
 ****************************************************************************************/
 
-
-#define UPV_DEBUG
-#ifdef UPV_DEBUG
 #define upgrade_printf(msg...)  \
         do{ \
           if(0 != select_id) printf(msg); \
 }while(0)
-#else
-#define upgrade_printf(msg...)
-#endif
 
 
-/**********************************************************/
-//#define bink_debug
-#ifdef bink_debug
-#define d_printf(msg...) printf(msg)
-#else
-#define d_printf(msg...)
-#endif
-
-unsigned long long t_begin = 0;
-unsigned long long t_end = 0;
-
-/*********************************************************/
-
-char version_curr[64] = "20170523";
-u8  upgrade_recv_serial_buffer[UPGRADE_RECV_BUFF_LEN];  // 接收buffer
+char version_curr[64] = "20191023";
+U32 upgrade_recv_serial_buffer = 0x2A0000;
+//u8  upgrade_recv_serial_buffer[UPGRADE_RECV_BUFF_LEN];  // 接收buffer
 //u8 * upgrade_recv_serial_buffer = malloc_buf;
 u8  upgrade_send_buffer[UPGRADE_SEND_BUFF_LEN];  // 发送buffer
 volatile U16 upgrade_recv_data_type;  // 解析后得到的数据帧类型
@@ -64,10 +45,9 @@ U32 upgrade_get_serial_buffer(U8 *buff)
 	unsigned long long s_c, s_t, e;
 	U32 length = 0;
 	U32 total_timeout = UPGRADE_RECV_DATA_TIMEOUT;
-	U32 char_timeout = 10;  // 毫秒为单位
+	U32 char_timeout = 30;  // 毫秒为单位
 
-	memset(buff, 0xee, UPGRADE_RECV_BUFF_LEN);
-
+//	memset(buff, 0xee, UPGRADE_RECV_BUFF_LEN);
     //s = timer_get_tick();
     //s_t = arch_counter_get_cntpct();
     s_t = arch_counter_get_current();
@@ -185,7 +165,6 @@ void upgrade_get_start_data(u8 *buff, U32 len)
         UPGRADE_GET_U32(buff[PROTOCOL_PAYLOAD_OFFSET + 4], buff[PROTOCOL_PAYLOAD_OFFSET + 5],
                         buff[PROTOCOL_PAYLOAD_OFFSET + 6], buff[PROTOCOL_PAYLOAD_OFFSET + 7]);
     upgrade_printf("parse ram_save_addr=0x%x, ram_save_len=0x%x \n", ram_save_addr, ram_save_len);
-    d_printf("parse ram_save_addr=0x%x, ram_save_len=0x%x \n", ram_save_addr, ram_save_len);
 }
 
 void upgrade_get_exec_data(u8* buff, U32 len)
@@ -234,10 +213,7 @@ inline void upgrade_send_version(int info)
 	int data_len;
 	//memset(version_curr, 0x0, 64);
 	//memcpy(version_curr, (U8 *)HG_BOOTROM_VERSION_STR, strlen(HG_BOOTROM_VERSION_STR));
-	
-    d_printf("BDebug: begin****************\n.");
-    
-    data_len = upgrade_package_data(PK_CMD_REP_VER, (U8 *)version_curr, 54);
+	data_len = upgrade_package_data(PK_CMD_REP_VER, (U8 *)version_curr, 54);
 	if(-1 != data_len)
 	{
 		uart_send_buffer(select_id, upgrade_send_buffer, data_len);
@@ -289,7 +265,7 @@ inline U32 upgrade_exec_data_valid(U32 _exec_addr)
 
 extern U8 fl_upgrade_if(unsigned int flash_addr, unsigned char * buff, unsigned int len);
 
-
+#if 0
 extern int loadx_total_len;
 int upv_upgrade(u32 fl_addr, u32 mem_addr, u32 len)
 {
@@ -305,16 +281,12 @@ int upv_upgrade(u32 fl_addr, u32 mem_addr, u32 len)
     return -1;
 #endif
 }
-
+#endif
 
 
 void upgrade_flash(int info)
 {
 #ifdef CONFIG_UPV_QSPI
-    unsigned long long t0,t1;
-    unsigned long long cost; 
-    t0 = arch_counter_get_current();
-    d_printf("BDebug: write flash size = %d. begin. \n",ram_save_len);
     if(0 == fl_upgrade_if((exec_addr - SPIFLASH_D_BASE), 
                 (u8 *)ram_save_addr, ram_save_len))
     {
@@ -328,12 +300,6 @@ void upgrade_flash(int info)
     {
         upgrade_send_nack(NACK_NO_FLASH);
     }
-    t1 = arch_counter_get_current(); 
-    t_end = arch_counter_get_current();
-    cost = (unsigned long)(t1-t0)/CONFIG_COUNTER_FREQ/1000;
-    cost = cost;
-    d_printf("BDebug: cost = %d.\n",cost);
-    d_printf("BDebug: end*************************,t0 = %d,t1 = %d. \n\n\n",t0,t1);
 #else
     upgrade_send_nack(NACK_NO_FLASH);
 #endif
@@ -346,7 +312,6 @@ int upgrade_data_check(U8 *buff, U32 len)
     upgrade_recv_data_type = 0xFFFF;
     upgrade_recv_data_len = 0;
     U32 i = 0, print_len;
-
     // 0. check start character 0x7E
     if ((1 == len) && (PK_HEADER == buff[0]) && (upgrade_state == PK_STATUS_IDLE)) {
 		return 0;
@@ -580,7 +545,7 @@ void upgrade_processing(void)
         }
 
 		// 2. get data from uart port.
-		len = upgrade_get_serial_buffer(upgrade_recv_serial_buffer);
+		len = upgrade_get_serial_buffer((U8 *)upgrade_recv_serial_buffer);
 		if(0 == len)
 		{
             zero_len_cnt++;
@@ -597,8 +562,8 @@ void upgrade_processing(void)
         zero_len_cnt = 0;
 
 		// 3. data check
-		ret = upgrade_data_check(upgrade_recv_serial_buffer, len);
-		if(0 != ret)
+		ret = upgrade_data_check((U8 *)upgrade_recv_serial_buffer, len);
+        if(0 != ret)
 		{
 			upgrade_send_nack(ret);
 			upgrade_printf("upgrade_data_check err(%d), send nack\n", ret);
@@ -606,21 +571,21 @@ void upgrade_processing(void)
 		}
 
         // 4. reset whenever received 0x7E
-        if(PK_CMD_ENTER == upgrade_get_cmd(upgrade_recv_serial_buffer, len)){
+        if(PK_CMD_ENTER == upgrade_get_cmd((U8 *)upgrade_recv_serial_buffer, len)){
 			upgrade_printf("recv reset cmd, reset state and para!\n");
             upgrade_global_para_reset();
         }
 
         //upgrade_printf("upgrade_state(%d), process\n", upgrade_state);
         // 5. process frame
-        ret = stat_manager[upgrade_state].deal_fun(upgrade_recv_serial_buffer, len, &sw);
+        ret = stat_manager[upgrade_state].deal_fun((U8 *)upgrade_recv_serial_buffer, len, &sw);
         if(NACK_OK == ret){
             if(NULL != stat_manager[upgrade_state].success_fun){
                 stat_manager[upgrade_state].success_fun(0);
             }
             if(true == sw){
                 upgrade_state++;
-                 upgrade_printf("deal upgrade state (%d)\n", upgrade_state);
+        upgrade_printf("deal upgrade state (%d)\n", upgrade_state);
             }
         }else {
             if(NULL != stat_manager[upgrade_state].fail_fun){
