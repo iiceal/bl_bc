@@ -1,0 +1,94 @@
+[14:12:12:839]Debug: open serial done.serial name = COM7, serial baudrate = 921600.
+[14:12:14:239]Debug: Bink serialClose start.
+[14:12:14:239]Debug: Serial transfer Done.Thread sleep.
+[14:12:14:239]Debug: ForceClose Done.
+[14:12:15:700]Debug: Name: "COM7" 
+[14:12:15:701]Debug: Description: "JLink CDC UART Port" 
+[14:12:15:701]Debug: Manufacturer: "SEGGER" 
+[14:12:15:710]Debug: Name: "COM5" 
+[14:12:15:710]Debug: Description: "USB Serial Port" 
+[14:12:15:710]Debug: Manufacturer: "FTDI" 
+[14:12:15:850]Debug: Name: "COM6" 
+[14:12:15:850]Debug: Description: "USB Serial Port" 
+[14:12:15:850]Debug: Manufacturer: "FTDI" 
+[14:12:15:993]Debug: Name: "COM1" 
+[14:12:15:993]Debug: Description: "通信端口" 
+[14:12:15:993]Debug: Manufacturer: "(标准端口类型)" 
+[14:12:16:070]Debug: Name: "COM3" 
+[14:12:16:070]Debug: Description: "USB Serial Port" 
+[14:12:16:070]Debug: Manufacturer: "FTDI" 
+[14:12:16:070]Debug: Name: "COM4" 
+[14:12:16:071]Debug: Description: "USB Serial Port" 
+[14:12:16:071]Debug: Manufacturer: "FTDI" 
+[14:12:18:455]Debug: open serial done.serial name = COM4, serial baudrate = 921600.
+[14:12:20:863]Debug: bbBinfile size = 4096.
+[14:12:20:863]Debug: get data success!
+[14:12:21:190]Debug: upgrade_respone size = 0.
+[14:12:21:490]Debug: upgrade_respone size = 0.
+[14:12:21:791]Debug: upgrade_respone size = 1.
+[14:12:21:797]Debug: Bink enter upgrade mode pass.
+[14:12:21:906]Debug: get ac flash file failed.
+[14:12:21:906]Debug: bbBinfile size = 42752.
+[14:12:21:906]Debug: get data success!
+[14:12:21:906]Debug: get bb flash file failed.
+[14:12:21:906]Debug: SecureEncryptionMode Download Flash File Progress
+[14:12:21:906]Debug: Name               Saddr       Eaddr       Length    
+[14:12:21:906]Debug: 
+[14:12:21:906]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[14:12:21:906]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[14:12:21:906]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[14:12:21:906]Debug: 
+mbr mbr(self) check ok
+[14:12:21:906]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:12:21:906]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[14:12:21:906]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[14:12:21:906]Debug: 
+[14:12:21:906]Debug: ******pgrade Process Start******
+
+[14:12:21:907]Debug: bink debug nRdSize 4096 
+[14:12:21:907]Debug: Try to handshake with targe, try_count = 1
+[14:12:21:907]Debug: Send handshake cmd to target.
+[14:12:21:907]Debug: Serial transfer Begin.Thread start.
+[14:12:21:907]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:21:907]Debug: Thread quit.Serial  close.
+[14:13:01:530]Debug: file dir = E:/4-debug/BP2016_Project_oem_ddr-20191115-v1.07/BP2016_BBFW/Debug/BP2016_BBFW.bin .
+[14:13:03:223]Debug: get_data_from_sellect_file :file dir = E:/4-debug/BP2016_Project_oem_ddr-20191115-v1.07/BP2016_BBFW/Debug/BP2016_BBFW.bin .
+[14:13:03:223]Debug: bbBinfile size = 1114052.
+[14:13:03:223]Debug: get data success!
+[14:13:03:224]Debug: start.
+
+[14:13:03:224]Debug: CreateBBflashFile: origin bin size = 0x10ffc4, after padding size = 0x110000
+
+[14:13:03:224]Debug: Create Header:magic = 0x77667766, version = 0x   10000, flag = 0x82
+load_addr = 0x20000000, exec_addr = 0x20000000,flash_addr = 0x     200,size = 0x  110000(1088 KB)
+hdr_size = 284
+
+[14:13:03:229]Debug: 1 bbBurnfile size = 1114624 FF_SUR_T = 8.
+[14:13:03:229]Debug: size 1 = 1114624,size 2 = 1114616 , size 3 = 1114624 
+[14:13:03:229]Debug: hdrf size = 512 bb_bin_size = 1114052, plan_size = 1114112. bbBurnfile size = 1114624, bb_ff_crc = 0x2f1a07c1, sizeof quint32 = 4 suf_crc32 = 0xf1068778 suf_size = 8
+[14:13:03:229]Debug: ff_crc32 = 0x2f1a07c1, dsuf_crc32 = 0xf1068778  
+
+[14:13:03:229]Debug: Create success!
+[14:13:03:229]Debug: create burn file done.burn start...[14:13:03:229]Debug: *****Down Load Flash Begin: file size 1114624 (bytes), Load Addr = 0x  100000, Flash Addr = 0x100c0000
+
+
+[14:13:03:229]Debug: *****Down Load Flash:upgrade flash addr 0x100c0000
+[14:13:03:229]Debug: Down Load Flash Processing: write 1114624 bytes to Flash Addr 0x100c0000 
+
+
+[14:13:03:230]Debug: 
+[14:13:03:230]Debug: ******pgrade Process Start******
+
+[14:13:03:230]Debug: bink debug nRdSize 1114624 
+[14:13:03:230]Debug: Try to handshake with targe, try_count = 1
+[14:13:03:230]Debug: Send handshake cmd to target.
+[14:13:03:230]Debug: Serial transfer Begin.Thread start.
+[14:13:03:230]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:03:230]Debug: Thread quit.Serial  close.
+[14:13:10:199]Debug: Bink serialClose start.
+[14:13:10:199]Debug: Serial transfer Done.Thread sleep.
+[14:13:10:199]Debug: ForceClose Done.

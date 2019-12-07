@@ -2,7 +2,7 @@
 
 export PATH=/opt/gcc/arm-eabi-4.8/bin/:$PATH
 
-make bp2016_oem_beta_defconfig
+#make bp2016_oem_beta_defconfig
 make clean
 make -j4 V=1
 #find . -name "bloader_bp2016.bin" |xargs -i cp {} ./copy_bl/

@@ -1,0 +1,284 @@
+[21:17:22:055]Debug: open serial done.serial name = COM4, serial baudrate = 921600.
+[21:17:39:728]Debug: bbBinfile size = 4096.
+[21:17:39:729]Debug: get data success!
+[21:17:40:066]Debug: upgrade_respone size = 0.
+[21:17:40:366]Debug: upgrade_respone size = 0.
+[21:17:40:666]Debug: upgrade_respone size = 0.
+[21:17:40:966]Debug: upgrade_respone size = 0.
+[21:17:41:266]Debug: upgrade_respone size = 0.
+[21:17:41:536]Debug: Bink enter upgrade mode pass.
+[21:17:41:650]Debug: get ac flash file failed.
+[21:17:41:650]Debug: bbBinfile size = 43264.
+[21:17:41:650]Debug: get data success!
+[21:17:41:650]Debug: get bb flash file failed.
+[21:17:41:651]Debug: SecureEncryptionMode Download Flash File Progress
+[21:17:41:651]Debug: Name               Saddr       Eaddr       Length    
+[21:17:41:651]Debug: 
+[21:17:41:651]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[21:17:41:651]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[21:17:41:652]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[21:17:41:652]Debug: 
+mbr mbr(self) check ok
+[21:17:41:652]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[21:17:41:652]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[21:17:41:652]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[21:17:41:653]Debug: 
+[21:17:41:653]Debug: ******pgrade Process Start******
+
+[21:17:41:653]Debug: bink debug nRdSize 4096 
+[21:17:41:653]Debug: Try to handshake with targe, try_count = 1
+[21:17:41:654]Debug: Send handshake cmd to target.
+[21:17:41:654]Debug: Serial transfer Begin.Thread start.
+[21:17:41:654]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:41:655]Debug: Serial transfer running.
+[21:17:41:679]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[21:17:42:679]Debug: mode = 1 , Wait read response timeout 21:17:42
+[21:17:42:679]Debug: get emit timeout signal
+[21:17:42:680]Debug: receive ack timeoutStatus = 1 
+[21:17:42:680]Debug: Try to handshake with targe, try_count = 2
+[21:17:42:680]Debug: Send handshake cmd to target.
+[21:17:42:680]Debug: Serial transfer Begin.Thread wake.
+[21:17:42:680]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:42:680]Debug: Serial transfer Done.Thread sleep.
+[21:17:42:681]Debug: Serial transfer running.
+[21:17:42:681]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[21:17:43:681]Debug: mode = 1 , Wait read response timeout 21:17:43
+[21:17:43:681]Debug: get emit timeout signal
+[21:17:43:682]Debug: receive ack timeoutStatus = 1 
+[21:17:43:682]Debug: Try to handshake with targe, try_count = 3
+[21:17:43:682]Debug: Send handshake cmd to target.
+[21:17:43:682]Debug: Serial transfer Begin.Thread wake.
+[21:17:43:682]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:43:682]Debug: Serial transfer Done.Thread sleep.
+[21:17:43:682]Debug: Serial transfer running.
+[21:17:43:682]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[21:17:43:771]Debug: 3 ,response data size = 64
+[21:17:43:771]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:43:771]Debug: show Respons array size = 64, mode = 1
+[21:17:43:771]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[21:17:43:772]Debug: state: 0==>0
+[21:17:43:772]Debug: Handshake to target Done.
+
+[21:17:43:772]Debug: Bink: set mbr progress bar pos = 0.
+[21:17:43:772]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[21:17:43:772]Debug:  current status:1 
+[21:17:43:772]Debug: Send data to targe: size: 10
+[21:17:43:772]Debug: Serial transfer Begin.Thread wake.
+[21:17:43:772]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:43:772]Debug: Serial transfer Done.Thread sleep.
+[21:17:43:772]Debug: Serial transfer running.
+[21:17:43:773]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[21:17:43:851]Debug: 3 ,response data size = 10
+[21:17:43:851]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:43:851]Debug: show Respons array size = 10, mode = 0
+[21:17:43:851]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:43:852]Debug: state parse cmd ret = 7
+[21:17:43:852]Debug: process machine state: 1 ==> 2 
+[21:17:43:852]Debug: state: 1==>2
+
+[21:17:43:852]Debug: Bink: set mbr progress bar pos = 0.
+[21:17:43:852]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[21:17:43:852]Debug:  current status:2 
+[21:17:43:852]Debug:  dwLoadAddr:0x140000, len:0x1000 
+[21:17:43:852]Debug: Send data to targe: size: 18
+[21:17:43:852]Debug: Serial transfer Begin.Thread wake.
+[21:17:43:852]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:43:852]Debug: Serial transfer Done.Thread sleep.
+[21:17:43:853]Debug: Serial transfer running.
+[21:17:43:853]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[21:17:43:931]Debug: 3 ,response data size = 10
+[21:17:43:931]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:43:931]Debug: show Respons array size = 10, mode = 0
+[21:17:43:931]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:43:932]Debug: state parse cmd ret = 7
+[21:17:43:932]Debug: process machine state: 2 ==> 3 
+[21:17:43:932]Debug: state: 2==>3
+
+[21:17:43:932]Debug: Bink: set mbr progress bar pos = 0.
+[21:17:43:932]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[21:17:43:932]Debug:  current status:3 
+[21:17:43:932]Debug: Send buff end.
+[21:17:43:932]Debug: send_total_byte = 4096, current packet size 4096, left size 0
+[21:17:43:932]Debug: Send data to targe: size: 4106
+[21:17:43:932]Debug: Serial transfer Begin.Thread wake.
+[21:17:43:932]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:43:932]Debug: Serial transfer Done.Thread sleep.
+[21:17:43:932]Debug: Serial transfer running.
+[21:17:43:960]Debug: Serial transfer wrtie data done.len = 4106,timeOut setting = 1000.
+[21:17:44:059]Debug: 3 ,response data size = 10
+[21:17:44:059]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:059]Debug: show Respons array size = 10, mode = 0
+[21:17:44:059]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:44:062]Debug: state parse cmd ret = 7
+[21:17:44:062]Debug: process machine state: 3 ==> 5 
+[21:17:44:062]Debug: state: 3==>5
+
+[21:17:44:062]Debug: Bink: set mbr progress bar pos = 100.
+[21:17:44:062]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[21:17:44:062]Debug:  current status:5 
+[21:17:44:063]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10000000
+[21:17:44:063]Debug: Send data to targe: size: 14
+[21:17:44:063]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:063]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:063]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:063]Debug: Serial transfer running.
+[21:17:44:063]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[21:17:44:331]Debug: 3 ,response data size = 20
+[21:17:44:331]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:331]Debug: show Respons array size = 20, mode = 0
+[21:17:44:331]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[21:17:44:333]Debug: state parse cmd ret = 7
+[21:17:44:333]Debug: process machine state: 5 ==> 6 
+[21:17:44:333]Debug: state: 5==>6
+
+[21:17:44:333]Debug: Bink: set mbr progress bar pos = 100.
+[21:17:44:333]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[21:17:44:333]Debug:  current status:6 
+[21:17:44:333]Debug: upgrade  complete ########################
+[21:17:44:333]Debug: ******Upgrade Process Complete******
+
+[21:17:44:333]Debug: DownLoadFlashFile --- 0
+[21:17:44:333]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[21:17:44:333]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[21:17:44:333]Debug: **************download mbr done,size 4096 bytes*************** 
+[21:17:44:333]Debug: authcode file is empy.
+[21:17:44:333]Debug: 
+mbr ramloader check ok
+[21:17:44:333]Debug: *****Down Load Flash Begin: file size 43264 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[21:17:44:334]Debug: *****Down Load Flash:upgrade flash addr 0x10040000
+[21:17:44:334]Debug: Down Load Flash Processing: write 43264 bytes to Flash Addr 0x10040000 
+
+
+[21:17:44:334]Debug: 
+[21:17:44:334]Debug: ******pgrade Process Start******
+
+[21:17:44:334]Debug: bink debug nRdSize 43264 
+[21:17:44:334]Debug: Try to handshake with targe, try_count = 1
+[21:17:44:334]Debug: Send handshake cmd to target.
+[21:17:44:334]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:334]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:334]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:334]Debug: Serial transfer running.
+[21:17:44:334]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[21:17:44:411]Debug: 3 ,response data size = 64
+[21:17:44:411]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:411]Debug: show Respons array size = 64, mode = 1
+[21:17:44:411]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[21:17:44:412]Debug: state: 0==>0
+[21:17:44:412]Debug: Handshake to target Done.
+
+[21:17:44:412]Debug: Bink: set bl progress bar pos = 0.
+[21:17:44:412]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[21:17:44:412]Debug:  current status:1 
+[21:17:44:412]Debug: Send data to targe: size: 10
+[21:17:44:412]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:412]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:412]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:412]Debug: Serial transfer running.
+[21:17:44:413]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[21:17:44:491]Debug: 3 ,response data size = 10
+[21:17:44:491]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:491]Debug: show Respons array size = 10, mode = 0
+[21:17:44:491]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:44:492]Debug: state parse cmd ret = 7
+[21:17:44:492]Debug: process machine state: 1 ==> 2 
+[21:17:44:492]Debug: state: 1==>2
+
+[21:17:44:492]Debug: Bink: set bl progress bar pos = 0.
+[21:17:44:492]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[21:17:44:492]Debug:  current status:2 
+[21:17:44:492]Debug:  dwLoadAddr:0x140000, len:0xa900 
+[21:17:44:492]Debug: Send data to targe: size: 18
+[21:17:44:492]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:492]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:492]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:492]Debug: Serial transfer running.
+[21:17:44:493]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[21:17:44:571]Debug: 3 ,response data size = 10
+[21:17:44:571]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:571]Debug: show Respons array size = 10, mode = 0
+[21:17:44:571]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:44:572]Debug: state parse cmd ret = 7
+[21:17:44:572]Debug: process machine state: 2 ==> 3 
+[21:17:44:572]Debug: state: 2==>3
+
+[21:17:44:572]Debug: Bink: set bl progress bar pos = 0.
+[21:17:44:572]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[21:17:44:572]Debug:  current status:3 
+[21:17:44:572]Debug: send_total_byte = 32768, current packet size 32768, left size 10496
+[21:17:44:572]Debug: Send data to targe: size: 32778
+[21:17:44:572]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:572]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:572]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:573]Debug: Serial transfer running.
+[21:17:44:911]Debug: Serial transfer wrtie data done.len = 32778,timeOut setting = 1000.
+[21:17:44:971]Debug: 3 ,response data size = 10
+[21:17:44:971]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:44:971]Debug: show Respons array size = 10, mode = 0
+[21:17:44:971]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:44:972]Debug: state parse cmd ret = 7
+[21:17:44:972]Debug: process machine state: 3 ==> 4 
+[21:17:44:972]Debug: state: 3==>4
+
+[21:17:44:973]Debug: Bink: set bl progress bar pos = 75.
+[21:17:44:973]Debug: Bink: set mode = 1, fileType = 3, pos = 75.
+[21:17:44:973]Debug:  current status:4 
+[21:17:44:973]Debug: Send buff end.
+[21:17:44:973]Debug: send_total_byte = 43264, current packet size 10496, left size 0
+[21:17:44:973]Debug: Send data to targe: size: 10506
+[21:17:44:973]Debug: Serial transfer Begin.Thread wake.
+[21:17:44:973]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:44:974]Debug: Serial transfer Done.Thread sleep.
+[21:17:44:974]Debug: Serial transfer running.
+[21:17:45:068]Debug: Serial transfer wrtie data done.len = 10506,timeOut setting = 1000.
+[21:17:45:163]Debug: 3 ,response data size = 10
+[21:17:45:163]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:45:163]Debug: show Respons array size = 10, mode = 0
+[21:17:45:163]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[21:17:45:164]Debug: state parse cmd ret = 7
+[21:17:45:164]Debug: process machine state: 4 ==> 5 
+[21:17:45:164]Debug: state: 4==>5
+
+[21:17:45:165]Debug: Bink: set bl progress bar pos = 100.
+[21:17:45:165]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[21:17:45:165]Debug:  current status:5 
+[21:17:45:165]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10040000
+[21:17:45:165]Debug: Send data to targe: size: 14
+[21:17:45:165]Debug: Serial transfer Begin.Thread wake.
+[21:17:45:165]Debug: Serial PortName = COM4, BondRate = 921600
+[21:17:45:165]Debug: Serial transfer Done.Thread sleep.
+[21:17:45:165]Debug: Serial transfer running.
+[21:17:45:166]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[21:17:45:579]Debug: 3 ,response data size = 20
+[21:17:45:579]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[21:17:45:579]Debug: show Respons array size = 20, mode = 0
+[21:17:45:579]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[21:17:45:585]Debug: state parse cmd ret = 7
+[21:17:45:585]Debug: process machine state: 5 ==> 6 
+[21:17:45:585]Debug: state: 5==>6
+
+[21:17:45:585]Debug: Bink: set bl progress bar pos = 100.
+[21:17:45:585]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[21:17:45:585]Debug:  current status:6 
+[21:17:45:585]Debug: upgrade  complete ########################
+[21:17:45:585]Debug: ******Upgrade Process Complete******
+
+[21:17:45:585]Debug: DownLoadFlashFile --- 0
+[21:17:45:585]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[21:17:45:585]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[21:17:45:586]Debug: **************download bl done,size 43264 bytes*************** 
+[21:17:45:586]Debug: bb file is empy.
+[21:17:51:274]Debug: Bink serialClose wakeone.
+[21:17:51:274]Debug: Serial transfer Done.Thread sleep.
+[21:17:51:275]Debug: ForceClose Done.
+[21:17:52:084]Warning: QWaitCondition: Destroyed while threads are still waiting[21:17:52:085]Warning: QMutex: destroying locked mutex

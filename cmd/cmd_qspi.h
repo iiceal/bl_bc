@@ -50,6 +50,7 @@ typedef enum {
     QSPI_TEST_POWER_DOWN,
 
     QSPI_TEST_ALL,
+    QSPI_PERF,
 
     QSPI_TEST_UNKNOWN = -1,
 } QSPI_TEST_TYPE_T;

@@ -1,10 +1,8 @@
 #include <common.h>
 #include <regs/scm.h>
 
-//#define RESET_DEBUG
-
-#ifdef RESET_DEBUG
-#define reset_debug(fmt, args...)  printf("RST: "fmt"\n", ##args);
+#ifdef CONFIG_ENABLE_TRACE
+#define reset_debug(fmt, args...)  printf(fmt"", ##args);
 #else
 #define reset_debug(fmt, args...)
 #endif
@@ -15,7 +13,7 @@ static void control_swrst_ctrl_regs(int bit)
 	swrst &= ~(1 << bit);
 	hwp_apSCM->swrst_ctrl = swrst;
 #ifndef RESET_DEBUG
-	mdelay(1);
+	mdelay(10);
 #endif
 	reset_debug("reset value: 0x%x", hwp_apSCM->swrst_ctrl);
 	swrst |= (1 << bit);

@@ -1,0 +1,1204 @@
+[14:07:50:319]Debug: open serial done.serial name = COM4, serial baudrate = 921600.
+[14:08:21:698]Debug: bbBinfile size = 4096.
+[14:08:21:698]Debug: get data success!
+[14:08:22:030]Debug: upgrade_respone size = 0.
+[14:08:22:327]Debug: Bink enter upgrade mode pass.
+[14:08:22:442]Debug: get ac flash file failed.
+[14:08:22:442]Debug: bbBinfile size = 43264.
+[14:08:22:442]Debug: get data success!
+[14:08:22:443]Debug: get bb flash file failed.
+[14:08:22:443]Debug: SecureEncryptionMode Download Flash File Progress
+[14:08:22:443]Debug: Name               Saddr       Eaddr       Length    
+[14:08:22:443]Debug: 
+[14:08:22:443]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[14:08:22:444]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[14:08:22:444]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[14:08:22:444]Debug: 
+mbr mbr(self) check ok
+[14:08:22:444]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:08:22:444]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[14:08:22:445]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[14:08:22:445]Debug: 
+[14:08:22:445]Debug: ******pgrade Process Start******
+
+[14:08:22:445]Debug: bink debug nRdSize 4096 
+[14:08:22:445]Debug: Try to handshake with targe, try_count = 1
+[14:08:22:445]Debug: Send handshake cmd to target.
+[14:08:22:446]Debug: Serial transfer Begin.Thread start.
+[14:08:22:446]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:22:446]Debug: Serial transfer running.
+[14:08:22:471]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:08:23:472]Debug: mode = 1 , Wait read response timeout 14:08:23
+[14:08:23:472]Debug: get emit timeout signal
+[14:08:23:473]Debug: receive ack timeoutStatus = 1 
+[14:08:23:473]Debug: Try to handshake with targe, try_count = 2
+[14:08:23:473]Debug: Send handshake cmd to target.
+[14:08:23:473]Debug: Serial transfer Begin.Thread wake.
+[14:08:23:473]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:23:474]Debug: Serial transfer Done.Thread sleep.
+[14:08:23:474]Debug: Serial transfer running.
+[14:08:23:474]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:08:24:474]Debug: mode = 1 , Wait read response timeout 14:08:24
+[14:08:24:474]Debug: get emit timeout signal
+[14:08:24:474]Debug: receive ack timeoutStatus = 1 
+[14:08:24:474]Debug: Try to handshake with targe, try_count = 3
+[14:08:24:474]Debug: Send handshake cmd to target.
+[14:08:24:474]Debug: Serial transfer Begin.Thread wake.
+[14:08:24:474]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:24:474]Debug: Serial transfer Done.Thread sleep.
+[14:08:24:474]Debug: Serial transfer running.
+[14:08:24:474]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:08:24:563]Debug: 3 ,response data size = 64
+[14:08:24:563]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:24:563]Debug: show Respons array size = 64, mode = 1
+[14:08:24:564]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:08:24:564]Debug: state: 0==>0
+[14:08:24:564]Debug: Handshake to target Done.
+
+[14:08:24:564]Debug: Bink: set mbr progress bar pos = 0.
+[14:08:24:564]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:08:24:564]Debug:  current status:1 
+[14:08:24:564]Debug: Send data to targe: size: 10
+[14:08:24:564]Debug: Serial transfer Begin.Thread wake.
+[14:08:24:564]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:24:564]Debug: Serial transfer Done.Thread sleep.
+[14:08:24:564]Debug: Serial transfer running.
+[14:08:24:565]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:08:24:643]Debug: 3 ,response data size = 10
+[14:08:24:643]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:24:643]Debug: show Respons array size = 10, mode = 0
+[14:08:24:643]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:24:644]Debug: state parse cmd ret = 7
+[14:08:24:644]Debug: process machine state: 1 ==> 2 
+[14:08:24:644]Debug: state: 1==>2
+
+[14:08:24:644]Debug: Bink: set mbr progress bar pos = 0.
+[14:08:24:644]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:08:24:644]Debug:  current status:2 
+[14:08:24:644]Debug:  dwLoadAddr:0x140000, len:0x1000 
+[14:08:24:644]Debug: Send data to targe: size: 18
+[14:08:24:644]Debug: Serial transfer Begin.Thread wake.
+[14:08:24:644]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:24:644]Debug: Serial transfer Done.Thread sleep.
+[14:08:24:644]Debug: Serial transfer running.
+[14:08:24:645]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:08:24:723]Debug: 3 ,response data size = 10
+[14:08:24:723]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:24:723]Debug: show Respons array size = 10, mode = 0
+[14:08:24:723]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:24:724]Debug: state parse cmd ret = 7
+[14:08:24:724]Debug: process machine state: 2 ==> 3 
+[14:08:24:724]Debug: state: 2==>3
+
+[14:08:24:724]Debug: Bink: set mbr progress bar pos = 0.
+[14:08:24:724]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:08:24:724]Debug:  current status:3 
+[14:08:24:724]Debug: Send buff end.
+[14:08:24:724]Debug: send_total_byte = 4096, current packet size 4096, left size 0
+[14:08:24:724]Debug: Send data to targe: size: 4106
+[14:08:24:724]Debug: Serial transfer Begin.Thread wake.
+[14:08:24:724]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:24:724]Debug: Serial transfer Done.Thread sleep.
+[14:08:24:724]Debug: Serial transfer running.
+[14:08:24:752]Debug: Serial transfer wrtie data done.len = 4106,timeOut setting = 1000.
+[14:08:24:851]Debug: 3 ,response data size = 10
+[14:08:24:851]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:24:851]Debug: show Respons array size = 10, mode = 0
+[14:08:24:851]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:24:854]Debug: state parse cmd ret = 7
+[14:08:24:854]Debug: process machine state: 3 ==> 5 
+[14:08:24:854]Debug: state: 3==>5
+
+[14:08:24:854]Debug: Bink: set mbr progress bar pos = 100.
+[14:08:24:854]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:08:24:854]Debug:  current status:5 
+[14:08:24:855]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10000000
+[14:08:24:855]Debug: Send data to targe: size: 14
+[14:08:24:855]Debug: Serial transfer Begin.Thread wake.
+[14:08:24:855]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:24:855]Debug: Serial transfer Done.Thread sleep.
+[14:08:24:855]Debug: Serial transfer running.
+[14:08:24:855]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:08:25:107]Debug: 3 ,response data size = 20
+[14:08:25:107]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:25:107]Debug: show Respons array size = 20, mode = 0
+[14:08:25:107]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:08:25:115]Debug: state parse cmd ret = 7
+[14:08:25:115]Debug: process machine state: 5 ==> 6 
+[14:08:25:115]Debug: state: 5==>6
+
+[14:08:25:115]Debug: Bink: set mbr progress bar pos = 100.
+[14:08:25:115]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:08:25:115]Debug:  current status:6 
+[14:08:25:115]Debug: upgrade  complete ########################
+[14:08:25:115]Debug: ******Upgrade Process Complete******
+
+[14:08:25:115]Debug: DownLoadFlashFile --- 0
+[14:08:25:115]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:08:25:115]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:08:25:115]Debug: **************download mbr done,size 4096 bytes*************** 
+[14:08:25:115]Debug: authcode file is empy.
+[14:08:25:115]Debug: 
+mbr ramloader check ok
+[14:08:25:115]Debug: *****Down Load Flash Begin: file size 43264 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:08:25:115]Debug: *****Down Load Flash:upgrade flash addr 0x10040000
+[14:08:25:115]Debug: Down Load Flash Processing: write 43264 bytes to Flash Addr 0x10040000 
+
+
+[14:08:25:115]Debug: 
+[14:08:25:115]Debug: ******pgrade Process Start******
+
+[14:08:25:116]Debug: bink debug nRdSize 43264 
+[14:08:25:116]Debug: Try to handshake with targe, try_count = 1
+[14:08:25:116]Debug: Send handshake cmd to target.
+[14:08:25:116]Debug: Serial transfer Begin.Thread wake.
+[14:08:25:116]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:25:116]Debug: Serial transfer Done.Thread sleep.
+[14:08:25:116]Debug: Serial transfer running.
+[14:08:25:116]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:08:25:203]Debug: 3 ,response data size = 64
+[14:08:25:203]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:25:203]Debug: show Respons array size = 64, mode = 1
+[14:08:25:203]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:08:25:204]Debug: state: 0==>0
+[14:08:25:204]Debug: Handshake to target Done.
+
+[14:08:25:204]Debug: Bink: set bl progress bar pos = 0.
+[14:08:25:204]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:08:25:204]Debug:  current status:1 
+[14:08:25:204]Debug: Send data to targe: size: 10
+[14:08:25:204]Debug: Serial transfer Begin.Thread wake.
+[14:08:25:204]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:25:204]Debug: Serial transfer Done.Thread sleep.
+[14:08:25:204]Debug: Serial transfer running.
+[14:08:25:205]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:08:25:283]Debug: 3 ,response data size = 10
+[14:08:25:283]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:25:283]Debug: show Respons array size = 10, mode = 0
+[14:08:25:283]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:25:284]Debug: state parse cmd ret = 7
+[14:08:25:284]Debug: process machine state: 1 ==> 2 
+[14:08:25:284]Debug: state: 1==>2
+
+[14:08:25:284]Debug: Bink: set bl progress bar pos = 0.
+[14:08:25:284]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:08:25:284]Debug:  current status:2 
+[14:08:25:284]Debug:  dwLoadAddr:0x140000, len:0xa900 
+[14:08:25:284]Debug: Send data to targe: size: 18
+[14:08:25:284]Debug: Serial transfer Begin.Thread wake.
+[14:08:25:284]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:25:284]Debug: Serial transfer Done.Thread sleep.
+[14:08:25:285]Debug: Serial transfer running.
+[14:08:25:285]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:08:25:363]Debug: 3 ,response data size = 10
+[14:08:25:363]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:25:363]Debug: show Respons array size = 10, mode = 0
+[14:08:25:363]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:25:364]Debug: state parse cmd ret = 7
+[14:08:25:364]Debug: process machine state: 2 ==> 3 
+[14:08:25:364]Debug: state: 2==>3
+
+[14:08:25:364]Debug: Bink: set bl progress bar pos = 0.
+[14:08:25:364]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:08:25:364]Debug:  current status:3 
+[14:08:25:364]Debug: send_total_byte = 32768, current packet size 32768, left size 10496
+[14:08:25:364]Debug: Send data to targe: size: 32778
+[14:08:25:364]Debug: Serial transfer Begin.Thread wake.
+[14:08:25:364]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:25:364]Debug: Serial transfer Done.Thread sleep.
+[14:08:25:365]Debug: Serial transfer running.
+[14:08:25:703]Debug: Serial transfer wrtie data done.len = 32778,timeOut setting = 1000.
+[14:08:25:763]Debug: 3 ,response data size = 10
+[14:08:25:763]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:25:798]Debug: show Respons array size = 10, mode = 0
+[14:08:25:798]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:25:799]Debug: state parse cmd ret = 7
+[14:08:25:799]Debug: process machine state: 3 ==> 4 
+[14:08:25:799]Debug: state: 3==>4
+
+[14:08:25:801]Debug: Bink: set bl progress bar pos = 75.
+[14:08:25:801]Debug: Bink: set mode = 1, fileType = 3, pos = 75.
+[14:08:25:802]Debug:  current status:4 
+[14:08:25:802]Debug: Send buff end.
+[14:08:25:803]Debug: send_total_byte = 43264, current packet size 10496, left size 0
+[14:08:25:803]Debug: Send data to targe: size: 10506
+[14:08:25:803]Debug: Serial transfer Begin.Thread wake.
+[14:08:25:804]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:25:804]Debug: Serial transfer Done.Thread sleep.
+[14:08:25:804]Debug: Serial transfer running.
+[14:08:25:899]Debug: Serial transfer wrtie data done.len = 10506,timeOut setting = 1000.
+[14:08:26:003]Debug: 3 ,response data size = 10
+[14:08:26:003]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:26:003]Debug: show Respons array size = 10, mode = 0
+[14:08:26:003]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:08:26:004]Debug: state parse cmd ret = 7
+[14:08:26:004]Debug: process machine state: 4 ==> 5 
+[14:08:26:004]Debug: state: 4==>5
+
+[14:08:26:004]Debug: Bink: set bl progress bar pos = 100.
+[14:08:26:004]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:08:26:004]Debug:  current status:5 
+[14:08:26:004]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10040000
+[14:08:26:004]Debug: Send data to targe: size: 14
+[14:08:26:004]Debug: Serial transfer Begin.Thread wake.
+[14:08:26:004]Debug: Serial PortName = COM4, BondRate = 921600
+[14:08:26:004]Debug: Serial transfer Done.Thread sleep.
+[14:08:26:004]Debug: Serial transfer running.
+[14:08:26:005]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:08:26:419]Debug: 3 ,response data size = 20
+[14:08:26:419]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:08:26:419]Debug: show Respons array size = 20, mode = 0
+[14:08:26:419]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:08:26:424]Debug: state parse cmd ret = 7
+[14:08:26:424]Debug: process machine state: 5 ==> 6 
+[14:08:26:424]Debug: state: 5==>6
+
+[14:08:26:424]Debug: Bink: set bl progress bar pos = 100.
+[14:08:26:424]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:08:26:424]Debug:  current status:6 
+[14:08:26:424]Debug: upgrade  complete ########################
+[14:08:26:424]Debug: ******Upgrade Process Complete******
+
+[14:08:26:424]Debug: DownLoadFlashFile --- 0
+[14:08:26:424]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:08:26:424]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:08:26:425]Debug: **************download bl done,size 43264 bytes*************** 
+[14:08:26:425]Debug: bb file is empy.
+[14:12:51:090]Debug: bbBinfile size = 4096.
+[14:12:51:090]Debug: get data success!
+[14:12:51:090]Debug: get ac flash file failed.
+[14:12:51:090]Debug: bbBinfile size = 43264.
+[14:12:51:091]Debug: get data success!
+[14:12:51:091]Debug: get bb flash file failed.
+[14:12:51:091]Debug: SecureEncryptionMode Download Flash File Progress
+[14:12:51:091]Debug: Name               Saddr       Eaddr       Length    
+[14:12:51:091]Debug: 
+[14:12:51:091]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[14:12:51:091]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[14:12:51:092]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[14:12:51:092]Debug: 
+mbr mbr(self) check ok
+[14:12:51:092]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:12:51:093]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[14:12:51:093]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[14:12:51:093]Debug: 
+[14:12:51:093]Debug: ******pgrade Process Start******
+
+[14:12:51:094]Debug: bink debug nRdSize 4096 
+[14:12:51:094]Debug: Try to handshake with targe, try_count = 1
+[14:12:51:094]Debug: Send handshake cmd to target.
+[14:12:51:094]Debug: Serial transfer Begin.Thread wake.
+[14:12:51:095]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:51:095]Debug: Serial transfer Done.Thread sleep.
+[14:12:51:095]Debug: Serial transfer running.
+[14:12:51:096]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:51:772]Debug: 3 ,response data size = 1
+[14:12:51:772]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:51:772]Debug: show Respons array size = 1, mode = 1
+[14:12:51:772]Debug: End == show Respons array size = 0, mode = 1 response = 0
+[14:12:51:773]Debug: response failed.
+[14:12:51:773]Debug: Try to handshake with targe, try_count = 2
+[14:12:51:773]Debug: Send handshake cmd to target.
+[14:12:51:773]Debug: Serial transfer Begin.Thread wake.
+[14:12:51:774]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:51:774]Debug: Serial transfer Done.Thread sleep.
+[14:12:51:774]Debug: Serial transfer running.
+[14:12:51:774]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:52:774]Debug: mode = 1 , Wait read response timeout 14:12:52
+[14:12:52:774]Debug: get emit timeout signal
+[14:12:52:775]Debug: receive ack timeoutStatus = 1 
+[14:12:52:775]Debug: Try to handshake with targe, try_count = 3
+[14:12:52:775]Debug: Send handshake cmd to target.
+[14:12:52:775]Debug: Serial transfer Begin.Thread wake.
+[14:12:52:776]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:52:776]Debug: Serial transfer Done.Thread sleep.
+[14:12:52:776]Debug: Serial transfer running.
+[14:12:52:776]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:53:776]Debug: mode = 1 , Wait read response timeout 14:12:53
+[14:12:53:776]Debug: get emit timeout signal
+[14:12:53:777]Debug: receive ack timeoutStatus = 1 
+[14:12:53:777]Debug: Try to handshake with targe, try_count = 4
+[14:12:53:777]Debug: Send handshake cmd to target.
+[14:12:53:777]Debug: Serial transfer Begin.Thread wake.
+[14:12:53:777]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:53:777]Debug: Serial transfer Done.Thread sleep.
+[14:12:53:777]Debug: Serial transfer running.
+[14:12:53:777]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:54:777]Debug: mode = 1 , Wait read response timeout 14:12:54
+[14:12:54:777]Debug: get emit timeout signal
+[14:12:54:778]Debug: receive ack timeoutStatus = 1 
+[14:12:54:778]Debug: Try to handshake with targe, try_count = 5
+[14:12:54:778]Debug: Send handshake cmd to target.
+[14:12:54:778]Debug: Serial transfer Begin.Thread wake.
+[14:12:54:778]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:54:778]Debug: Serial transfer Done.Thread sleep.
+[14:12:54:778]Debug: Serial transfer running.
+[14:12:54:778]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:54:859]Debug: 3 ,response data size = 64
+[14:12:54:859]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:54:859]Debug: show Respons array size = 64, mode = 1
+[14:12:54:859]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:12:54:860]Debug: state: 0==>0
+[14:12:54:860]Debug: Handshake to target Done.
+
+[14:12:54:860]Debug: Bink: set mbr progress bar pos = 0.
+[14:12:54:860]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:12:54:860]Debug:  current status:1 
+[14:12:54:860]Debug: Send data to targe: size: 10
+[14:12:54:861]Debug: Serial transfer Begin.Thread wake.
+[14:12:54:861]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:54:861]Debug: Serial transfer Done.Thread sleep.
+[14:12:54:861]Debug: Serial transfer running.
+[14:12:54:861]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:12:54:939]Debug: 3 ,response data size = 10
+[14:12:54:939]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:54:939]Debug: show Respons array size = 10, mode = 0
+[14:12:54:939]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:54:941]Debug: state parse cmd ret = 7
+[14:12:54:941]Debug: process machine state: 1 ==> 2 
+[14:12:54:941]Debug: state: 1==>2
+
+[14:12:54:941]Debug: Bink: set mbr progress bar pos = 0.
+[14:12:54:941]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:12:54:941]Debug:  current status:2 
+[14:12:54:941]Debug:  dwLoadAddr:0x140000, len:0x1000 
+[14:12:54:941]Debug: Send data to targe: size: 18
+[14:12:54:941]Debug: Serial transfer Begin.Thread wake.
+[14:12:54:941]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:54:941]Debug: Serial transfer Done.Thread sleep.
+[14:12:54:941]Debug: Serial transfer running.
+[14:12:54:942]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:12:55:019]Debug: 3 ,response data size = 10
+[14:12:55:019]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:019]Debug: show Respons array size = 10, mode = 0
+[14:12:55:019]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:55:021]Debug: state parse cmd ret = 7
+[14:12:55:021]Debug: process machine state: 2 ==> 3 
+[14:12:55:021]Debug: state: 2==>3
+
+[14:12:55:021]Debug: Bink: set mbr progress bar pos = 0.
+[14:12:55:021]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:12:55:021]Debug:  current status:3 
+[14:12:55:021]Debug: Send buff end.
+[14:12:55:021]Debug: send_total_byte = 4096, current packet size 4096, left size 0
+[14:12:55:021]Debug: Send data to targe: size: 4106
+[14:12:55:021]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:021]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:021]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:022]Debug: Serial transfer running.
+[14:12:55:049]Debug: Serial transfer wrtie data done.len = 4106,timeOut setting = 1000.
+[14:12:55:147]Debug: 3 ,response data size = 10
+[14:12:55:147]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:147]Debug: show Respons array size = 10, mode = 0
+[14:12:55:147]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:55:151]Debug: state parse cmd ret = 7
+[14:12:55:151]Debug: process machine state: 3 ==> 5 
+[14:12:55:151]Debug: state: 3==>5
+
+[14:12:55:151]Debug: Bink: set mbr progress bar pos = 100.
+[14:12:55:151]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:12:55:151]Debug:  current status:5 
+[14:12:55:151]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10000000
+[14:12:55:151]Debug: Send data to targe: size: 14
+[14:12:55:151]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:151]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:151]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:152]Debug: Serial transfer running.
+[14:12:55:152]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:12:55:403]Debug: 3 ,response data size = 20
+[14:12:55:403]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:403]Debug: show Respons array size = 20, mode = 0
+[14:12:55:403]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:12:55:411]Debug: state parse cmd ret = 7
+[14:12:55:411]Debug: process machine state: 5 ==> 6 
+[14:12:55:411]Debug: state: 5==>6
+
+[14:12:55:411]Debug: Bink: set mbr progress bar pos = 100.
+[14:12:55:411]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:12:55:411]Debug:  current status:6 
+[14:12:55:411]Debug: upgrade  complete ########################
+[14:12:55:412]Debug: ******Upgrade Process Complete******
+
+[14:12:55:412]Debug: DownLoadFlashFile --- 0
+[14:12:55:412]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:12:55:412]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:12:55:412]Debug: **************download mbr done,size 4096 bytes*************** 
+[14:12:55:412]Debug: authcode file is empy.
+[14:12:55:412]Debug: 
+mbr ramloader check ok
+[14:12:55:412]Debug: *****Down Load Flash Begin: file size 43264 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:12:55:412]Debug: *****Down Load Flash:upgrade flash addr 0x10040000
+[14:12:55:412]Debug: Down Load Flash Processing: write 43264 bytes to Flash Addr 0x10040000 
+
+
+[14:12:55:412]Debug: 
+[14:12:55:413]Debug: ******pgrade Process Start******
+
+[14:12:55:413]Debug: bink debug nRdSize 43264 
+[14:12:55:413]Debug: Try to handshake with targe, try_count = 1
+[14:12:55:413]Debug: Send handshake cmd to target.
+[14:12:55:413]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:413]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:413]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:413]Debug: Serial transfer running.
+[14:12:55:413]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:12:55:499]Debug: 3 ,response data size = 64
+[14:12:55:499]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:499]Debug: show Respons array size = 64, mode = 1
+[14:12:55:499]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:12:55:500]Debug: state: 0==>0
+[14:12:55:500]Debug: Handshake to target Done.
+
+[14:12:55:500]Debug: Bink: set bl progress bar pos = 0.
+[14:12:55:500]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:12:55:500]Debug:  current status:1 
+[14:12:55:500]Debug: Send data to targe: size: 10
+[14:12:55:501]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:501]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:501]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:501]Debug: Serial transfer running.
+[14:12:55:501]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:12:55:579]Debug: 3 ,response data size = 10
+[14:12:55:579]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:579]Debug: show Respons array size = 10, mode = 0
+[14:12:55:579]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:55:581]Debug: state parse cmd ret = 7
+[14:12:55:581]Debug: process machine state: 1 ==> 2 
+[14:12:55:581]Debug: state: 1==>2
+
+[14:12:55:581]Debug: Bink: set bl progress bar pos = 0.
+[14:12:55:581]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:12:55:581]Debug:  current status:2 
+[14:12:55:581]Debug:  dwLoadAddr:0x140000, len:0xa900 
+[14:12:55:581]Debug: Send data to targe: size: 18
+[14:12:55:581]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:581]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:581]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:581]Debug: Serial transfer running.
+[14:12:55:581]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:12:55:659]Debug: 3 ,response data size = 10
+[14:12:55:659]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:55:659]Debug: show Respons array size = 10, mode = 0
+[14:12:55:659]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:55:661]Debug: state parse cmd ret = 7
+[14:12:55:661]Debug: process machine state: 2 ==> 3 
+[14:12:55:661]Debug: state: 2==>3
+
+[14:12:55:661]Debug: Bink: set bl progress bar pos = 0.
+[14:12:55:661]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:12:55:661]Debug:  current status:3 
+[14:12:55:661]Debug: send_total_byte = 32768, current packet size 32768, left size 10496
+[14:12:55:661]Debug: Send data to targe: size: 32778
+[14:12:55:661]Debug: Serial transfer Begin.Thread wake.
+[14:12:55:661]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:55:662]Debug: Serial transfer Done.Thread sleep.
+[14:12:55:662]Debug: Serial transfer running.
+[14:12:56:000]Debug: Serial transfer wrtie data done.len = 32778,timeOut setting = 1000.
+[14:12:56:075]Debug: 3 ,response data size = 10
+[14:12:56:075]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:56:075]Debug: show Respons array size = 10, mode = 0
+[14:12:56:075]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:56:082]Debug: state parse cmd ret = 7
+[14:12:56:082]Debug: process machine state: 3 ==> 4 
+[14:12:56:082]Debug: state: 3==>4
+
+[14:12:56:082]Debug: Bink: set bl progress bar pos = 75.
+[14:12:56:082]Debug: Bink: set mode = 1, fileType = 3, pos = 75.
+[14:12:56:082]Debug:  current status:4 
+[14:12:56:083]Debug: Send buff end.
+[14:12:56:083]Debug: send_total_byte = 43264, current packet size 10496, left size 0
+[14:12:56:083]Debug: Send data to targe: size: 10506
+[14:12:56:083]Debug: Serial transfer Begin.Thread wake.
+[14:12:56:083]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:56:083]Debug: Serial transfer Done.Thread sleep.
+[14:12:56:083]Debug: Serial transfer running.
+[14:12:56:178]Debug: Serial transfer wrtie data done.len = 10506,timeOut setting = 1000.
+[14:12:56:283]Debug: 3 ,response data size = 10
+[14:12:56:283]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:56:283]Debug: show Respons array size = 10, mode = 0
+[14:12:56:283]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:12:56:293]Debug: state parse cmd ret = 7
+[14:12:56:293]Debug: process machine state: 4 ==> 5 
+[14:12:56:293]Debug: state: 4==>5
+
+[14:12:56:293]Debug: Bink: set bl progress bar pos = 100.
+[14:12:56:293]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:12:56:293]Debug:  current status:5 
+[14:12:56:293]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10040000
+[14:12:56:293]Debug: Send data to targe: size: 14
+[14:12:56:293]Debug: Serial transfer Begin.Thread wake.
+[14:12:56:294]Debug: Serial PortName = COM4, BondRate = 921600
+[14:12:56:294]Debug: Serial transfer Done.Thread sleep.
+[14:12:56:294]Debug: Serial transfer running.
+[14:12:56:294]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:12:56:715]Debug: 3 ,response data size = 20
+[14:12:56:715]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:12:56:715]Debug: show Respons array size = 20, mode = 0
+[14:12:56:715]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:12:56:724]Debug: state parse cmd ret = 7
+[14:12:56:724]Debug: process machine state: 5 ==> 6 
+[14:12:56:724]Debug: state: 5==>6
+
+[14:12:56:724]Debug: Bink: set bl progress bar pos = 100.
+[14:12:56:724]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:12:56:724]Debug:  current status:6 
+[14:12:56:724]Debug: upgrade  complete ########################
+[14:12:56:724]Debug: ******Upgrade Process Complete******
+
+[14:12:56:724]Debug: DownLoadFlashFile --- 0
+[14:12:56:724]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:12:56:724]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:12:56:724]Debug: **************download bl done,size 43264 bytes*************** 
+[14:12:56:724]Debug: bb file is empy.
+[14:13:38:448]Debug: bbBinfile size = 4096.
+[14:13:38:448]Debug: get data success!
+[14:13:38:449]Debug: get ac flash file failed.
+[14:13:38:449]Debug: bbBinfile size = 42752.
+[14:13:38:449]Debug: get data success!
+[14:13:38:449]Debug: get bb flash file failed.
+[14:13:38:450]Debug: SecureEncryptionMode Download Flash File Progress
+[14:13:38:450]Debug: Name               Saddr       Eaddr       Length    
+[14:13:38:450]Debug: 
+[14:13:38:450]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[14:13:38:450]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[14:13:38:451]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[14:13:38:451]Debug: 
+mbr mbr(self) check ok
+[14:13:38:451]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:13:38:451]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[14:13:38:451]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[14:13:38:452]Debug: 
+[14:13:38:452]Debug: ******pgrade Process Start******
+
+[14:13:38:452]Debug: bink debug nRdSize 4096 
+[14:13:38:452]Debug: Try to handshake with targe, try_count = 1
+[14:13:38:453]Debug: Send handshake cmd to target.
+[14:13:38:453]Debug: Serial transfer Begin.Thread wake.
+[14:13:38:453]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:38:453]Debug: Serial transfer Done.Thread sleep.
+[14:13:38:454]Debug: Serial transfer running.
+[14:13:38:454]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:39:073]Debug: 3 ,response data size = 1
+[14:13:39:073]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:39:073]Debug: show Respons array size = 1, mode = 1
+[14:13:39:073]Debug: End == show Respons array size = 0, mode = 1 response = 0
+[14:13:39:074]Debug: response failed.
+[14:13:39:074]Debug: Try to handshake with targe, try_count = 2
+[14:13:39:074]Debug: Send handshake cmd to target.
+[14:13:39:074]Debug: Serial transfer Begin.Thread wake.
+[14:13:39:074]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:39:074]Debug: Serial transfer Done.Thread sleep.
+[14:13:39:074]Debug: Serial transfer running.
+[14:13:39:075]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:40:075]Debug: mode = 1 , Wait read response timeout 14:13:40
+[14:13:40:075]Debug: get emit timeout signal
+[14:13:40:076]Debug: receive ack timeoutStatus = 1 
+[14:13:40:076]Debug: Try to handshake with targe, try_count = 3
+[14:13:40:076]Debug: Send handshake cmd to target.
+[14:13:40:076]Debug: Serial transfer Begin.Thread wake.
+[14:13:40:076]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:40:076]Debug: Serial transfer Done.Thread sleep.
+[14:13:40:076]Debug: Serial transfer running.
+[14:13:40:077]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:41:077]Debug: mode = 1 , Wait read response timeout 14:13:41
+[14:13:41:077]Debug: get emit timeout signal
+[14:13:41:078]Debug: receive ack timeoutStatus = 1 
+[14:13:41:078]Debug: Try to handshake with targe, try_count = 4
+[14:13:41:078]Debug: Send handshake cmd to target.
+[14:13:41:078]Debug: Serial transfer Begin.Thread wake.
+[14:13:41:078]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:41:078]Debug: Serial transfer Done.Thread sleep.
+[14:13:41:078]Debug: Serial transfer running.
+[14:13:41:079]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:42:079]Debug: mode = 1 , Wait read response timeout 14:13:42
+[14:13:42:079]Debug: get emit timeout signal
+[14:13:42:080]Debug: receive ack timeoutStatus = 1 
+[14:13:42:080]Debug: Try to handshake with targe, try_count = 5
+[14:13:42:080]Debug: Send handshake cmd to target.
+[14:13:42:080]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:080]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:080]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:080]Debug: Serial transfer running.
+[14:13:42:080]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:42:161]Debug: 3 ,response data size = 64
+[14:13:42:161]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:161]Debug: show Respons array size = 64, mode = 1
+[14:13:42:161]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:13:42:162]Debug: state: 0==>0
+[14:13:42:162]Debug: Handshake to target Done.
+
+[14:13:42:163]Debug: Bink: set mbr progress bar pos = 0.
+[14:13:42:163]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:13:42:163]Debug:  current status:1 
+[14:13:42:163]Debug: Send data to targe: size: 10
+[14:13:42:163]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:163]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:163]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:163]Debug: Serial transfer running.
+[14:13:42:164]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:13:42:241]Debug: 3 ,response data size = 10
+[14:13:42:241]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:241]Debug: show Respons array size = 10, mode = 0
+[14:13:42:241]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:42:243]Debug: state parse cmd ret = 7
+[14:13:42:243]Debug: process machine state: 1 ==> 2 
+[14:13:42:243]Debug: state: 1==>2
+
+[14:13:42:243]Debug: Bink: set mbr progress bar pos = 0.
+[14:13:42:243]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:13:42:243]Debug:  current status:2 
+[14:13:42:243]Debug:  dwLoadAddr:0x140000, len:0x1000 
+[14:13:42:243]Debug: Send data to targe: size: 18
+[14:13:42:243]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:243]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:243]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:244]Debug: Serial transfer running.
+[14:13:42:244]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:13:42:321]Debug: 3 ,response data size = 10
+[14:13:42:321]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:321]Debug: show Respons array size = 10, mode = 0
+[14:13:42:321]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:42:323]Debug: state parse cmd ret = 7
+[14:13:42:323]Debug: process machine state: 2 ==> 3 
+[14:13:42:323]Debug: state: 2==>3
+
+[14:13:42:323]Debug: Bink: set mbr progress bar pos = 0.
+[14:13:42:323]Debug: Bink: set mode = 1, fileType = 1, pos = 0.
+[14:13:42:323]Debug:  current status:3 
+[14:13:42:323]Debug: Send buff end.
+[14:13:42:323]Debug: send_total_byte = 4096, current packet size 4096, left size 0
+[14:13:42:323]Debug: Send data to targe: size: 4106
+[14:13:42:323]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:324]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:324]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:324]Debug: Serial transfer running.
+[14:13:42:352]Debug: Serial transfer wrtie data done.len = 4106,timeOut setting = 1000.
+[14:13:42:449]Debug: 3 ,response data size = 10
+[14:13:42:449]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:449]Debug: show Respons array size = 10, mode = 0
+[14:13:42:449]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:42:455]Debug: state parse cmd ret = 7
+[14:13:42:455]Debug: process machine state: 3 ==> 5 
+[14:13:42:455]Debug: state: 3==>5
+
+[14:13:42:455]Debug: Bink: set mbr progress bar pos = 100.
+[14:13:42:456]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:13:42:456]Debug:  current status:5 
+[14:13:42:456]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10000000
+[14:13:42:456]Debug: Send data to targe: size: 14
+[14:13:42:456]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:456]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:456]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:456]Debug: Serial transfer running.
+[14:13:42:456]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:13:42:705]Debug: 3 ,response data size = 20
+[14:13:42:705]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:705]Debug: show Respons array size = 20, mode = 0
+[14:13:42:705]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:13:42:706]Debug: state parse cmd ret = 7
+[14:13:42:706]Debug: process machine state: 5 ==> 6 
+[14:13:42:706]Debug: state: 5==>6
+
+[14:13:42:706]Debug: Bink: set mbr progress bar pos = 100.
+[14:13:42:706]Debug: Bink: set mode = 1, fileType = 1, pos = 100.
+[14:13:42:706]Debug:  current status:6 
+[14:13:42:706]Debug: upgrade  complete ########################
+[14:13:42:706]Debug: ******Upgrade Process Complete******
+
+[14:13:42:706]Debug: DownLoadFlashFile --- 0
+[14:13:42:706]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:13:42:706]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:13:42:706]Debug: **************download mbr done,size 4096 bytes*************** 
+[14:13:42:706]Debug: authcode file is empy.
+[14:13:42:707]Debug: 
+mbr ramloader check ok
+[14:13:42:707]Debug: *****Down Load Flash Begin: file size 42752 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:13:42:707]Debug: *****Down Load Flash:upgrade flash addr 0x10040000
+[14:13:42:707]Debug: Down Load Flash Processing: write 42752 bytes to Flash Addr 0x10040000 
+
+
+[14:13:42:707]Debug: 
+[14:13:42:707]Debug: ******pgrade Process Start******
+
+[14:13:42:707]Debug: bink debug nRdSize 42752 
+[14:13:42:707]Debug: Try to handshake with targe, try_count = 1
+[14:13:42:707]Debug: Send handshake cmd to target.
+[14:13:42:707]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:707]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:707]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:707]Debug: Serial transfer running.
+[14:13:42:707]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:13:42:785]Debug: 3 ,response data size = 64
+[14:13:42:785]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:785]Debug: show Respons array size = 64, mode = 1
+[14:13:42:785]Debug: End == show Respons array size = 64, mode = 1 response = 1
+[14:13:42:786]Debug: state: 0==>0
+[14:13:42:786]Debug: Handshake to target Done.
+
+[14:13:42:786]Debug: Bink: set bl progress bar pos = 0.
+[14:13:42:786]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:13:42:786]Debug:  current status:1 
+[14:13:42:786]Debug: Send data to targe: size: 10
+[14:13:42:786]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:786]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:787]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:787]Debug: Serial transfer running.
+[14:13:42:787]Debug: Serial transfer wrtie data done.len = 10,timeOut setting = 1000.
+[14:13:42:865]Debug: 3 ,response data size = 10
+[14:13:42:865]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:865]Debug: show Respons array size = 10, mode = 0
+[14:13:42:865]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:42:866]Debug: state parse cmd ret = 7
+[14:13:42:866]Debug: process machine state: 1 ==> 2 
+[14:13:42:866]Debug: state: 1==>2
+
+[14:13:42:866]Debug: Bink: set bl progress bar pos = 0.
+[14:13:42:866]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:13:42:866]Debug:  current status:2 
+[14:13:42:866]Debug:  dwLoadAddr:0x140000, len:0xa700 
+[14:13:42:866]Debug: Send data to targe: size: 18
+[14:13:42:866]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:866]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:866]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:867]Debug: Serial transfer running.
+[14:13:42:867]Debug: Serial transfer wrtie data done.len = 18,timeOut setting = 1000.
+[14:13:42:945]Debug: 3 ,response data size = 10
+[14:13:42:945]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:42:945]Debug: show Respons array size = 10, mode = 0
+[14:13:42:945]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:42:946]Debug: state parse cmd ret = 7
+[14:13:42:946]Debug: process machine state: 2 ==> 3 
+[14:13:42:946]Debug: state: 2==>3
+
+[14:13:42:946]Debug: Bink: set bl progress bar pos = 0.
+[14:13:42:946]Debug: Bink: set mode = 1, fileType = 3, pos = 0.
+[14:13:42:946]Debug:  current status:3 
+[14:13:42:946]Debug: send_total_byte = 32768, current packet size 32768, left size 9984
+[14:13:42:946]Debug: Send data to targe: size: 32778
+[14:13:42:946]Debug: Serial transfer Begin.Thread wake.
+[14:13:42:946]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:42:946]Debug: Serial transfer Done.Thread sleep.
+[14:13:42:947]Debug: Serial transfer running.
+[14:13:43:285]Debug: Serial transfer wrtie data done.len = 32778,timeOut setting = 1000.
+[14:13:43:345]Debug: 3 ,response data size = 10
+[14:13:43:345]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:43:345]Debug: show Respons array size = 10, mode = 0
+[14:13:43:345]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:43:346]Debug: state parse cmd ret = 7
+[14:13:43:346]Debug: process machine state: 3 ==> 4 
+[14:13:43:346]Debug: state: 3==>4
+
+[14:13:43:346]Debug: Bink: set bl progress bar pos = 76.
+[14:13:43:346]Debug: Bink: set mode = 1, fileType = 3, pos = 76.
+[14:13:43:346]Debug:  current status:4 
+[14:13:43:346]Debug: Send buff end.
+[14:13:43:346]Debug: send_total_byte = 42752, current packet size 9984, left size 0
+[14:13:43:346]Debug: Send data to targe: size: 9994
+[14:13:43:346]Debug: Serial transfer Begin.Thread wake.
+[14:13:43:347]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:43:347]Debug: Serial transfer Done.Thread sleep.
+[14:13:43:347]Debug: Serial transfer running.
+[14:13:43:436]Debug: Serial transfer wrtie data done.len = 9994,timeOut setting = 1000.
+[14:13:43:537]Debug: 3 ,response data size = 10
+[14:13:43:537]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:43:537]Debug: show Respons array size = 10, mode = 0
+[14:13:43:537]Debug: End == show Respons array size = 10, mode = 0 response = 1
+[14:13:43:547]Debug: state parse cmd ret = 7
+[14:13:43:547]Debug: process machine state: 4 ==> 5 
+[14:13:43:547]Debug: state: 4==>5
+
+[14:13:43:547]Debug: Bink: set bl progress bar pos = 100.
+[14:13:43:547]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:13:43:547]Debug:  current status:5 
+[14:13:43:547]Debug: send UPGRADE_CMD_TYPE_E_EXEC_DATA, flash addr 0x10040000
+[14:13:43:547]Debug: Send data to targe: size: 14
+[14:13:43:547]Debug: Serial transfer Begin.Thread wake.
+[14:13:43:547]Debug: Serial PortName = COM4, BondRate = 921600
+[14:13:43:548]Debug: Serial transfer Done.Thread sleep.
+[14:13:43:548]Debug: Serial transfer running.
+[14:13:43:548]Debug: Serial transfer wrtie data done.len = 14,timeOut setting = 1000.
+[14:13:43:953]Debug: 3 ,response data size = 20
+[14:13:43:953]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:13:43:953]Debug: show Respons array size = 20, mode = 0
+[14:13:43:953]Debug: End == show Respons array size = 20, mode = 0 response = 1
+[14:13:43:958]Debug: state parse cmd ret = 7
+[14:13:43:958]Debug: process machine state: 5 ==> 6 
+[14:13:43:958]Debug: state: 5==>6
+
+[14:13:43:958]Debug: Bink: set bl progress bar pos = 100.
+[14:13:43:958]Debug: Bink: set mode = 1, fileType = 3, pos = 100.
+[14:13:43:958]Debug:  current status:6 
+[14:13:43:958]Debug: upgrade  complete ########################
+[14:13:43:958]Debug: ******Upgrade Process Complete******
+
+[14:13:43:958]Debug: DownLoadFlashFile --- 0
+[14:13:43:958]Debug: *****Down Load Flash Done: file size 0 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10040000
+
+
+[14:13:43:958]Debug: Down Load Flash Done:upgrade done,ret = 1.
+[14:13:43:958]Debug: **************download bl done,size 42752 bytes*************** 
+[14:13:43:958]Debug: bb file is empy.
+[14:14:15:552]Debug: bbBinfile size = 4096.
+[14:14:15:552]Debug: get data success!
+[14:14:15:552]Debug: get ac flash file failed.
+[14:14:15:553]Debug: bbBinfile size = 43264.
+[14:14:15:553]Debug: get data success!
+[14:14:15:553]Debug: get bb flash file failed.
+[14:14:15:553]Debug: SecureEncryptionMode Download Flash File Progress
+[14:14:15:554]Debug: Name               Saddr       Eaddr       Length    
+[14:14:15:554]Debug: 
+[14:14:15:554]Debug: [1]mbr(self)       0x00000000  0x00040000  0x00040000
+[14:14:15:554]Debug: [2]ramloader       0x00040000  0x000c0000  0x00080000
+[14:14:15:554]Debug: [3]bb.firmware     0x000c0000  0x00240000  0x00180000
+[14:14:15:554]Debug: 
+mbr mbr(self) check ok
+[14:14:15:555]Debug: *****Down Load Flash Begin: file size 4096 (bytes), Load Addr = 0x  140000, Flash Addr = 0x10000000
+
+
+[14:14:15:555]Debug: *****Down Load Flash:upgrade flash addr 0x10000000
+[14:14:15:555]Debug: Down Load Flash Processing: write 4096 bytes to Flash Addr 0x10000000 
+
+
+[14:14:15:555]Debug: 
+[14:14:15:555]Debug: ******pgrade Process Start******
+
+[14:14:15:555]Debug: bink debug nRdSize 4096 
+[14:14:15:555]Debug: Try to handshake with targe, try_count = 1
+[14:14:15:556]Debug: Send handshake cmd to target.
+[14:14:15:556]Debug: Serial transfer Begin.Thread wake.
+[14:14:15:556]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:15:556]Debug: Serial transfer Done.Thread sleep.
+[14:14:15:556]Debug: Serial transfer running.
+[14:14:15:557]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:15:986]Debug: 3 ,response data size = 1
+[14:14:15:986]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:15:986]Debug: show Respons array size = 1, mode = 1
+[14:14:15:986]Debug: End == show Respons array size = 0, mode = 1 response = 0
+[14:14:15:987]Debug: response failed.
+[14:14:15:987]Debug: Try to handshake with targe, try_count = 2
+[14:14:15:987]Debug: Send handshake cmd to target.
+[14:14:15:987]Debug: Serial transfer Begin.Thread wake.
+[14:14:15:987]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:15:987]Debug: Serial transfer Done.Thread sleep.
+[14:14:15:988]Debug: Serial transfer running.
+[14:14:15:988]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:16:423]Debug: 3 ,response data size = 3
+[14:14:16:423]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:16:423]Debug: show Respons array size = 3, mode = 1
+[14:14:16:423]Debug: End == show Respons array size = 0, mode = 1 response = 0
+[14:14:16:424]Debug: response failed.
+[14:14:16:424]Debug: Try to handshake with targe, try_count = 3
+[14:14:16:424]Debug: Send handshake cmd to target.
+[14:14:16:424]Debug: Serial transfer Begin.Thread wake.
+[14:14:16:424]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:16:424]Debug: Serial transfer Done.Thread sleep.
+[14:14:16:424]Debug: Serial transfer running.
+[14:14:16:424]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:16:497]Debug: 3 ,response data size = 2259
+[14:14:16:497]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:16:497]Debug: show Respons array size = 2259, mode = 1
+[14:14:16:497]Debug: End == show Respons array size = 2259, mode = 1 response = 1
+[14:14:16:498]Debug: parse_version failed.
+[14:14:16:498]Debug: Try to handshake with targe, try_count = 4
+[14:14:16:498]Debug: Send handshake cmd to target.
+[14:14:16:498]Debug: Serial transfer Begin.Thread wake.
+[14:14:16:498]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:16:498]Debug: Serial transfer Done.Thread sleep.
+[14:14:16:498]Debug: Serial transfer running.
+[14:14:16:498]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:16:572]Debug: 3 ,response data size = 178
+[14:14:16:572]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:16:572]Debug: show Respons array size = 178, mode = 1
+[14:14:16:572]Debug: End == show Respons array size = 178, mode = 1 response = 1
+[14:14:16:573]Debug: parse_version failed.
+[14:14:16:573]Debug: Try to handshake with targe, try_count = 5
+[14:14:16:573]Debug: Send handshake cmd to target.
+[14:14:16:573]Debug: Serial transfer Begin.Thread wake.
+[14:14:16:573]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:16:573]Debug: Serial transfer Done.Thread sleep.
+[14:14:16:573]Debug: Serial transfer running.
+[14:14:16:573]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:16:872]Debug: 3 ,response data size = 193
+[14:14:16:872]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:16:872]Debug: show Respons array size = 193, mode = 1
+[14:14:16:872]Debug: End == show Respons array size = 193, mode = 1 response = 1
+[14:14:16:873]Debug: parse_version failed.
+[14:14:16:873]Debug: Try to handshake with targe, try_count = 6
+[14:14:16:873]Debug: Send handshake cmd to target.
+[14:14:16:873]Debug: Serial transfer Begin.Thread wake.
+[14:14:16:873]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:16:873]Debug: Serial transfer Done.Thread sleep.
+[14:14:16:873]Debug: Serial transfer running.
+[14:14:16:873]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:17:468]Debug: 3 ,response data size = 979
+[14:14:17:468]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:17:468]Debug: show Respons array size = 979, mode = 1
+[14:14:17:468]Debug: End == show Respons array size = 979, mode = 1 response = 1
+[14:14:17:469]Debug: parse_version failed.
+[14:14:17:469]Debug: Try to handshake with targe, try_count = 7
+[14:14:17:469]Debug: Send handshake cmd to target.
+[14:14:17:469]Debug: Serial transfer Begin.Thread wake.
+[14:14:17:469]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:17:469]Debug: Serial transfer Done.Thread sleep.
+[14:14:17:469]Debug: Serial transfer running.
+[14:14:17:469]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:18:484]Debug: 3 ,response data size = 1151
+[14:14:18:484]Debug: Serial transfer read data done.len = 0,timeOut setting = 1000.
+[14:14:18:484]Debug: show Respons array size = 1151, mode = 1
+[14:14:18:484]Debug: End == show Respons array size = 1151, mode = 1 response = 1
+[14:14:18:485]Debug: parse_version failed.
+[14:14:18:485]Debug: Try to handshake with targe, try_count = 8
+[14:14:18:485]Debug: Send handshake cmd to target.
+[14:14:18:485]Debug: Serial transfer Begin.Thread wake.
+[14:14:18:485]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:18:485]Debug: Serial transfer Done.Thread sleep.
+[14:14:18:485]Debug: Serial transfer running.
+[14:14:18:485]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:19:485]Debug: mode = 1 , Wait read response timeout 14:14:19
+[14:14:19:485]Debug: get emit timeout signal
+[14:14:19:486]Debug: receive ack timeoutStatus = 1 
+[14:14:19:486]Debug: Try to handshake with targe, try_count = 9
+[14:14:19:486]Debug: Send handshake cmd to target.
+[14:14:19:486]Debug: Serial transfer Begin.Thread wake.
+[14:14:19:486]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:19:486]Debug: Serial transfer Done.Thread sleep.
+[14:14:19:486]Debug: Serial transfer running.
+[14:14:19:487]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:20:487]Debug: mode = 1 , Wait read response timeout 14:14:20
+[14:14:20:487]Debug: get emit timeout signal
+[14:14:20:488]Debug: receive ack timeoutStatus = 1 
+[14:14:20:489]Debug: Try to handshake with targe, try_count = 10
+[14:14:20:489]Debug: Send handshake cmd to target.
+[14:14:20:489]Debug: Serial transfer Begin.Thread wake.
+[14:14:20:489]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:20:489]Debug: Serial transfer Done.Thread sleep.
+[14:14:20:489]Debug: Serial transfer running.
+[14:14:20:489]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:21:489]Debug: mode = 1 , Wait read response timeout 14:14:21
+[14:14:21:489]Debug: get emit timeout signal
+[14:14:21:490]Debug: receive ack timeoutStatus = 1 
+[14:14:21:490]Debug: Try to handshake with targe, try_count = 11
+[14:14:21:490]Debug: Send handshake cmd to target.
+[14:14:21:490]Debug: Serial transfer Begin.Thread wake.
+[14:14:21:491]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:21:491]Debug: Serial transfer Done.Thread sleep.
+[14:14:21:491]Debug: Serial transfer running.
+[14:14:21:491]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:22:491]Debug: mode = 1 , Wait read response timeout 14:14:22
+[14:14:22:491]Debug: get emit timeout signal
+[14:14:22:492]Debug: receive ack timeoutStatus = 1 
+[14:14:22:492]Debug: Try to handshake with targe, try_count = 12
+[14:14:22:492]Debug: Send handshake cmd to target.
+[14:14:22:492]Debug: Serial transfer Begin.Thread wake.
+[14:14:22:492]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:22:492]Debug: Serial transfer Done.Thread sleep.
+[14:14:22:492]Debug: Serial transfer running.
+[14:14:22:493]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:23:572]Debug: mode = 1 , Wait read response timeout 14:14:23
+[14:14:23:573]Debug: get emit timeout signal
+[14:14:23:573]Debug: receive ack timeoutStatus = 1 
+[14:14:23:573]Debug: Try to handshake with targe, try_count = 13
+[14:14:23:573]Debug: Send handshake cmd to target.
+[14:14:23:573]Debug: Serial transfer Begin.Thread wake.
+[14:14:23:574]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:23:574]Debug: Serial transfer Done.Thread sleep.
+[14:14:23:574]Debug: Serial transfer running.
+[14:14:23:575]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:24:576]Debug: mode = 1 , Wait read response timeout 14:14:24
+[14:14:24:576]Debug: get emit timeout signal
+[14:14:24:576]Debug: receive ack timeoutStatus = 1 
+[14:14:24:576]Debug: Try to handshake with targe, try_count = 14
+[14:14:24:576]Debug: Send handshake cmd to target.
+[14:14:24:576]Debug: Serial transfer Begin.Thread wake.
+[14:14:24:576]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:24:576]Debug: Serial transfer Done.Thread sleep.
+[14:14:24:576]Debug: Serial transfer running.
+[14:14:24:576]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:25:576]Debug: mode = 1 , Wait read response timeout 14:14:25
+[14:14:25:576]Debug: get emit timeout signal
+[14:14:25:577]Debug: receive ack timeoutStatus = 1 
+[14:14:25:577]Debug: Try to handshake with targe, try_count = 15
+[14:14:25:577]Debug: Send handshake cmd to target.
+[14:14:25:577]Debug: Serial transfer Begin.Thread wake.
+[14:14:25:577]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:25:577]Debug: Serial transfer Done.Thread sleep.
+[14:14:25:577]Debug: Serial transfer running.
+[14:14:25:577]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:26:577]Debug: mode = 1 , Wait read response timeout 14:14:26
+[14:14:26:577]Debug: get emit timeout signal
+[14:14:26:578]Debug: receive ack timeoutStatus = 1 
+[14:14:26:578]Debug: Try to handshake with targe, try_count = 16
+[14:14:26:578]Debug: Send handshake cmd to target.
+[14:14:26:578]Debug: Serial transfer Begin.Thread wake.
+[14:14:26:578]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:26:578]Debug: Serial transfer Done.Thread sleep.
+[14:14:26:578]Debug: Serial transfer running.
+[14:14:26:578]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:27:579]Debug: mode = 1 , Wait read response timeout 14:14:27
+[14:14:27:579]Debug: get emit timeout signal
+[14:14:27:580]Debug: receive ack timeoutStatus = 1 
+[14:14:27:580]Debug: Try to handshake with targe, try_count = 17
+[14:14:27:580]Debug: Send handshake cmd to target.
+[14:14:27:581]Debug: Serial transfer Begin.Thread wake.
+[14:14:27:581]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:27:581]Debug: Serial transfer Done.Thread sleep.
+[14:14:27:581]Debug: Serial transfer running.
+[14:14:27:581]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:28:581]Debug: mode = 1 , Wait read response timeout 14:14:28
+[14:14:28:581]Debug: get emit timeout signal
+[14:14:28:582]Debug: receive ack timeoutStatus = 1 
+[14:14:28:582]Debug: Try to handshake with targe, try_count = 18
+[14:14:28:582]Debug: Send handshake cmd to target.
+[14:14:28:582]Debug: Serial transfer Begin.Thread wake.
+[14:14:28:582]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:28:582]Debug: Serial transfer Done.Thread sleep.
+[14:14:28:582]Debug: Serial transfer running.
+[14:14:28:582]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:29:582]Debug: mode = 1 , Wait read response timeout 14:14:29
+[14:14:29:582]Debug: get emit timeout signal
+[14:14:29:583]Debug: receive ack timeoutStatus = 1 
+[14:14:29:583]Debug: Try to handshake with targe, try_count = 19
+[14:14:29:583]Debug: Send handshake cmd to target.
+[14:14:29:583]Debug: Serial transfer Begin.Thread wake.
+[14:14:29:583]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:29:583]Debug: Serial transfer Done.Thread sleep.
+[14:14:29:584]Debug: Serial transfer running.
+[14:14:29:584]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:30:584]Debug: mode = 1 , Wait read response timeout 14:14:30
+[14:14:30:584]Debug: get emit timeout signal
+[14:14:30:585]Debug: receive ack timeoutStatus = 1 
+[14:14:30:585]Debug: Try to handshake with targe, try_count = 20
+[14:14:30:585]Debug: Send handshake cmd to target.
+[14:14:30:585]Debug: Serial transfer Begin.Thread wake.
+[14:14:30:585]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:30:585]Debug: Serial transfer Done.Thread sleep.
+[14:14:30:585]Debug: Serial transfer running.
+[14:14:30:586]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:31:746]Debug: mode = 1 , Wait read response timeout 14:14:31
+[14:14:31:747]Debug: get emit timeout signal
+[14:14:31:747]Debug: receive ack timeoutStatus = 1 
+[14:14:31:747]Debug: Try to handshake with targe, try_count = 21
+[14:14:31:747]Debug: Send handshake cmd to target.
+[14:14:31:748]Debug: Serial transfer Begin.Thread wake.
+[14:14:31:748]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:31:748]Debug: Serial transfer Done.Thread sleep.
+[14:14:31:749]Debug: Serial transfer running.
+[14:14:31:749]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:32:750]Debug: mode = 1 , Wait read response timeout 14:14:32
+[14:14:32:750]Debug: get emit timeout signal
+[14:14:32:751]Debug: receive ack timeoutStatus = 1 
+[14:14:32:751]Debug: Try to handshake with targe, try_count = 22
+[14:14:32:751]Debug: Send handshake cmd to target.
+[14:14:32:751]Debug: Serial transfer Begin.Thread wake.
+[14:14:32:751]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:32:752]Debug: Serial transfer Done.Thread sleep.
+[14:14:32:752]Debug: Serial transfer running.
+[14:14:32:752]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:33:752]Debug: mode = 1 , Wait read response timeout 14:14:33
+[14:14:33:752]Debug: get emit timeout signal
+[14:14:33:753]Debug: receive ack timeoutStatus = 1 
+[14:14:33:754]Debug: Try to handshake with targe, try_count = 23
+[14:14:33:754]Debug: Send handshake cmd to target.
+[14:14:33:754]Debug: Serial transfer Begin.Thread wake.
+[14:14:33:754]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:33:754]Debug: Serial transfer Done.Thread sleep.
+[14:14:33:754]Debug: Serial transfer running.
+[14:14:33:754]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:34:755]Debug: mode = 1 , Wait read response timeout 14:14:34
+[14:14:34:755]Debug: get emit timeout signal
+[14:14:34:756]Debug: receive ack timeoutStatus = 1 
+[14:14:34:756]Debug: Try to handshake with targe, try_count = 24
+[14:14:34:756]Debug: Send handshake cmd to target.
+[14:14:34:756]Debug: Serial transfer Begin.Thread wake.
+[14:14:34:756]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:34:756]Debug: Serial transfer Done.Thread sleep.
+[14:14:34:756]Debug: Serial transfer running.
+[14:14:34:757]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:35:757]Debug: mode = 1 , Wait read response timeout 14:14:35
+[14:14:35:757]Debug: get emit timeout signal
+[14:14:35:758]Debug: receive ack timeoutStatus = 1 
+[14:14:35:759]Debug: Try to handshake with targe, try_count = 25
+[14:14:35:759]Debug: Send handshake cmd to target.
+[14:14:35:759]Debug: Serial transfer Begin.Thread wake.
+[14:14:35:759]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:35:759]Debug: Serial transfer Done.Thread sleep.
+[14:14:35:759]Debug: Serial transfer running.
+[14:14:35:760]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:36:760]Debug: mode = 1 , Wait read response timeout 14:14:36
+[14:14:36:760]Debug: get emit timeout signal
+[14:14:36:760]Debug: receive ack timeoutStatus = 1 
+[14:14:36:760]Debug: Try to handshake with targe, try_count = 26
+[14:14:36:760]Debug: Send handshake cmd to target.
+[14:14:36:760]Debug: Serial transfer Begin.Thread wake.
+[14:14:36:760]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:36:760]Debug: Serial transfer Done.Thread sleep.
+[14:14:36:760]Debug: Serial transfer running.
+[14:14:36:760]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:37:760]Debug: mode = 1 , Wait read response timeout 14:14:37
+[14:14:37:760]Debug: get emit timeout signal
+[14:14:37:761]Debug: receive ack timeoutStatus = 1 
+[14:14:37:761]Debug: Try to handshake with targe, try_count = 27
+[14:14:37:761]Debug: Send handshake cmd to target.
+[14:14:37:761]Debug: Serial transfer Begin.Thread wake.
+[14:14:37:761]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:37:761]Debug: Serial transfer Done.Thread sleep.
+[14:14:37:761]Debug: Serial transfer running.
+[14:14:37:761]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:38:762]Debug: mode = 1 , Wait read response timeout 14:14:38
+[14:14:38:762]Debug: get emit timeout signal
+[14:14:38:763]Debug: receive ack timeoutStatus = 1 
+[14:14:38:763]Debug: Try to handshake with targe, try_count = 28
+[14:14:38:763]Debug: Send handshake cmd to target.
+[14:14:38:763]Debug: Serial transfer Begin.Thread wake.
+[14:14:38:763]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:38:763]Debug: Serial transfer Done.Thread sleep.
+[14:14:38:763]Debug: Serial transfer running.
+[14:14:38:763]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:39:763]Debug: mode = 1 , Wait read response timeout 14:14:39
+[14:14:39:763]Debug: get emit timeout signal
+[14:14:39:764]Debug: receive ack timeoutStatus = 1 
+[14:14:39:764]Debug: Try to handshake with targe, try_count = 29
+[14:14:39:764]Debug: Send handshake cmd to target.
+[14:14:39:764]Debug: Serial transfer Begin.Thread wake.
+[14:14:39:764]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:39:764]Debug: Serial transfer Done.Thread sleep.
+[14:14:39:764]Debug: Serial transfer running.
+[14:14:39:765]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.
+[14:14:40:765]Debug: mode = 1 , Wait read response timeout 14:14:40
+[14:14:40:765]Debug: get emit timeout signal
+[14:14:40:765]Debug: receive ack timeoutStatus = 1 
+[14:14:40:765]Debug: Try to handshake with targe, try_count = 30
+[14:14:40:765]Debug: Send handshake cmd to target.
+[14:14:40:765]Debug: Serial transfer Begin.Thread wake.
+[14:14:40:765]Debug: Serial PortName = COM4, BondRate = 921600
+[14:14:40:766]Debug: Serial transfer Done.Thread sleep.
+[14:14:40:766]Debug: Serial transfer running.
+[14:14:40:766]Debug: Serial transfer wrtie data done.len = 1,timeOut setting = 1000.

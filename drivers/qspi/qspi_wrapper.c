@@ -35,19 +35,41 @@ u64 qspi_get_timer_tick_save(void)
 }
 #endif
 
-static void wait_qspi_hw_idle(void)
+#define QSPI_CTL_BUSY_TIMEOUT	(100000)
+static bool wait_qspi_hw_idle(void)
 {
+	unsigned int tm = 0;
     while (qspi_is_busy() == true)
-        ;
+	{
+		udelay(1);
+		tm += 1;
+
+		if(tm > QSPI_CTL_BUSY_TIMEOUT)
+		{
+			break;
+		}
+	}
+
+	return qspi_is_busy();
 }
 
-inline void qspi_wren(u8 cmd)
+inline int qspi_wren(u8 cmd)
 {
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_tx_init();
     qspi_reg_enable();
     qspi_push_data_8bit(cmd);
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
+
+    return QSPI_OP_SUCCESS;
 }
 
 static void qspi_xfer_init(u8 *dbuf, int dlen, int flags)
@@ -173,13 +195,21 @@ static void qspi_xfer_polling_process(int flags)
     }
 }
 
-static void qspi_xfer_wait_done(void)
+static int qspi_xfer_wait_done(void)
 {
     while (qspi_rw_opt_pending == 1)
         ;
-    wait_qspi_hw_idle();
+
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
+
+    return QSPI_OP_SUCCESS;
 }
 
+#ifdef CONFIG_USE_IRQ
 static int qspi_irq_handler(int irq, void *dev_id)
 {
     u32 st = qspi_irq_read_status();
@@ -193,10 +223,15 @@ static int qspi_irq_handler(int irq, void *dev_id)
     }
     return 0;
 }
+#endif
 
 void qspi_ahb_read_enable(u8 rd_cmd, u8 dfs)
 {
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return;
+	}
     qspi_rx_init(rd_cmd, dfs);
     hwp_apQspi->cache_dis_update = 1;
     qspi_reg_enable();
@@ -216,7 +251,11 @@ int qspi_send_xx_data(u8 *tx_dbuf, int tx_len)
     if (qspi_print_log > 0) {
         printf("qspi_send_xx_data, tx_len = %d\n", tx_len);
     }
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_tx_init();
     qspi_set_tx_fifo_level(128);
     qspi_xfer_init(tx_dbuf, tx_len, QSPI_TX);
@@ -224,7 +263,8 @@ int qspi_send_xx_data(u8 *tx_dbuf, int tx_len)
 
     qspi_xfer_polling_process(QSPI_TX);
 
-    qspi_xfer_wait_done();
+    if(qspi_xfer_wait_done() != QSPI_OP_SUCCESS)
+        return QSPI_OP_FAILED;
 
     return tx_len;
 }
@@ -274,8 +314,8 @@ int qspi_get_rx_thr(int rx_len, int dfs)
 int qspi_dma_read_start(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dma_rdlr)
 {
     int rx_ndf = 0, rx_thr;
-    int mod_rx_len = rx_len%4;
-    if(mod_rx_len)
+
+    if(rx_len%4)
     {
         rx_ndf = qspi_get_rx_ndf(cmd, rx_len, 8);
         rx_thr = qspi_get_rx_thr(rx_len, 8);
@@ -285,16 +325,20 @@ int qspi_dma_read_start(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dma_rdlr)
     }
 
     if ((rx_len > 256) || (rx_ndf == 0))
-        return 0;
+        return QSPI_OP_FAILED;
 
-    if (0 == (mod_rx_len)) {
-        wait_qspi_hw_idle();
+    if (0 == (rx_len%4)) {
+        if(true == wait_qspi_hw_idle())
+        {
+            printf("controller is busy! return ...");
+            return QSPI_OP_FAILED;
+        }
         qspi_set_dma_ctrl(0);
     }else{
         qspi_dma_send_read_cmd(cmd, addr, rx_thr, rx_ndf, 8);
     }
 
-    if(mod_rx_len)
+    if(rx_len%4)
     {
         //qspi_rx_init(cmd, 8);
         qspi_set_dma_rdlr(0);
@@ -308,11 +352,40 @@ int qspi_dma_read_start(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dma_rdlr)
     qspi_set_dma_ctrl(1);
     asm volatile("isb" : : : "memory");
 
-    if (0 == (mod_rx_len)) {
+    if (0 == (rx_len%4)) {
         qspi_reg_enable();
         qspi_push_data_32bit((cmd << 24) | addr);
     }
 
+    return QSPI_OP_SUCCESS;
+}
+
+int qspi_dma_read_start_once(u8 cmd, int rx_len, int dma_rdlr)
+{
+    int rx_ndf = 0, rx_thr;
+
+    rx_ndf = qspi_get_rx_ndf(cmd, rx_len, 32);
+    rx_thr = qspi_get_rx_thr(rx_len, 32);
+
+    wait_qspi_hw_idle();
+    qspi_set_dma_ctrl(0);
+
+    qspi_rx_init(cmd, 32);
+    qspi_set_rx_fifo_level(rx_thr - 1);
+    qspi_set_rx_ndf(rx_ndf - 1);
+    qspi_set_dma_rdlr(dma_rdlr);
+
+    qspi_set_dma_ctrl(1);
+    asm volatile("isb" : : : "memory");
+
+    return 0;
+}
+
+int qspi_dma_read_start_new(u8 cmd, u32 addr)
+{
+    wait_qspi_hw_idle();
+    qspi_reg_enable();
+    qspi_push_data_32bit((cmd << 24) | addr);
     return 0;
 }
 
@@ -330,17 +403,15 @@ int qspi_dma_read_page(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len)
 {
     unsigned int width = DMAC_CTL_TR_WIDTH_E_32;
     unsigned int burst = DMAC_CTL_MSIZE_E_16;
-    int mod_rx_len = rx_len%4;
-    if(mod_rx_len)
+
+    int ret = QSPI_OP_SUCCESS;
+
+    if(rx_len%4)
     {   
         width = DMAC_CTL_TR_WIDTH_E_8;
         burst = DMAC_CTL_MSIZE_E_1;
-    }   
+    }
 
-    // if(dma_init == 0) {
-    //     dmac_enable();
-    //     dma_init = 1;
-    // }
     if (false == is_dma_init(0)) {
         dmac_enable(0);
     }
@@ -348,25 +419,28 @@ int qspi_dma_read_page(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len)
     v7_dma_inv_range((u32) rx_dbuf, (u32)(rx_dbuf + rx_len));
 
     dma_qspiflash_read_polling_new(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) rx_dbuf, rx_len, width, burst, 0);
-    asm volatile("isb" : : : "memory");
-    asm volatile("dsb" : : : "memory");
+    //asm volatile("isb" : : : "memory");
+    //asm volatile("dsb" : : : "memory");
 
-    qspi_dma_read_start(cmd, addr, rx_dbuf, rx_len, 15);
-    asm volatile("isb" : : : "memory");
-    asm volatile("dsb" : : : "memory");
+    ret = qspi_dma_read_start(cmd, addr, rx_dbuf, rx_len, 15);
+    //asm volatile("isb" : : : "memory");
+    //asm volatile("dsb" : : : "memory");
 
-    if(mod_rx_len)
+    if(rx_len%4)
         dma_wait_channel_done_polling(0, QSPI_DMA_CHANNEL_W, 0);
     dma_wait_channel_done_polling(0, QSPI_DMA_CHANNEL, 0);
     qspi_hw_init();
 
+    if(QSPI_OP_FAILED == ret)
+        return ret;
+
     return rx_len;
 }
 #endif
+
 /*
  *  only for read page operations
  */
-
 int qspi_read_page_data(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dfs)
 {
     int rx_thr, rx_ndf = 0;
@@ -382,11 +456,15 @@ int qspi_read_page_data(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dfs)
     }
 
     if (rx_len > 256)
-        return 0;
+        return QSPI_OP_FAILED;
     if ((rx_ndf == 0) || (rx_thr == 0))
-        return 0;
+        return QSPI_OP_FAILED;
 
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_rx_init(cmd, dfs);
     qspi_set_rx_ndf(rx_ndf - 1);
 
@@ -426,7 +504,8 @@ int qspi_read_page_data(u8 cmd, u32 addr, u8 *rx_dbuf, int rx_len, int dfs)
     }
 
     qspi_xfer_polling_process(QSPI_RX);
-    qspi_xfer_wait_done();
+    if(qspi_xfer_wait_done() != QSPI_OP_SUCCESS)
+        return QSPI_OP_FAILED;
     return rx_len;
 }
 
@@ -438,7 +517,11 @@ extern int dma_qspiflash_write_page_polling(U32 id, U32 ch, U32 flash_addr, U32 
 extern inline void qspi_tx_init_4(void);
 static int qspi_dma_write_start(/*u8 cmd, u32 addr, u8 * rx_dbuf, int tx_len, */ int dma_tdlr)
 {
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_set_dma_ctrl(0);
 
     if(dma_tdlr == 8){
@@ -453,12 +536,16 @@ static int qspi_dma_write_start(/*u8 cmd, u32 addr, u8 * rx_dbuf, int tx_len, */
     asm volatile("isb" : : : "memory");
     qspi_reg_enable();
 
-    return 0;
+    return QSPI_OP_SUCCESS;
 }
 
 static int qspi_dma_write_read_cmd_start(u8 cmd, int dma_tdlr, u32 rx_thr, u32 rx_ndf)
 {
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_set_dma_ctrl(0);
 
     hwp_apQspi->ssienr = QSPI_SSIENR_EN(0) | QSPI_SSIENR_AHB_EN(0);
@@ -477,7 +564,7 @@ static int qspi_dma_write_read_cmd_start(u8 cmd, int dma_tdlr, u32 rx_thr, u32 r
     asm volatile("isb" : : : "memory");
     qspi_reg_enable();
 
-    return 0;
+    return QSPI_OP_SUCCESS;
 }
 
 int qspi_dma_write_page(u8 cmd, u32 addr, u8 *tx_dbuf, int tx_len, int dfs)
@@ -503,7 +590,7 @@ int qspi_dma_write_page(u8 cmd, u32 addr, u8 *tx_dbuf, int tx_len, int dfs)
     dma_qspiflash_write_buf[0] = addr & 0xFF;
 	}else{
 		printf("DFS = %d is not support, return!\n", dfs);
-		return -1;
+		return QSPI_OP_FAILED;
 	}
 
     if( (0!=tx_len) && (NULL != tx_dbuf) )
@@ -514,19 +601,26 @@ int qspi_dma_write_page(u8 cmd, u32 addr, u8 *tx_dbuf, int tx_len, int dfs)
                            (U32) dma_qspiflash_write_buf + tx_len + 4);
     }
 
-    qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ dfs);
+    if(QSPI_OP_FAILED == qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ dfs))
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     //dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-    dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-                                     tx_len + 4, dfs, 1, false); // async write
+    if(DMAC_ERR_E_OK != dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
+                                     tx_len + 4, dfs, 1, false))
+        return QSPI_OP_FAILED; // async write
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     dma_wait_channel_done_polling(0, QSPI_DMA_CHANNEL, 0);
 
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     // close qspi-dma, no tx_req
     qspi_set_dma_ctrl(0);
 
@@ -552,7 +646,7 @@ int qspi_dma_send_read_cmd(u8 cmd, u32 addr, int rx_thr, int rx_ndf, int dfs)
         dma_qspiflash_write_buf[0] = addr & 0xFF;
     }else{
         printf("DFS = %d is not support, return!\n", dfs);
-        return -1;
+        return QSPI_OP_FAILED;
     }
 
     if (is_mmu_enable()) {
@@ -560,13 +654,17 @@ int qspi_dma_send_read_cmd(u8 cmd, u32 addr, int rx_thr, int rx_ndf, int dfs)
                            (U32) dma_qspiflash_write_buf + 4);
     }
 
-    qspi_dma_write_read_cmd_start(cmd, dfs, rx_thr, rx_ndf);
+    if(QSPI_OP_FAILED == qspi_dma_write_read_cmd_start(cmd, dfs, rx_thr, rx_ndf))
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     //dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-    dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL_W, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-                                     4, dfs, 1, false); // async write
+    if(DMAC_ERR_E_OK != dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL_W, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
+                                     4, dfs, 1, false)) // async write
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
@@ -591,23 +689,31 @@ int qspi_dma_send_cmd_data(u8 cmd, u8 data)
                            (U32) dma_qspiflash_write_buf + 2);
     }
 
-    qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ 8);
+    if(QSPI_OP_FAILED == qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ 8))
+        return QSPI_OP_SUCCESS;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     //dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
     //                                 2, 8, false); // async write
-    dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-                                     2, 8, 1, false); // async write
+    if(DMAC_ERR_E_OK != dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
+                                     2, 8, 1, false)) // async write
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     dma_wait_channel_done_polling(0, QSPI_DMA_CHANNEL, 0);
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     // close qspi-dma, no tx_req
     qspi_set_dma_ctrl(0);
 
-    return 0;
+    return QSPI_OP_SUCCESS;
 }
 
 int spansion_qspi_dma_send_cmd_data(u8 cmd, u8 *data, u32 dat_len)
@@ -630,37 +736,48 @@ int spansion_qspi_dma_send_cmd_data(u8 cmd, u8 *data, u32 dat_len)
                            (U32) dma_qspiflash_write_buf + dat_len + 1);
     }
 
-    qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ 8);
+    if(QSPI_OP_FAILED == qspi_dma_write_start(/*cmd, addr, tx_dbuf, tx_len, */ 8))
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     //dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
     //                                 2, 8, false); // async write
-    dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
-                                     1+dat_len, 8, 1, false); // async write
+    if(DMAC_ERR_E_OK != dma_qspiflash_write_page_polling(0, QSPI_DMA_CHANNEL, get_qspiflash_dr(), (u32) dma_qspiflash_write_buf,
+                                     1+dat_len, 8, 1, false)) // async write
+        return QSPI_OP_FAILED;
+
     asm volatile("isb" : : : "memory");
     asm volatile("dsb" : : : "memory");
 
     dma_wait_channel_done_polling(0, QSPI_DMA_CHANNEL, 0);
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     // close qspi-dma, no tx_req
     qspi_set_dma_ctrl(0);
 
-    return 0;
+    return QSPI_OP_SUCCESS;
 }
 #endif
 
 /*
  *  only for read status/device id/readid etc. operations
  */
-
 int qspi_read_xx_data(u8 cmd, u32 addr, int addr_vld, u8 *rx_dbuf, int rx_len)
 {
     if (qspi_print_log > 0) {
         printf("cmd = %02x, rx_len = %d\n", cmd, rx_len);
     }
     qspi_rd_dfs = 8;
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_rx_init(SPINOR_OP_READ, 8);
     qspi_set_rx_ndf(rx_len - 1);
     qspi_set_rx_fifo_level(rx_len - 1);
@@ -686,23 +803,27 @@ int qspi_read_xx_data(u8 cmd, u32 addr, int addr_vld, u8 *rx_dbuf, int rx_len)
     } else
         qspi_push_data_8bit(cmd);
     qspi_xfer_polling_process(QSPI_RX);
-    qspi_xfer_wait_done();
+
+    if(qspi_xfer_wait_done() != QSPI_OP_SUCCESS)
+        return QSPI_OP_FAILED;
+
     return rx_len;
 }
 
 void qspi_init_low(int irq_enable, int disp_log, int rd_thr_en)
 {
-    printf("irq mode %s, log = %d, rd_thr_en = %d\n", irq_enable ? "enable" : "disabled", disp_log,
-           rd_thr_en);
+    //printf("irq mode %s, log = %d, rd_thr_en = %d\n", irq_enable ? "enable" : "disabled", disp_log, rd_thr_en);
 
     qspi_hw_init();
     using_irq_mode = irq_enable;
     qspi_print_log = disp_log;
     qspi_rd_thr_en = rd_thr_en;
 
+#ifdef CONFIG_USE_IRQ
     if (irq_enable) {
         request_irq(SYS_IRQ_ID_QSPI, qspi_irq_handler, NULL, (void *) hwp_apQspi);
     }
+#endif
 }
 
 /*
@@ -715,7 +836,11 @@ int qspi_read_spansion_data(u8 cmd, u32 addr, int addr_vld, u8 *rx_dbuf, int rx_
 	}
 
     qspi_rd_dfs = 8;
-    wait_qspi_hw_idle();
+    if(true == wait_qspi_hw_idle())
+	{
+		printf("controller is busy! return ...");
+		return QSPI_OP_FAILED;
+	}
     qspi_rx_init(SPINOR_OP_READ, 8);
     qspi_set_rx_ndf(rx_len - 1);
     qspi_set_rx_fifo_level(rx_len - 1);
@@ -735,6 +860,7 @@ int qspi_read_spansion_data(u8 cmd, u32 addr, int addr_vld, u8 *rx_dbuf, int rx_
         qspi_push_data_8bit(cmd);
 
     qspi_xfer_polling_process(QSPI_RX);
-    qspi_xfer_wait_done();
+    if(qspi_xfer_wait_done() != QSPI_OP_SUCCESS)
+        return QSPI_OP_FAILED;
     return rx_len;
 }

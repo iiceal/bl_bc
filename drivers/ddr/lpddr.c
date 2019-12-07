@@ -1,13 +1,6 @@
 #include <drivers/drv_ddr.h>
 
-
-#ifdef LPDDR_DEBUG
-#define lpddr_debug(fmt, args...)  printf("LPDDR: " fmt "\n", ##args);
-#else
-#define lpddr_debug(fmt, args...)
-#endif
-
-
+#ifdef CONFIG_LPDDR
 static void lpddr_phy_init(void)
 {
     REG_WRITE_ctrl(0xC01A0008,0x07842e05);//at:338405.690 ns
@@ -31,7 +24,8 @@ static void lpddr_phy_init(void)
     REG_WRITE_ctrl(0xC01A002c,0xfa00001f);//at:350627.450 ns
     REG_WRITE_ctrl(0xC01A001c,0x0600ac40);//at:351364.970 ns
     REG_WRITE_ctrl(0xC01A0020,0x0190006e);//at:352113.026 ns
-    REG_WRITE_ctrl(0xC01A0040,0x00000032);//at:352692.506 ns
+    //REG_WRITE_ctrl(0xC01A0040,0x00000032);//at:352692.506 ns
+    REG_WRITE_ctrl(0xC01A0040,0x00000033);//at:352692.506 ns
 }
 
 static void lpddr_controller_init(void)
@@ -44,7 +38,8 @@ static void lpddr_controller_init(void)
     REG_WRITE_ctrl(0xC0190000,0x03040402);//at:179996.930 ns
     REG_WRITE_ctrl(0xC0190000,0x03040402);//at:180070.682 ns
     REG_WRITE_ctrl(0xC0190000,0x03020402);//at:180144.434 ns
-    REG_WRITE_ctrl(0xC0190000,0x01020402);//at:180218.186 ns
+    //REG_WRITE_ctrl(0xC0190000,0x01020402);//at:180218.186 ns
+    REG_WRITE_ctrl(0xC0190000,0x01040402);//at:180218.186 ns
     REG_WRITE_ctrl(0xC0190010,0x00000030);//at:180629.090 ns
     REG_WRITE_ctrl(0xC0190010,0x00000030);//at:181039.994 ns
     REG_WRITE_ctrl(0xC0190010,0x00007030);//at:181450.898 ns
@@ -113,7 +108,8 @@ static void lpddr_controller_init(void)
     REG_WRITE_ctrl(0xC0190110,0x05040402);//at:191291.522 ns
     REG_WRITE_ctrl(0xC0190110,0x05040102);//at:191365.274 ns
     REG_WRITE_ctrl(0xC0190110,0x05010102);//at:191439.026 ns
-    REG_WRITE_ctrl(0xC0190110,0x02010102);//at:191512.778 ns
+    //REG_WRITE_ctrl(0xC0190110,0x02010102);//at:191512.778 ns
+    REG_WRITE_ctrl(0xC0190110,0x02020102);//at:191512.778 ns
     REG_WRITE_ctrl(0xC0190114,0x05050401);//at:192007.970 ns
     REG_WRITE_ctrl(0xC0190114,0x05050e01);//at:192081.722 ns
     REG_WRITE_ctrl(0xC0190114,0x05070e01);//at:192155.474 ns
@@ -234,8 +230,10 @@ static void lpddr_controller_init(void)
     REG_WRITE_ctrl(0xC0190250,0x00000303);//at:206284.250 ns
     REG_WRITE_ctrl(0xC0190250,0x00000303);//at:206358.002 ns
     REG_WRITE_ctrl(0xC0190250,0x00d70303);//at:206431.754 ns
-    REG_WRITE_ctrl(0xC0190250,0x7cd70303);//at:206505.506 ns
-    REG_WRITE_ctrl(0xC0190254,0x00000000);//at:206579.258 ns
+    //REG_WRITE_ctrl(0xC0190250,0x7cd70303);//at:206505.506 ns
+    REG_WRITE_ctrl(0xC0190250,0x0b74ff05);//at:206505.506 ns
+    //REG_WRITE_ctrl(0xC0190254,0x00000000);//at:206579.258 ns
+    REG_WRITE_ctrl(0xC0190254,0x000000ff);//at:206579.258 ns
     REG_WRITE_ctrl(0xC019025c,0x0f0080f8);//at:207074.450 ns
     REG_WRITE_ctrl(0xC019025c,0x680080f8);//at:207148.202 ns
     REG_WRITE_ctrl(0xC0190264,0x0f003719);//at:207632.858 ns
@@ -254,9 +252,13 @@ static void lpddr_controller_init(void)
     REG_WRITE_ctrl(0xC019030c,0x00000000);//at:210456.506 ns
     REG_WRITE_ctrl(0xC0190320,0x00000001);//at:295366.130 ns
     REG_WRITE_ctrl(0xC0190400,0x00000001);//at:295871.858 ns
-    REG_WRITE_ctrl(0xC0190404,0x00005045);//at:296388.122 ns
-    REG_WRITE_ctrl(0xC0190408,0x0000309b);//at:296461.874 ns
-    REG_WRITE_ctrl(0xC0190494,0x02100100);//at:296946.530 ns
+    //REG_WRITE_ctrl(0xC0190404,0x00005045);//at:296388.122 ns
+    //REG_WRITE_ctrl(0xC0190408,0x0000309b);//at:296461.874 ns
+    //REG_WRITE_ctrl(0xC0190404,0x000030a0);//at:296388.122 ns
+    REG_WRITE_ctrl(0xC0190404,0x000070a0);//at:296388.122 ns
+    REG_WRITE_ctrl(0xC0190408,0x00003309);//at:296461.874 ns
+    //REG_WRITE_ctrl(0xC0190494,0x02100100);//at:296946.530 ns
+    REG_WRITE_ctrl(0xC0190494,0x0012000d);//at:296946.530 ns
     REG_WRITE_ctrl(0xC0190490,0x00000001);//at:297072.962 ns
     REG_WRITE_ctrl(0xC0190304,0x00000000);//at:333548.594 ns
 }
@@ -270,15 +272,15 @@ int lpddr_init(void)
 
     /*Setp 2*/
     ddr_rd_st = REG_READ_ctrl(0xC0190004); /*read and reset value?*/
-    lpddr_debug("2.lpddr: ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2.lpddr: ddr rd status: 0x%x\n", ddr_rd_st);
     while (ddr_rd_st != 0) {
         ddr_rd_st = REG_READ_ctrl(0xC0190004);
     }
-    lpddr_debug("2. ddr rd status: 0x%x\n", ddr_rd_st);
+    ddr_printf("2. ddr rd status: 0x%x\n", ddr_rd_st);
 
     /*Setp 3*/
     lpddr_controller_init();
-    lpddr_debug("3. ddr controller init done\n");
+    ddr_printf("3. ddr controller init done\n");
 
     /*Setp 4*/
     REG_READ_ctrl(0xC0190030);
@@ -295,18 +297,19 @@ int lpddr_init(void)
     /*phy init */
     /*Setp 6*/
     pgcr = REG_READ_ctrl(0xC01A0008);
-    lpddr_debug("6. phy pgcr = 0x%x\n", pgcr);
     pgcr = pgcr;
+    //printf("6. phy pgcr = 0x%x\n", pgcr);
+
     /*Setp 7*/
     lpddr_phy_init();
-    lpddr_debug("7. ddr phy init done\n");
+    ddr_printf("7. ddr phy init done\n");
 
     /*Setp 8*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    lpddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     while ((pgsr&0x1) != 0x1) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        lpddr_debug("8. ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("8. ddr phy pgsr: 0x%x\n", pgsr);
     }
     /*Step 9*/
     REG_WRITE_ctrl(0xC01A0004, 0x00000061);
@@ -315,13 +318,13 @@ int lpddr_init(void)
 
     /*Step 10*/
     pgsr = REG_READ_ctrl(0xC01A000c);
-    lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     while ((pgsr&0x1) != 0x1) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     }
     /*Step 11*/
-    REG_WRITE_ctrl(0xC01A0040,0x00000022);//at:355305.434 ns)
+    REG_WRITE_ctrl(0xC01A0040,0x00000023);//at:355305.434 ns)
     REG_WRITE_ctrl(0xC01901b0,0x00000001);//at:355379.186 ns
     REG_WRITE_ctrl(0xC0190320,0x00000001);//at:355452.938 ns
     REG_WRITE_ctrl(0xC0190030,0x00000008);//at:356769.938 ns
@@ -336,12 +339,12 @@ int lpddr_init(void)
     swstat = REG_READ_ctrl(0xC0190324);
     while (swstat != 0x1)
         swstat = REG_READ_ctrl(0xC0190324);
-    lpddr_debug("ddr swstat: 0x%x\n", swstat);
+    ddr_printf("ddr swstat: 0x%x\n", swstat);
 
     /*Step 14*/
     REG_WRITE_ctrl(0xC01A0008,0x07842e05);//at:359372.330 ns)
     ddr_pir = REG_READ_ctrl(0xC01a0004);
-    lpddr_debug("ddr pir : 0x%x\n", ddr_pir);
+    ddr_printf("ddr pir : 0x%x\n", ddr_pir);
     while (ddr_pir != 0) {
         ddr_pir = REG_READ_ctrl(0xC01a0004);
     }
@@ -349,17 +352,17 @@ int lpddr_init(void)
     REG_WRITE_ctrl(0xC01A0004,0x00000003);//at:370846.034 ns)
 
     ddr_pir = REG_READ_ctrl(0xC01a0004);
-    lpddr_debug("ddr pir : 0x%x\n", ddr_pir);
+    ddr_printf("ddr pir : 0x%x\n", ddr_pir);
     while (ddr_pir != 0) {
     ddr_pir = REG_READ_ctrl(0xC01a0004);
     }
      
 
     pgsr = REG_READ_ctrl(0xC01A000c);
-    lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+    ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     while ((pgsr&0x1) != 0x1) {
         pgsr = REG_READ_ctrl(0xC01A000c);
-        lpddr_debug("ddr phy pgsr: 0x%x\n", pgsr);
+        ddr_printf("ddr phy pgsr: 0x%x\n", pgsr);
     }
 
     /*Step 15*/
@@ -371,7 +374,7 @@ int lpddr_init(void)
     REG_WRITE_ctrl(0xC01901b0,0x00000001);//at:392645.018 ns
     REG_WRITE_ctrl(0xC0190320,0x00000001);//at:392718.770 ns
     REG_WRITE_ctrl(0xC0190030,0x00000008);//at:393403.610 ns
-    REG_WRITE_ctrl(0xC0190030,0x00000008);//at:393530.042 ns
+    REG_WRITE_ctrl(0xC0190030,0x00000000);//at:393530.042 ns
     //REG_WRITE_ctrl(0xC01a01d4,0x3db0b001);//lpddr ,200m , lichunlei 181206
     //REG_WRITE_ctrl(0xC01a0214,0x3c00b001);
 #ifdef CONFIG_BP2016_OEM
@@ -383,3 +386,4 @@ int lpddr_init(void)
 #endif
     return 0;
 }
+#endif

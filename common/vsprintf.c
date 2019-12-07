@@ -785,7 +785,7 @@ int vsnprintf(char *buf, size_t size, const char *fmt,
 }
 
 int vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
-{
+{a
 	int i;
 
 	i = vsnprintf(buf, size, fmt, args);
@@ -848,6 +848,41 @@ int sprintf(char *buf, const char *fmt, ...)
 	va_start(args, fmt);
 	i = vsprintf(buf, fmt, args);
 	va_end(args);
+	return i;
+}
+
+// wwzz copy from console.c
+int printf(const char *fmt, ...)
+{
+	va_list args;
+	uint i;
+	char printbuffer[CONFIG_SYS_PBSIZE];
+
+	va_start(args, fmt);
+
+	/* For this to work, printbuffer must be larger than
+	 * anything we ever want to print.
+	 */
+	i = vscnprintf(printbuffer, sizeof(printbuffer), fmt, args);
+	va_end(args);
+
+	/* Print the string */
+	puts(printbuffer);
+	return i;
+}
+
+int vprintf(const char *fmt, va_list args)
+{
+	uint i;
+	char printbuffer[CONFIG_SYS_PBSIZE];
+
+	/* For this to work, printbuffer must be larger than
+	 * anything we ever want to print.
+	 */
+	i = vscnprintf(printbuffer, sizeof(printbuffer), fmt, args);
+
+	/* Print the string */
+	puts(printbuffer);
 	return i;
 }
 

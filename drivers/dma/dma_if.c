@@ -13,7 +13,10 @@ static volatile BOOL dma_lli_func_flag = false;
 static volatile BOOL dmac_en_flag[2] = {false, false};
 static volatile U32 ch_lli_addr[2][HW_DMAC_CH_NUM_MAX] = {{0}};
 
+#ifdef CONFIG_USE_IRQ
 static int dmac_irq_handler(int irq, void *dev_id);
+#endif
+
 #ifdef DMA_TIME_COUNT
 DMA_TIME_COUNT_ST dma_time_record[2][HW_DMAC_CH_NUM_MAX];
 
@@ -30,9 +33,15 @@ void dma_count_init(U32 id, U32 ch)
 
 void dma_init(U32 id)
 {
+#ifdef CONFIG_USE_IRQ
     U32 irq_id = 0xFFFF;
     U32 irq_data = 0xFFFF;
+#endif
 
+    if (true == dmac_en_flag[id])
+        return;
+
+#ifdef CONFIG_USE_IRQ
     switch(id){
     case 0:
         irq_id = SYS_IRQ_ID_DMAC0;
@@ -46,16 +55,16 @@ void dma_init(U32 id)
         return;
     }
 
-    if (true == dmac_en_flag[id])
-        return;
     request_irq(irq_id, dmac_irq_handler, NULL, (void *) (irq_data));
     dmac_int_enable(id);
+#endif
     dma_enable(id);
     dmac_en_flag[id] = true;
 }
 
 void dma_deinit(U32 id)
 {
+#ifdef CONFIG_USE_IRQ
     U32 irq_id;
     switch(id){
     case 0:
@@ -68,9 +77,10 @@ void dma_deinit(U32 id)
         return;
     }
 
+    unrequest_irq(irq_id);
+#endif
     dma_disable(id);
     dmac_int_disable(id);
-    unrequest_irq(irq_id);
     dmac_en_flag[id] = false;
 }
 
@@ -256,6 +266,7 @@ void dma_ch_int_ctl(U32 id, U32 ch_id, DMAC_CH_INT_TYPE_E int_type, U32 en)
     dmac_ch_int_signal_ctl(hwp_dma, int_type, en_flag);
 }
 
+#ifdef CONFIG_USE_IRQ
 static int dmac_irq_handler(int irq, void *dev_id)
 {
     U32 i, ch_id, dmac_base, id;
@@ -310,6 +321,7 @@ static int dmac_irq_handler(int irq, void *dev_id)
     // clear int status
     return 0;
 }
+#endif
 
 static inline DMAC_CTL_TR_WIDTH_E get_tr_width(U32 addr)
 {
@@ -326,6 +338,7 @@ static inline DMAC_CTL_TR_WIDTH_E get_tr_width(U32 addr)
     }
 }
 
+#ifdef CONFIG_CMD_DMA
 U32 dma_m2m_single_max(U32 src, U32 dst, U32 len)
 {
     return DMAC_ERR_E_OK;
@@ -447,6 +460,7 @@ int dma_m2m_single_performance(U32 id, U32 ch, U32 src, U32 dst, U32 len, bool s
 
     return dma_m2m_base(id, ch, src, dst, blk_ts, src_width, dst_width, 4, sync);
 }
+#endif
 
 // msize set to 4---20170928
 int dma_dir_base(U32 id, U32 ch, U32 src, U32 dst, U32 blk_ts, U32 per_type,
@@ -665,6 +679,7 @@ int dma_qspiflash_write_page_polling(U32 id, U32 ch, U32 flash_addr, U32 src, U3
     return err;
 }
 
+#ifdef CONFIG_CMD_DMA
 int dma_spi_read_polling(U32 id, U32 ch, U32 addr, U32 dst, U32 len, U32 src_width, U32 src_burst, BOOL syn_flag)
 {
     int err;
@@ -951,4 +966,67 @@ int dma_ap_lli_start(U32 id, U32 ch)
 #endif
     dma_ch_done[id][ch] = 0;
     return DMAC_ERR_E_OK;
+}
+#endif
+
+// TODO: add qspi marco here
+// speed up read interface
+extern inline u32 get_qspiflash_dr(void);
+extern int qspi_dma_read_start_new(u8 cmd, u32 addr);
+extern inline void qspi_hw_init(void);
+u32 rdch = 1;
+u32 wrch = 0;
+int flash_read_dma_init_once(u32 len)
+{
+    U32 ctl;
+    dmac_int_disable(0);
+
+    DMAC_CH_CONTROLLER_ST *hwp_dma = get_hwp_dma(0, rdch);
+
+    // config rx regs
+    hwp_dma->CFG = 0;
+    ctl = (DMAC_CTL_ADDR_INC_E_NO_CHANGE << DMAC_CH_CTL_SINC_BIT) |
+          (DMAC_CTL_ADDR_INC_E_INC << DMAC_CH_CTL_DINC_BIT);
+    hwp_dma->CFG_UPPER = (DMAC_CH_CFG_DST_OSR_LMT_MASK | DMAC_CH_CFG_SRC_OSR_LMT_MASK |
+                          (DMAC_CFG_TT_FC_E_P_TO_M_DMA << DMAC_CH_CFG_TT_FC_BIT) |
+                          (DMAC_PERIPHERAL_TYPE_E_QSPI_RX << DMAC_CH_CFG_SRC_PER_BIT));
+
+    hwp_dma->CTL = ctl | (DMAC_CTL_TR_WIDTH_E_32 << DMAC_CH_CTL_SRC_TR_WIDTH_BIT) |
+                   (DMAC_CTL_TR_WIDTH_E_32 << DMAC_CH_CTL_DST_TR_WIDTH_BIT) |
+                   (DMAC_CTL_MSIZE_E_16 << DMAC_CH_CTL_SRC_MSIZE_BIT) |
+                   (DMAC_CTL_MSIZE_E_16 << DMAC_CH_CTL_DST_MSIZE_BIT);
+
+    hwp_dma->CTL_UPPER = 0;
+    dmac_ch_sar_set(hwp_dma, get_qspiflash_dr());
+    dmac_ch_block_ts_set(hwp_dma, (len / 4));
+    dmac_ch_int_disable_all(hwp_dma);
+    dmac_ch_int_status_ctl(hwp_dma, DMAC_CH_INT_TYPE_E_DMA_TFR_DONE, 0x1);
+    dmac_ch_int_signal_ctl(hwp_dma, DMAC_CH_INT_TYPE_E_DMA_TFR_DONE, 0x1);
+    asm volatile("ISB");
+    asm volatile("DMB");
+    asm volatile("DSB");
+    return 0;
+}
+
+int flash_dma_read_start(u32 fl_addr, u8 *rx_dbuf, int rx_len)
+{
+    DMAC_CH_CONTROLLER_ST *hwp_dma = get_hwp_dma(0, rdch);
+    dmac_ch_dar_set(hwp_dma, (u32) rx_dbuf);
+    dmac_ch_enable(0, rdch);
+    qspi_dma_read_start_new(0xeb, fl_addr);
+    return 0;
+}
+
+int flash_dma_read_wait_done(void)
+{
+    dma_wait_channel_done_polling(0, rdch, 0);
+    return 0;
+}
+
+int flash_dma_read_finished(void)
+{
+    // disable qspi dma feature
+    qspi_hw_init();
+    dmac_int_enable(0);
+    return 0;
 }

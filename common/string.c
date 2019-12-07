@@ -493,8 +493,7 @@ char * bcopy(const char * src, char * dest, int count)
  */
 void * memcpy(void *dest, const void *src, size_t count)
 {
-#if 1
-    unsigned long *dl = (unsigned long *)dest, *sl = (unsigned long *)src;
+	unsigned long *dl = (unsigned long *)dest, *sl = (unsigned long *)src;
 	char *d8, *s8;
 
 	if (src == dest)
@@ -514,17 +513,6 @@ void * memcpy(void *dest, const void *src, size_t count)
 		*d8++ = *s8++;
 
 	return dest;
-#else    
-    int wn = count/4;
-    int slice = count%4;
-    int *psrc = (int *)src;
-    int *pdes = (int *)dest;
-    while(wn--) 
-        *pdes++ = *psrc++;
-    while(slice--)
-        *(char*)pdes++ = *(char*)psrc++;
-    return dest;
-#endif
 }
 #endif
 

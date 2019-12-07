@@ -7,18 +7,6 @@
 #include <drivers/iomux/iomux_hw.h>
 #include <drivers/drv_qspi.h>
 
-#include "regs/uart.h"
-
-
-#ifdef CHIP_DEBUG
-#define chip_debug(fmt, args...)  printf("Chip: " fmt "\n", ##args);
-#else
-#define chip_debug(fmt, args...)
-#endif
-
-
-
-
 void pll_init(void)
 {
     //pll0_set_rate_kHz(PLL0_CPU_FREQ_KHZ);
@@ -29,13 +17,13 @@ void pll_init(void)
 
 void pll_print(void)
 {
-    chip_debug("pll01 reg = 0x%x \n", hwp_apSCM->pll01_ctrl);
-    chip_debug("pll23 reg = 0x%x \n", hwp_apSCM->pll23_ctrl);
+    printf("pll01 reg = 0x%x \n", hwp_apSCM->pll01_ctrl);
+    printf("pll23 reg = 0x%x \n", hwp_apSCM->pll23_ctrl);
 
-    chip_debug("PLL0=%d kHz\n", pll0_get_rate_kHz());
-    chip_debug("PLL1=%d kHz\n", pll1_get_rate_kHz());
-    chip_debug("PLL2=%d kHz\n", pll2_get_rate_kHz());
-    chip_debug("PLL3=%d kHz\n", pll3_get_rate_kHz());
+    printf("PLL0=%d kHz\n", pll0_get_rate_kHz());
+    printf("PLL1=%d kHz\n", pll1_get_rate_kHz());
+    printf("PLL2=%d kHz\n", pll2_get_rate_kHz());
+    printf("PLL3=%d kHz\n", pll3_get_rate_kHz());
 }
 
 void pll_test(void)
@@ -44,16 +32,31 @@ void pll_test(void)
     //pll0_set_rate_kHz(PLL0_CPU_FREQ_KHZ/2);
     for(i=5; i<16; i++)
     {
-        chip_debug("########################################\n");
+        printf("########################################\n");
         pll1_set_rate_kHz(i*100000);
         pll2_set_rate_kHz(i*100000);
         pll3_set_rate_kHz(i*100000);
         pll_print();
-        chip_debug("########################################\n");
+        printf("########################################\n");
     }
 
 }
 
+#ifdef CONFIG_DRV_CLK
+#include <drivers/drv_clk.h>
+void clk_en_set(void)
+{
+    clk_enable(CLK_DMAC0);
+    clk_enable(CLK_QSPI);
+    clk_enable(CLK_UART0);
+    clk_enable(CLK_UART1);
+    clk_enable(CLK_UART6);
+}
+#else
+void clk_en_set(void)
+{
+}
+#endif
 
 void pin_mux_set(void)
 {
@@ -77,6 +80,7 @@ void prcm_init(void)
 
 __attribute__((weak)) int chip_early_init_f(void)
 {
+    clk_en_set();
 
     pin_mux_set();
 
@@ -91,16 +95,8 @@ __attribute__((weak)) int chip_early_init_f(void)
 
 __attribute__((weak)) void early_system_init(void)
 {
-
 #ifdef CONFIG_UPV_SERIAl
-    if(hwp_upvUart == hwp_apUart6 || hwp_upvUart == hwp_apUart7)
-    {
-        upv_serial_init(CONFIG_BAUDRATE_921600);
-        chip_debug("UPV Uart%s BaudRate:%d.\n",(hwp_upvUart== hwp_apUart6?"6":"7"),CONFIG_BAUDRATE_921600);
-    }else{
-        chip_debug("UPV Uart%s BaudRate:%d.\n",(hwp_upvUart== hwp_apUart6?"6":"7"),CONFIG_BAUDRATE_115200);
-        upv_serial_init(CONFIG_BAUDRATE_115200);
-    }
+    upv_serial_init(CONFIG_UPV_SERIAL_BAUDRATE);
 #endif
 
 #ifdef CONFIG_MMU_ENABLE
@@ -116,4 +112,12 @@ __attribute__((weak)) void early_system_init(void)
     ddrc_init();
 #endif
 
+#ifdef CONFIG_DRV_DMA
+    extern void dma_init(U32 id);
+    extern void dma_deinit(U32 id);
+    extern inline void dmac_int_disable(U32 id);
+    dma_deinit(0);
+    dma_init(0);
+    dmac_int_disable(0);
+#endif
 }

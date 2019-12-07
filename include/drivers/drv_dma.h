@@ -41,7 +41,7 @@ typedef enum {
     DMA_TRANS_TYPE_E_OTHER
 }DMA_TRANS_TYPE_E;
 
-#define DMA_TIME_COUNT
+//#define DMA_TIME_COUNT
 #ifdef DMA_TIME_COUNT
 typedef struct dma_time_count {
     U64 config_s;

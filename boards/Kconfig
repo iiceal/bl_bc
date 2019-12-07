@@ -35,5 +35,5 @@ endif
 if BP2016_OEM
 config BOARD_NAME
     string
-    default "bp2016_oem"
+    default "oem"
 endif

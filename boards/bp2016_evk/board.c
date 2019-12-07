@@ -20,9 +20,10 @@ int board_init_f(void)
 #endif
     // wwzz add iomux setting here
     // wwzz add 20181031
+//extern void qspi_init_low(int irq_enable, int disp_log, int rd_thr_en) ;
+//    qspi_init_low(0,0,0);
     init_spinor();
     //global_iomux_set();
-
 
 	return 0;
 }

@@ -560,40 +560,44 @@ CONFIG_	scripts/kconfig/lkc.h	40;"	d
 CONFIG_	scripts/kconfig/lkc.h	46;"	d
 CONFIG_	scripts/kconfig/lkc.h	47;"	d
 CONFIG_APB_CLOCK	chip/bp2016/include/chip_config.h	19;"	d
-CONFIG_AUTO_UPGRADE	include/generated/autoconf.h	23;"	d
+CONFIG_AUTO_UPGRADE	include/generated/autoconf.h	26;"	d
 CONFIG_AUTO_UPGRADE_DELAY_MS	include/generated/autoconf.h	14;"	d
 CONFIG_BB_MEM_SIZE	chip/bp2016/include/chip_config.h	31;"	d
 CONFIG_BB_MEM_START	chip/bp2016/include/chip_config.h	30;"	d
-CONFIG_BOARD_NAME	include/generated/autoconf.h	32;"	d
+CONFIG_BOARD_NAME	include/generated/autoconf.h	39;"	d
 CONFIG_BOOT_RSVADDR_SIZE	chip/bp2016/include/chip_config.h	36;"	d
 CONFIG_BOOT_RSVADDR_START	chip/bp2016/include/chip_config.h	37;"	d
-CONFIG_BP2016_OEM	include/generated/autoconf.h	24;"	d
+CONFIG_BP2016_OEM	include/generated/autoconf.h	28;"	d
+CONFIG_COMMON_MALLOC	include/generated/autoconf.h	30;"	d
 CONFIG_COUNTER_FREQ	chip/bp2016/include/chip_config.h	11;"	d
 CONFIG_CPU_NAME	include/generated/autoconf.h	9;"	d
-CONFIG_CPU_V7	include/generated/autoconf.h	22;"	d
+CONFIG_CPU_V7	include/generated/autoconf.h	25;"	d
 CONFIG_DBG_SERIAL_NUM	include/generated/autoconf.h	7;"	d
 CONFIG_DRAM_SIZE	chip/bp2016/include/chip_config.h	34;"	d
 CONFIG_DRAM_START	chip/bp2016/include/chip_config.h	33;"	d
-CONFIG_DRV_CLK	include/generated/autoconf.h	30;"	d
-CONFIG_DRV_DDR	include/generated/autoconf.h	27;"	d
+CONFIG_DRV_CLK	include/generated/autoconf.h	36;"	d
+CONFIG_DRV_DDR	include/generated/autoconf.h	32;"	d
 CONFIG_DRV_DMA	include/generated/autoconf.h	12;"	d
 CONFIG_DRV_QSPI	include/generated/autoconf.h	15;"	d
-CONFIG_DRV_RESET	include/generated/autoconf.h	17;"	d
+CONFIG_DRV_RESET	include/generated/autoconf.h	18;"	d
 CONFIG_DRV_UART	include/generated/autoconf.h	10;"	d
+CONFIG_DRV_WDT	include/generated/autoconf.h	17;"	d
 CONFIG_EXCEPTION_STACK_START	chip/bp2016/include/chip_config.h	55;"	d
-CONFIG_FASTBOOT	include/generated/autoconf.h	19;"	d
-CONFIG_HG_ARCH_ARM_CORTEX_A7	include/generated/autoconf.h	21;"	d
-CONFIG_HG_PROJECT_BP2016	include/generated/autoconf.h	18;"	d
-CONFIG_HG_PROJECT_NAME	include/generated/autoconf.h	31;"	d
+CONFIG_FASTBOOT	include/generated/autoconf.h	20;"	d
+CONFIG_HG_ARCH_ARM_CORTEX_A7	include/generated/autoconf.h	24;"	d
+CONFIG_HG_PROJECT_BP2016	include/generated/autoconf.h	19;"	d
+CONFIG_HG_PROJECT_NAME	include/generated/autoconf.h	38;"	d
 CONFIG_IRQ_STACK_START	chip/bp2016/include/chip_config.h	54;"	d
 CONFIG_JFFS2_DEV	chip/bp2016/include/board_cfg.h	5;"	d
 CONFIG_JFFS2_PART_OFFSET	chip/bp2016/include/board_cfg.h	7;"	d
 CONFIG_JFFS2_PART_SIZE	chip/bp2016/include/board_cfg.h	6;"	d
+CONFIG_LOAD_XMODEM	include/generated/autoconf.h	27;"	d
 CONFIG_LPDDR	include/generated/autoconf.h	16;"	d
-CONFIG_MMU_ENABLE	include/generated/autoconf.h	28;"	d
+CONFIG_MALLOC_LEN_KB	include/generated/autoconf.h	37;"	d
+CONFIG_MMU_ENABLE	include/generated/autoconf.h	33;"	d
 CONFIG_PGTABLE_SIZE	chip/bp2016/include/chip_config.h	45;"	d
-CONFIG_QSPI_DMA_TRANSFER	include/generated/autoconf.h	29;"	d
-CONFIG_QSPI_W25Q256FV	include/generated/autoconf.h	26;"	d
+CONFIG_QSPI_DMA_TRANSFER	include/generated/autoconf.h	34;"	d
+CONFIG_QSPI_W25Q256FV	include/generated/autoconf.h	31;"	d
 CONFIG_QSPI_WAIT_WEL	include/generated/autoconf.h	13;"	d
 CONFIG_ROM_RSVADDR	chip/bp2016/include/chip_config.h	40;"	d
 CONFIG_ROM_RUN_RANGE	chip/bp2016/include/chip_config.h	39;"	d
@@ -610,6 +614,8 @@ CONFIG_STACKSIZE_IRQ	chip/bp2016/include/chip_config.h	53;"	d
 CONFIG_STACKSIZE_SVC	chip/bp2016/include/chip_config.h	52;"	d
 CONFIG_SYS_FLASH0_BASE	chip/bp2016/include/board_cfg.h	4;"	d
 CONFIG_SYS_INIT_SP_ADDR	chip/bp2016/include/chip_config.h	50;"	d
+CONFIG_SYS_MALLOC_CLEAR_ON_INIT	include/generated/autoconf.h	23;"	d
+CONFIG_SYS_MALLOC_DEBUG	include/generated/autoconf.h	22;"	d
 CONFIG_SYS_MALLOC_LEN	chip/bp2016/include/chip_config.h	59;"	d
 CONFIG_SYS_MALLOC_LEN	chip/bp2016/include/chip_config.h	61;"	d
 CONFIG_SYS_MALLOC_START	chip/bp2016/include/chip_config.h	63;"	d
@@ -618,8 +624,9 @@ CONFIG_SYS_MAX_FLASH_SECT	include/flash.h	14;"	d
 CONFIG_SYS_PBSIZE	chip/bp2016/include/chip_config.h	68;"	d
 CONFIG_TIMER_FREQ	chip/bp2016/include/chip_config.h	10;"	d
 CONFIG_TTB_BASE	chip/bp2016/include/chip_config.h	48;"	d
-CONFIG_UPV_QSPI	include/generated/autoconf.h	20;"	d
-CONFIG_UPV_SERIAL_NUM	include/generated/autoconf.h	25;"	d
+CONFIG_UPV_QSPI	include/generated/autoconf.h	21;"	d
+CONFIG_UPV_SERIAL_BAUDRATE	include/generated/autoconf.h	35;"	d
+CONFIG_UPV_SERIAL_NUM	include/generated/autoconf.h	29;"	d
 CONFIG_UPV_SERIAl	include/generated/autoconf.h	11;"	d
 CONFIG_VERBOSE_EXCEPTIONS	cpu/armv7/irq.c	8;"	d	file:
 CONFIG_prefix	scripts/kconfig/lkc.h	/^static inline const char *CONFIG_prefix(void)$/;"	f
@@ -4849,11 +4856,13 @@ REG_AP_UART7_BASE	chip/bp2016/include/regs/uart.h	15;"	d
 REG_AP_WDT0_BASE	chip/bp2016/include/regs/wdt.h	4;"	d
 REG_AP_WDT1_BASE	chip/bp2016/include/regs/wdt.h	5;"	d
 REG_FASTBOOT_BASE	include/fastboot.h	28;"	d
+REG_READ	boot/serial.c	8;"	d	file:
 REG_READ_UINT32	include/global_macros.h	7;"	d
 REG_READ_ctrl	include/drivers/drv_ddr.h	5;"	d
 REG_SIM0_BASE	chip/bp2016/include/regs/sim.h	4;"	d
 REG_SIM1_BASE	chip/bp2016/include/regs/sim.h	5;"	d
 REG_SIM2_BASE	chip/bp2016/include/regs/sim.h	6;"	d
+REG_WRITE	boot/serial.c	9;"	d	file:
 REG_WRITE_UINT32	include/global_macros.h	8;"	d
 REG_WRITE_ctrl	include/drivers/drv_ddr.h	6;"	d
 REJCIADDR	net/lwip/src/netif/ppp/ipcp.c	780;"	d	file:
@@ -17470,7 +17479,7 @@ upgrade_printf	common/upgrade.c	15;"	d	file:
 upgrade_processing	common/upgrade.c	/^void upgrade_processing(void)$/;"	f
 upgrade_recv_data_len	common/upgrade.c	/^U16 upgrade_recv_data_len;   \/\/ $/;"	v
 upgrade_recv_data_type	common/upgrade.c	/^volatile U16 upgrade_recv_data_type;  \/\/ 解析后得到的数据帧类型$/;"	v
-upgrade_recv_serial_buffer	common/upgrade.c	/^U32 upgrade_recv_serial_buffer = 0x2F0000;$/;"	v
+upgrade_recv_serial_buffer	common/upgrade.c	/^U32 upgrade_recv_serial_buffer = 0x2D0000;$/;"	v
 upgrade_send_ack	common/upgrade.c	/^inline void upgrade_send_ack(int info)$/;"	f
 upgrade_send_buffer	common/upgrade.c	/^u8  upgrade_send_buffer[UPGRADE_SEND_BUFF_LEN];  \/\/ 发送buffer$/;"	v
 upgrade_send_nack	common/upgrade.c	/^inline void upgrade_send_nack(int err_no)$/;"	f

@@ -1,11 +1,30 @@
 menu "General setup"
 
+config FASTBOOT
+    bool "enable fast boot function"
+    default n
+    help
+        fast boot support.
+
+config COMMON_MALLOC
+    bool "enable common dlmalloc"
+    default n
+    help
+        common malloc and free function.
+
+config CMD_SHELL
+    bool "enable cmd shell"
+    default n
+    select DRV_UART
+    select COMMON_MALLOC
+    help
+        cmd shell in uart0.
+
 config UPV_SERIAl
     bool "enable upgrade for uart"
     default n
     select UPV_QSPI
     select DRV_UART
-    select CMD_UART
     help
         Upgrade bootloader form uart.
 
@@ -17,6 +36,13 @@ config UPV_SERIAL_NUM
 	help
         This is upgrade serial port number, the vailid port number is 0~7.
         Attention: this number must different of CONFIG_DBG_SERIAL_NUM
+config UPV_SERIAL_BAUDRATE
+	int	"upgrade serial port number"
+	range 9600  921600
+	default 921600
+    depends on UPV_SERIAl
+	help
+        This is upgrade serial port baudrate, the vailid port number is 9600~921600.
 
 config UPV_QSPI
     bool "qspi upgrade"
@@ -55,16 +81,17 @@ config LOAD_XMODEM
 
 config BOOT_COUNT_DOWN
     bool "count down for start"
-    default n
-    select UPV_QSPI
-    select DRV_UART
-    select CMD_UART
+    default y
+#    depends on CMD_SHELL
+#    select UPV_QSPI
+#    select DRV_UART
+#    select CMD_UART
     help
         count down for startting bl shell.
 
 config BOOT_COUNT_DOWN_SEC
 	int	"boot count down seconds"
-	range 0  5
+	range 0  15
 	default 3
     depends on BOOT_COUNT_DOWN
 	help
@@ -76,13 +103,12 @@ config AUTO_UPGRADE
     default n
     select UPV_QSPI
     select DRV_UART
-    select CMD_UART
     help
         auto upgrade in booting...
 
 config AUTO_UPGRADE_DELAY_MS
 	int	"waiting time for upgrade in bl"
-	range 0  5000
+	range 0  1500
 	default 100
     depends on AUTO_UPGRADE
 	help
@@ -90,4 +116,9 @@ config AUTO_UPGRADE_DELAY_MS
         Attention: if set 0, meaning bypass...
                    less than 100, can not assure enter auto upgrade procedure.
 
+config ENABLE_TRACE
+	bool "enable print trace"
+	default n
+	help
+        Attention: if enable, print message for bootloader, or only keep printf bl version message
 endmenu
