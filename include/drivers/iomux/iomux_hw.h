@@ -2,14 +2,15 @@
 #define __IOMUX_HW_20171218_H__
 #include <common.h>
 
-#define iomux_printf(fmt, args...) printf("Iomux: " fmt "\n", ##args);
 
 //#define IOMUX_DEBUG
 
 #ifdef IOMUX_DEBUG
-#define iomux_debug(fmt, args...) printf(fmt "\n", ##args);
+#define iomux_debug(fmt, args...)  printf("Iomux: " fmt "\n", ##args);
+#define iomux_printf(fmt, args...) printf("Iomux: " fmt "\n", ##args);
 #else
 #define iomux_debug(fmt, args...)
+#define iomux_printf(fmt, args...) 
 #endif
 
 #define DRV_OP_SUCCESS (0)

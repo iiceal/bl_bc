@@ -5,29 +5,53 @@
 #include "cp15.h"
 #include "regs/scm.h"
 
-#if (CONFIG_DRV_DMA && CONFIG_CMD_DMA)
+#ifdef CONFIG_DRV_DMA
 #include "drivers/drv_dma.h"
 #endif
 
-#ifdef CONFIG_CMD_UART
 static UART_CONFIG_ST uart_config[HWP_SERIAL_PORT_NUM];
-#endif
 
 #ifdef UART_IRQ_TEST
 void uart_irq_test_init(U32 port_id);
 int uart_irq_test_handler(int irq, void *dev_id);
 #endif
 
-#ifdef CONFIG_USE_IRQ
 UART_RX_M_ST uart_rx_m[HWP_SERIAL_PORT_NUM];
 int uart_irq_handler(int irq, void *dev_id);
-#endif
 
 #ifdef UART_IRQ_CALLBACK
 typedef void (*PTRFUN)(U32, U8 *, U32);
 PTRFUN uart_call_back[HWP_SERIAL_PORT_NUM];
 #endif
 
+// Uart RX FIFO Depth Test
+void uart_rx_fifo_depth_test(U32 port_id)
+{
+    U32 rx_count = 0;
+    U8 data_temp;
+    HWP_UART_T *hw_uart = NULL;
+
+    if (serial_port_valid(port_id)) {
+        hw_uart = serial_hwp_get(port_id);
+    } else {
+        return;
+    }
+
+    uart_init(port_id, 115200, 0);
+
+    while (1) {
+        mdelay(1000);
+        if (hw_uart->lsr & 0x02) {
+            while (hw_uart->lsr & 0x01) {
+                data_temp += hw_uart->rbr_thr_dll;
+                rx_count++;
+            }
+            printf("test end:rx fifo depth is 0x%x~\n", rx_count);
+            return;
+        }
+        printf("testing:rx fifo doesn't overrun~\n");
+    }
+}
 
 void serial_reset_rx_fifo(U32 port_id)
 {
@@ -54,7 +78,6 @@ void register_irq_call_back(U32 port, PTRFUN pfn)
 }
 #endif
 
-#ifdef CONFIG_USE_IRQ
 int uart_irq_handler(int irq, void *dev_id)
 {
     U32 flag_read = 0;
@@ -112,7 +135,6 @@ void uart_irq_init(U32 port)
     }
     memset(&uart_rx_m[port].buff[0], 0, UART_RECV_BUFFER_SIZE);
 }
-#endif
 
 // 串口初始化，入参可以根据项目具体情况继续修改添加
 U32 uart_init(U32 port_id, U32 baut_rate, U8 int_enable)
@@ -159,12 +181,10 @@ U32 uart_init(U32 port_id, U32 baut_rate, U8 int_enable)
         hw_uart->iir_fcr = (FCR_FIFO_EN | FCR_RXSR | FCR_TXSR);
     // if(0x1 == int_enable)
     if (0x1 <= int_enable) {
-#ifdef CONFIG_USE_IRQ
-  #ifdef UART_IRQ_TEST
+#ifdef UART_IRQ_TEST
         uart_irq_test_init(port_id);
-  #endif
-        uart_irq_init(port_id);
 #endif
+        uart_irq_init(port_id);
         // uart6 and uart7 use dma
         if ((port_id >= 6) || (int_enable > 1)) /* for test only wwzz */
             serial_int_enable(hw_uart, (/*IER_ELSI | IER_ERBFI | IER_ETBEI |*/ IER_PTIME));
@@ -286,7 +306,6 @@ U32 uart_get_serial_buffer(U32 port_id, U8 *buff, U32 len, U32 timeout)
 }
 #endif
 
-#ifdef CONFIG_CMD_UART
 U32 uart_set_config(U32 port_id, UART_CONFIG_ST *config)
 {
     HWP_UART_T *hw_uart = NULL;
@@ -328,7 +347,6 @@ U32 uart_get_config(U32 port_id, UART_CONFIG_ST *config)
         return -1;
     }
 }
-#endif
 
 #ifdef UART_IRQ_TEST
 // interface for BB.
@@ -573,7 +591,7 @@ int uart_send_buffer_irq(U32 port_id, void *buff, U32 len)
 }
 #endif // UART_IRQ_TEST
 
-#if (CONFIG_DRV_DMA && CONFIG_CMD_DMA)
+#ifdef CONFIG_DRV_DMA
 int uart_send_buffer_dma(U32 ch, U32 port, void *buff, U32 len)
 {
     U32 dst, per_type;

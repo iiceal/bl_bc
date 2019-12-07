@@ -1,1 +1,1 @@
-obj-y += wiznet/
+#obj-y += wiznet/

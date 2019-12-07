@@ -6,14 +6,10 @@ menuconfig  DRV_QSPI
 
 if DRV_QSPI
 
-config QSPI_WAIT_WEL
-    bool "enable wait wel when write enable"
-    default y
-
 config QSPI_DMA_TRANSFER
 	bool "enable qspi dma read/write"
     default n
-	select DRV_DMA
+	depends on DRV_DMA
     ---help---
 	help
 		enable qspi dma transfer 
@@ -41,11 +37,5 @@ config QSPI_GD25Q256D
     default y
     ---help---
 		enable gd25q256d driver
-
-config QSPI_TRACE
-    bool "enable qspi driver debug info"
-    default n
-    ---help---
-		enable debug 
 
 endif

@@ -35,7 +35,6 @@ U32 loadversion_start_data_valid(U32 addr, U32 len)
 
 #include <drivers/drv_serial.h>
 extern void upgrade_start(void);
-extern void v7_dma_clean_range(u32, u32);
 
 #define DEFAULT_BAUD    (9600)
 int loadx_total_len = 0;
@@ -83,15 +82,13 @@ static u32 uart_cmd_entry_func(BL_CNXT_T *pCnxt, u32 argc, const char **argv)
             //}
 
             loadx_total_len = load_xmodem(addr, length);
-
-            v7_dma_clean_range(addr, (addr + loadx_total_len));
-            printf("clean 0x%x--->0x%x\n", addr, (addr + loadx_total_len));
-            printf("load done! addr=0x%x, file length=%d(0x%x) \n", addr, loadx_total_len, loadx_total_len);
+            printf("load done! addr=0x%x, file length=0x%x\n", addr, loadx_total_len);
             return RET_PASS;
         }
 #endif
 
-#ifdef CONFIG_UPV_SERIAl
+//#ifdef CONFIG_UPV_SERIAl
+#ifdef CONFIG_AUTO_UPGRADE
         if (strcmp(argv[1], "upv") == 0) {
             // upgrade_processing();
             upgrade_start();

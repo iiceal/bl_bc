@@ -25,7 +25,7 @@ int load_xmodem(unsigned int load_addr, int load_size)
     xyzModem_stream_close (&ret);
     xyzModem_stream_terminate (0, &getcxmodem);
     printf("read %d bytes Done\n", len);
-    return len;
+    return 0;
 }
 
 #endif //CONFIG_LOAD_XMODEM 

@@ -1,12 +1,6 @@
 #ifndef __FLASH_H___
 #define	__FLASH_H___
 
-#ifdef CONFIG_QSPI_TRACE
-#define qspi_debug(fmt, args...)  printf("%s: %d " fmt, __func__, __LINE__, ##args)
-#else
-#define qspi_debug(fmt, args...)
-#endif
-
 /* Flash opcodes. */
 #define SPINOR_OP_WREN		0x06	/* Write enable */
 #define SPINOR_OP_WRDI		0x04	/* Write enable */
@@ -44,10 +38,10 @@ struct qspi_fl_info{
 #ifdef CONFIG_QSPI_DMA_TRANSFER
     int  (*dma_write_page)(u32 addr, u8 * dbuf, int len, int dfs);
 #endif
-    int   (*erase)(u32 addr);
-    int   (*erase_chip)(void);
+    u8   (*erase)(u32 addr);
+    u8   (*erase_chip)(void);
 
-    int (*config_4byte_extend)(u32 addr, int en);
+    void (*config_4byte_extend)(u32 addr, int en);
 
     int  (*config_quad)(int en);
     int  (*config_prot_region)(int region, int en);
@@ -56,9 +50,9 @@ struct qspi_fl_info{
     int (*block_lock)(u32 offs);
     int (*block_unlock)(u32 offs);
     int (*get_block_lock_status)(u32 offs);
-    int (*global_lock)(void);
-    int (*global_unlock)(void);
-    int (*deep_power_down)(void);
+    void (*global_lock)(void);
+    void (*global_unlock)(void);
+    void (*deep_power_down)(void);
 };
 
 #define QSPI_HW_STAT

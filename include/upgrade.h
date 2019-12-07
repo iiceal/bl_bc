@@ -60,10 +60,8 @@ typedef enum {
 } PK_STATE;
 
 #define SYS_UPGRADE_UART_PORT    0x1
-//#define SYS_SRAM_ADDR_BASE       0x00100000
-//#define SYS_SRAM_LENGTH          0x00200000
-#define SYS_SRAM_ADDR_BASE       CONFIG_SRAM_START
-#define SYS_SRAM_LENGTH          CONFIG_SRAM_SIZE
+#define SYS_SRAM_ADDR_BASE       0x00100000
+#define SYS_SRAM_LENGTH          0x00200000
 #define UPGRADE_RECV_TIMEOUT     0x5
 #define UPGRADE_ACK              0x7C
 #define UPGRADE_HDR_FORMAT_LEN   (10)
@@ -72,7 +70,7 @@ typedef enum {
 #define SYS_RAM_LENGTH           SYS_SRAM_LENGTH
 #define SYS_RAM_RESV_LENGTH      (64 * 1024)
 
-#define UPGRADE_RECV_BUFF_LEN        (32768 + 10)  //32 * 1024
+#define UPGRADE_RECV_BUFF_LEN        (32768+10)   //32*1024
 #define UPGRADE_SEND_BUFF_LEN        (128)
 #define UPGRADE_CONNECT_CMD_LEN      (10)
 #define UPGRADE_START_DATA_CMD_LEN   (18)
@@ -90,8 +88,9 @@ typedef enum {
 #define UPGRADE_GET_U16(a,b)        ((a<<8)|(b))
 #define UPGRADE_GET_U32(a,b,c,d)    ((a<<24)|(b<<16)|(c<<8)|(d))
 
+//bl run on sram. bb run on ddr.
 #define UPGRADE_START_DATA_VALID_SRAM(addr, len)  \
-        ((CONFIG_SRAM_START <= addr) && ((addr + len) < (CONFIG_SRAM_START + SYS_RAM_LENGTH)))
+        ((CONFIG_SRAM_START <= addr) && ((addr + len) < (CONFIG_SRAM_START + CONFIG_SRAM_SIZE - SYS_RAM_RESV_LENGTH)))
 
 #define UPGRADE_SPIFLASH_ADDR_VALID(addr, len) \
         ((SPIFLASH_D_BASE <= addr) && ((addr + len) < SPIFLASH_D_BASE + 0x2000000))

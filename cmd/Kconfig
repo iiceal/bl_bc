@@ -1,5 +1,4 @@
 menu "Command select"
-    depends on CMD_SHELL
 
 config CMD_JFFS2
 	bool "jffs2 command"

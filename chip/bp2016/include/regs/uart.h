@@ -3,7 +3,7 @@
 
 // only choice one macro bellow
 //#define UART_IRQ_TEST
-//#define UART_IRQ_CALLBACK
+#define UART_IRQ_CALLBACK
 
 #define REG_AP_UART0_BASE          (APB1_BASE+0x00000)
 #define REG_AP_UART1_BASE          (APB1_BASE+0x10000)

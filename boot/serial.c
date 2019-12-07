@@ -8,37 +8,46 @@
 #define REG_READ( _r_ )		(*(volatile unsigned int*)(_r_))
 #define REG_WRITE( _r_, _v_) 	((*(volatile unsigned int*)(_r_)) = (unsigned int)(_v_))
 
+#ifdef SERIA_DEBUG
+#define serial_debug(fmt, args...)  printf("Serial: " fmt "\n", ##args);
+#else
+#define serial_debug(fmt, args...)
+#endif
+
+
 void _serial_init(HWP_UART_T *hw_uart, int baudrate)
 {
 	unsigned int baud_divisor;
-    unsigned int regv;	
+    unsigned int regv;
+	
 	baud_divisor = CONFIG_APB_CLOCK / 16 / baudrate;	
 
 	if(CONFIG_APB_CLOCK > (baud_divisor * 16 * baudrate))
 		baud_divisor +=((CONFIG_APB_CLOCK/16 - baud_divisor * baudrate)*2 > baudrate) ? 1 : 0;
 
+    //hard code for uart6 7 921600 baudrate setting
+
     if(hw_uart == hwp_apUart6 || hw_uart == hwp_apUart7)
     {
-        if(baudrate == 921600){
-            regv = REG_READ(0xC01D000C);
-            if(hw_uart == hwp_apUart6)
-            {
-                regv = regv & 0xFC0FFFFF;
-                regv = regv | (unsigned int)(0x00000007 << 20);
-            }
-            if(hw_uart == hwp_apUart7)
-            {
-                regv = regv & 0x3FFFFFF;
-                regv = regv | (0x00000007 << 26);
-            }
-            REG_WRITE(0xC01D000C,regv);
-            regv = REG_READ(0xC01D000C);
-            baud_divisor = 11;
-            printf("uart6/7 921600 Baudrate setting.\n");
+        regv = REG_READ(0xC01D000C);
+        if(hw_uart == hwp_apUart6)
+        {
+            regv = regv & 0xFC0FFFFF;
+            regv = regv | (unsigned int)(0x00000007 << 20);
         }
+        if(hw_uart == hwp_apUart7)
+        {
+            regv = regv & 0x3FFFFFF;
+            regv = regv | (0x00000007 << 26);
+        }
+        REG_WRITE(0xC01D000C,regv);
+        regv = REG_READ(0xC01D000C);
+        baud_divisor = 11;
+        serial_debug("HW code for uart6/7 921600 Baudrate setting.\n");
     }
- 
-	hw_uart->dlh_ier = 0x00;	//disable all interrupts
+    
+    
+    hw_uart->dlh_ier = 0x00;	//disable all interrupts
 	hw_uart->lcr = LCR_BKSE | LCRVAL;
 	hw_uart->rbr_thr_dll = baud_divisor & 0xff;
 	hw_uart->dlh_ier = (baud_divisor >> 8) & 0xff;
@@ -147,25 +156,3 @@ int ctrlc(void)
 	}
 	return 0;
 }
-
-// wwzz copy from console.c
-int getc(void)
-{
-	return serial_getc();
-}
-
-int tstc(void)
-{
-	return serial_tstc();
-}
-
-void putc(const char c)
-{
-	serial_putc(c);
-}
-
-void puts(const char *s)
-{
-	serial_puts(s);
-}
-

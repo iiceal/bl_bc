@@ -2,8 +2,8 @@
 #include <pll.h>
 #include <regs/scm.h>
 
-#ifdef CONFIG_ENABLE_TRACE
-#define pll_debug(fmt, args...)  printf(fmt"\n", ##args);
+#ifdef PLL_DEBUGI
+#define pll_debug(fmt, args...)  printf("PLL: " fmt "\n", ##args);
 #else
 #define pll_debug(fmt, args...)
 #endif
@@ -53,7 +53,7 @@ int get_M_N_NO(unsigned int CLK_IN, unsigned int ratekhz,  unsigned int *m, unsi
 
     if((ratekhz < PLL_OUT_MIN) || (ratekhz > PLL_RANGE_MAX))
     {
-        printf("ERROR: the pll output range: 62.5MHz ~~ 1500MHz, now is %d kHz\n", ratekhz);
+        pll_debug("ERROR: the pll output range: 62.5MHz ~~ 1500MHz, now is %d kHz\n", ratekhz);
         return RET_FAILED;
     }
 
@@ -68,7 +68,7 @@ int get_M_N_NO(unsigned int CLK_IN, unsigned int ratekhz,  unsigned int *m, unsi
 
     if(j == 0)
     {
-        printf("%s: get NO ERROR!\n", __func__);
+        pll_debug("%s: get NO ERROR!\n", __func__);
         return RET_FAILED;
     }
     pll_debug("NO %d %d %d %d\n", n_o_ok[0], n_o_ok[1], n_o_ok[2], n_o_ok[3]);
@@ -92,7 +92,7 @@ int get_M_N_NO(unsigned int CLK_IN, unsigned int ratekhz,  unsigned int *m, unsi
         }
     }
 
-    printf("%s: get M N NO ERROR!\n", __func__); 
+    pll_debug("%s: get M N NO ERROR!\n", __func__); 
     return RET_FAILED;
 }
 
@@ -114,14 +114,14 @@ int pll0_set_rate_kHz(unsigned int ratekhz)
     CLK_IN = get_strip_refclk_rate_kHz();
     if(RET_FAILED == CLK_IN)
     {
-        printf("ERROR: refclk is ERROR\n");
+        pll_debug("ERROR: refclk is ERROR\n");
         return RET_FAILED;
     }
 
     ret = get_M_N_NO(CLK_IN, ratekhz,  &M, &N, &NO);
     if(RET_FAILED == ret)
     {
-        printf("ERROR: get M N NO is ERROR\n");
+        pll_debug("ERROR: get M N NO is ERROR\n");
         return RET_FAILED;
     }
 
@@ -202,7 +202,7 @@ int pll1_set_rate_kHz(unsigned int ratekhz)
     CLK_IN = get_strip_refclk_rate_kHz();
     if(RET_FAILED == CLK_IN)
     {
-        printf("ERROR: refclk is ERROR\n");
+        pll_debug("ERROR: refclk is ERROR\n");
         return RET_FAILED;
     }
     
@@ -211,7 +211,7 @@ int pll1_set_rate_kHz(unsigned int ratekhz)
     ret = get_M_N_NO(CLK_IN, ratekhz,  &M, &N, &NO);
     if(RET_FAILED == ret)
     {
-        printf("ERROR: get M N NO is ERROR\n");
+        pll_debug("ERROR: get M N NO is ERROR\n");
         return RET_FAILED;
     }
 
@@ -284,7 +284,7 @@ int pll2_set_rate_kHz(unsigned int ratekhz)
     CLK_IN = get_strip_refclk_rate_kHz();
     if(RET_FAILED == CLK_IN)
     {
-        printf("ERROR: refclk is ERROR\n");
+        pll_debug("ERROR: refclk is ERROR\n");
         return RET_FAILED;
     }
 
@@ -293,7 +293,7 @@ int pll2_set_rate_kHz(unsigned int ratekhz)
     ret = get_M_N_NO(CLK_IN, ratekhz,  &M, &N, &NO);
     if(RET_FAILED == ret)
     {
-        printf("ERROR: get M N NO is ERROR\n");
+        pll_debug("ERROR: get M N NO is ERROR\n");
         return RET_FAILED;
     }
 
@@ -362,12 +362,12 @@ int pll3_set_rate_kHz(unsigned int ratekhz)
     unsigned int regv = 0;
     int ret;
 
-    printf("%s: PLL3 reference clk is %d kHz\n", __func__, pll3_ref_clk_khz);
+    pll_debug("%s: PLL3 reference clk is %d kHz\n", __func__, pll3_ref_clk_khz);
 
     ret = get_M_N_NO(pll3_ref_clk_khz, ratekhz,  &M, &N, &NO);
     if(RET_FAILED == ret)
     {
-        printf("ERROR: get M N NO is ERROR\n");
+        pll_debug("ERROR: get M N NO is ERROR\n");
         return RET_FAILED;
     }
 
@@ -405,7 +405,7 @@ int pll3_get_rate_kHz(void)
     unsigned int M=0;     //pll23_ctrl [27:20]
     unsigned int regv=0;
 
-    printf("%s: PLL3 reference clk is %d kHz\n", __func__, pll3_ref_clk_khz);
+    pll_debug("%s: PLL3 reference clk is %d kHz\n", __func__, pll3_ref_clk_khz);
 
     regv = ((hwp_apSCM->pll23_ctrl)>>16);
     N = regv&0xf;

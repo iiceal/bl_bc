@@ -1,13 +1,15 @@
-obj-y += ctype.o	\
+obj-y += \
+console.o	\
+		 ctype.o	\
 		 div64.o	\
 		 dlmalloc.o \
+		 bl_cmd.o	\
+		 bl_shell.o \
 		 misc.o		\
 		 string.o	\
          upgrade.o  \
          crc.o  \
 		 vsprintf.o
-
-obj-$(CONFIG_CMD_SHELL) += bl_cmd.o bl_shell.o
 
 obj-$(CONFIG_BUILD_ENABLE_UNWIND) += dump_stack.o
 

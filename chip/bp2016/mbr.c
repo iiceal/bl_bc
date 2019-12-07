@@ -4,10 +4,16 @@
 #include "bl2fw_if.h"
 #include "rsv_save.h"
 
-static u8 mbr_dbuf[MBR_SIZE]__attribute__((__aligned__(64)));  
-struct reserved_area_data * reserved_save;
-struct bl2fw_rsv_data bbfw_main, bbfw_bak;
+//#define MBR_DEBUG
 
+
+#ifdef MBR_DEBUG
+#define mbr_debug(fmt, args...)  printf("MBR: " fmt "\n", ##args);
+#else
+#define mbr_debug(fmt, args...)
+#endif
+
+static u8 mbr_dbuf[MBR_SIZE]__attribute__((__aligned__(64)));  
 u8 * get_flash_mbr_dbuf(void)
 {
 	return mbr_dbuf;
@@ -51,7 +57,7 @@ bool get_flash_mbr(const char * name, u32 * fl_addr, u32 * fl_size)
 		num_0xff = 0;
 		crc16_v = 0;
 		i = 0;
-
+        crc16_v = crc16_v;
 		for(i = 0; i < 16; i++) {
 			if((u8)fls->name[i] == 0xff)
 				num_0xff ++;
@@ -72,7 +78,7 @@ bool get_flash_mbr(const char * name, u32 * fl_addr, u32 * fl_size)
 					*fl_addr = fls->fl_addr;
 				if(fl_size != NULL)
 					*fl_size = fls->fl_size;
-				// printf("\nmbr region: %s check ok\n", fls->name);
+				mbr_debug("\nmbr region: %s check ok\n", fls->name);
 				return true;
 			}
 			return false;
@@ -95,13 +101,14 @@ void print_mbr_info(struct bl2fw_rsv_data *bbfw_main, struct bl2fw_rsv_data *bbf
 	fls = (struct fls_fmt_data *)mbr_dbuf;
 	length = 0;
 
-	printf("\r\n");	
-	printf("################### MBR Info ##################\n"); 
+	mbr_debug("\r\n");	
+	mbr_debug("################### MBR Info ##################\n"); 
 	while(1) {
 		num_0xff = 0;
 		crc16_v = 0;
 		i = 0;
 
+        crc16_v = crc16_v;
 		for(i = 0; i < 16; i++) {
 			if((unsigned char)fls->name[i] == 0xff)
 				num_0xff ++;
@@ -112,11 +119,11 @@ void print_mbr_info(struct bl2fw_rsv_data *bbfw_main, struct bl2fw_rsv_data *bbf
 		crc16_v = crc16((void*)fls, sizeof(struct fls_fmt_data) - 2);
  
 		if(fls->flags & FLS_DATA_FLAGS_VALID) {
-			printf("Name           : %s \n",  fls->name);
-			printf("flash address  : 0x%x\n", fls->fl_addr);
-			printf("flash size     : 0x%x (%dK)\n", fls->fl_size, fls->fl_size/1024);
-			printf("crc16          : 0x%x\n", fls->crc16);
-			printf("crc            : %s\n\n", (crc16_v == fls->crc16) ? "pass":"failed"); 
+			mbr_debug("Name           : %s \n",  fls->name);
+			mbr_debug("flash address  : 0x%x\n", fls->fl_addr);
+			mbr_debug("flash size     : 0x%x (%dK)\n", fls->fl_size, fls->fl_size/1024);
+			mbr_debug("crc16          : 0x%x\n", fls->crc16);
+			mbr_debug("crc            : %s\n\n", (crc16_v == fls->crc16) ? "pass":"failed"); 
 
             if(0 == strncmp(fls->name, BB_FW_NAME, sizeof(BB_FW_NAME)))
             {
@@ -147,40 +154,8 @@ void print_mbr_info(struct bl2fw_rsv_data *bbfw_main, struct bl2fw_rsv_data *bbf
 			break;
 	}
 
-	printf("############### Total %d partition #############\n", 
+	mbr_debug("############### Total %d partition #############\n", 
 			length/sizeof(struct fls_fmt_data));	
-	printf("\r\n");
-}
-
-extern int spinor_hw_read_page(u32 fl_addr, u8* rbuf, int len);
-bool read_mbr_cfg(void)
-{
-    int offset, i;
-    int fl_pg_size = 256, block_count = MBR_SIZE / fl_pg_size;
-    u8 *rd_page_buf = get_flash_mbr_dbuf();
-
-    offset = 0;
-    for (i = 0; i < block_count; i++) {
-        offset = spinor_hw_read_page((i * fl_pg_size), rd_page_buf, fl_pg_size);
-        if (offset < 0) {
-            printf("read mbr cfg failed, and qspi read timeout\n");
-            return false;
-        }
-        rd_page_buf += offset;
-        if ((*(rd_page_buf - 1) == 0xff) && (*(rd_page_buf - 2) == 0xff) &&
-            (*(rd_page_buf - 3) == 0xff))
-            break;
-    }
-    return true;
-}
-
-bool copy_mbr_cfg_from_rsv(void)
-{
-    u8 * mbr_buf;
-    reserved_save =(struct reserved_area_data*)CONFIG_BOOT_RSVADDR_START;
-    mbr_buf = get_flash_mbr_dbuf();
-    memcpy(mbr_buf, reserved_save->mbr_data, MBR_SIZE);
-    // print_mbr_info(&bbfw_main, &bbfw_bak);
-    return true;
+	mbr_debug("\r\n");
 }
 

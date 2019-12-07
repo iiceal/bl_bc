@@ -1,7 +1,5 @@
 #include <common.h>
 
-#ifdef CONFIG_COMMON_MALLOC
-
 #ifdef CONFIG_SYS_MALLOC_DEBUG
 #define DEBUG
 #endif
@@ -3381,15 +3379,3 @@ History:
 	 structure of old version,  but most details differ.)
 
 */
-
-#else
-Void_t* malloc(size_t bytes)
-{
-    return NULL;
-}
-
-void free(Void_t* mem)
-{
-    return;
-}
-#endif
